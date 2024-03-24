@@ -22,9 +22,9 @@ author: Yannis Tevissen
 navbar-links:
   About Me: "aboutme"
   Resources:
-    - Beautiful Jekyll: "https://beautifuljekyll.com"
+#    - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Google scholar: "https://scholar.google.com/citations?user=jEnK4FIAAAAJ&hl=fr"
-  Author's home: "https://yannistevissen.fr"
+#  Author's home: "https://yannistevissen.fr"
 
 ################
 # --- Logo --- #
