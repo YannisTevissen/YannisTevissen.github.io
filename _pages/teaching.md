@@ -2,11 +2,13 @@
 layout: page
 permalink: /teaching/
 title: teaching
-description: Materials for courses you taught. Replace this text with your description.
+description: I sometimes give courses on machine learning, deep learning, and speech processing. Here are some the materials from my courses.
 nav: true
 nav_order: 6
 ---
 
-For now, this page is assumed to be a static description of your courses. You can convert it to a collection similar to `_projects/` so that you can have a dedicated page for each course.
 
-Organize your courses by years, topics, or universities, however you like!
+# IMA4511 - Speaker Diarization
+
+- Slides [PDF](/assets/pdf/Speaker Diarization Lecture 2024.pdf)
+- Google Colab [Notebook](https://colab.research.google.com/drive/1T4kLdLBk5hbpyY7vaNkg809KiV3B9mvy?usp=sharing)
