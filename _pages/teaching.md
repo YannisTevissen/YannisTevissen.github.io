@@ -11,8 +11,7 @@ nav_order: 6
   <tr>
     <th scope="row" style="width: 20%">IMA4511 - Speaker Diarization</th>
     <td>
-- Slides [PDF](/assets/pdf/Speaker Diarization Lecture 2024.pdf)
-- Google Colab [Notebook](https://colab.research.google.com/drive/1T4kLdLBk5hbpyY7vaNkg809KiV3B9mvy?usp=sharing)
+<a href="/assets/pdf/Speaker Diarization Lecture 2024.pdf">Slides</a> - <a href="https://colab.research.google.com/drive/1T4kLdLBk5hbpyY7vaNkg809KiV3B9mvy?usp=sharing">Google Colab</a>
     </td>
   </tr>
 </table>
