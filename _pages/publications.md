@@ -2,7 +2,7 @@
 layout: page
 permalink: /publications/
 title: publications
-description: Here is list of my main scientific publications. a more exhaustive list can be found on my <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Google Scholar profile.</a>
+description: Here is list of my main scientific publications. a more exhaustive list can be found on my Google Scholar profile.
 nav: true
 nav_order: 2
 ---
