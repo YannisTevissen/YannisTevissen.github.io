@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I release [UpToCure](https://www.uptocure.com/), a new platform for AI-generated reports on recent research towards curing rare diseases.
+I release [UpToCure](https://uptocure.com/), a new platform for AI-generated reports on recent research towards curing rare diseases.
