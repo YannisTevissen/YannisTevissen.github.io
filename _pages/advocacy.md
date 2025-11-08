@@ -6,12 +6,13 @@ description: I spent some of my free time advocating for a better inclusion of p
 scholar:
   source: ./_advocacy/
   bibliography: advocacy.bib
-  query: "@*"                          # Adjust this query to filter the publications
+  query: "@*" # Adjust this query to filter the publications
   group_by: year
   group_order: descending
 nav: true
 nav_order: 2
 ---
+
 <div class="publications">
 
 {% bibliography %}
