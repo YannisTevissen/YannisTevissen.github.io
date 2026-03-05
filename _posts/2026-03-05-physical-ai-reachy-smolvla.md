@@ -27,7 +27,7 @@ But like most robotic videos back then it was carefully recorded and teleoperate
 
 A few months later, [Hugging Face](https://huggingface.co) and [Pollen Robotics](https://www.pollen-robotics.com) launched [Reachy Mini](https://www.pollen-robotics.com/products/reachy-mini/), so I bought and built the Lite version. It was ready for some Christmas magic and family demos.
 
-{% include figure.liquid path="/assets/img/P1230385.jpg" alt="Reachy Mini next to the Christmas tree" caption="Reachy Mini Lite, ready for Christmas demos." %}
+{% include figure.liquid path="/assets/img/P1230385.jpg" alt="Reachy Mini next to the Christmas tree" caption="Reachy Mini Lite, ready for Christmas demos." max-width="400px" %}
 
 Then, a few weeks ago, I thought: what about combining both robots? The arm needs a front camera if I want to make it autonomous on some tasks, and Reachy needs an arm to interact with the world around it.
 
@@ -37,7 +37,7 @@ Due to my disability I cannot use a leader arm, as most teleoperators do. Traini
 
 So I built a small teleoperation app to directly control the follower SO-101 arm with my phone using two joysticks.
 
-{% include figure.liquid path="/assets/img/teleop.jpeg" alt="Teleoperation app on phone: wrist camera feed and joystick controls for shoulder, elbow, wrist, and gripper" caption="Phone teleoperation interface: wrist camera view and two joysticks for arm control." %}
+{% include figure.liquid path="/assets/img/teleop.jpeg" alt="Teleoperation app on phone: wrist camera feed and joystick controls for shoulder, elbow, wrist, and gripper" caption="Phone teleoperation interface: wrist camera view and two joysticks for arm control." max-width="400px" %}
 
 After some warmup trials, I recorded ~50 episodes of the arm picking up a pen and showing it to Reachy.
 
@@ -48,7 +48,7 @@ Then I used these episodes to finetune [SmolVLA](https://huggingface.co/blog/smo
 And here was the result!
 
 <div class="post-video-wrapper portrait">
-{% include video.liquid path="/assets/video/IMG_2898.mov" controls=true caption="Reachy and SO-101 acting together" %}
+{% include video.liquid path="/assets/video/IMG_2898.mp4" controls=true caption="Reachy and SO-101 acting together" %}
 </div>
 
 I must say it feels weird to see a model I trained *act* in the real world. Physical AI is really something else and even though I know how it works, it still felt a bit like magic.
