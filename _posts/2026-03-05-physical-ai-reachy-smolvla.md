@@ -13,6 +13,8 @@ _styles: |
   .post-video-wrapper iframe { max-height: 70vh; width: auto; height: auto; max-width: 100%; object-fit: contain; }
   .post-video-wrapper.portrait video,
   .post-video-wrapper.portrait iframe { max-height:  min(60vh, 560px); }
+  .post-figure-wrapper { text-align: center; margin: 1.5rem 0; }
+  .post-figure-wrapper figure { display: inline-block; margin: 0; }
 ---
 
 Awhile ago, I started growing interest in physical AI: how could the already powerful AI models be used for real physical tasks, and ultimately for better autonomy?
@@ -27,7 +29,9 @@ But like most robotic videos back then it was carefully recorded and teleoperate
 
 A few months later, [Hugging Face](https://huggingface.co) and [Pollen Robotics](https://www.pollen-robotics.com) launched [Reachy Mini](https://www.pollen-robotics.com/products/reachy-mini/), so I bought and built the Lite version. It was ready for some Christmas magic and family demos.
 
+<div class="post-figure-wrapper">
 {% include figure.liquid path="/assets/img/P1230385.jpg" alt="Reachy Mini next to the Christmas tree" caption="Reachy Mini Lite, ready for Christmas demos." max-width="400px" %}
+</div>
 
 Then, a few weeks ago, I thought: what about combining both robots? The arm needs a front camera if I want to make it autonomous on some tasks, and Reachy needs an arm to interact with the world around it.
 
@@ -37,13 +41,17 @@ Due to my disability I cannot use a leader arm, as most teleoperators do. Traini
 
 So I built a small teleoperation app to directly control the follower SO-101 arm with my phone using two joysticks.
 
+<div class="post-figure-wrapper">
 {% include figure.liquid path="/assets/img/teleop.jpeg" alt="Teleoperation app on phone: wrist camera feed and joystick controls for shoulder, elbow, wrist, and gripper" caption="Phone teleoperation interface: wrist camera view and two joysticks for arm control." max-width="400px" %}
+</div>
 
 After some warmup trials, I recorded ~50 episodes of the arm picking up a pen and showing it to Reachy.
 
 Then I used these episodes to finetune [SmolVLA](https://huggingface.co/blog/smolvla). I tried LoRA finetuning and full finetuning but I finally got better results with the full finetuning that took about 9 hours on my MacBook Pro M3.
 
+<div class="post-figure-wrapper">
 {% include figure.liquid path="/assets/img/robot_training.png" alt="Training loss and gradient norm: full finetuning vs LoRA r=16" caption="Training curves: full finetuning (fft) vs LoRA r=16 — lower loss with full finetuning." %}
+</div>
 
 And here was the result!
 
