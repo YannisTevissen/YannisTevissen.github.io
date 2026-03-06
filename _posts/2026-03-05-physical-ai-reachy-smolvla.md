@@ -19,21 +19,21 @@ _styles: |
 
 Awhile ago, I started growing interest in physical AI: how could the already powerful AI models be used for real physical tasks, and ultimately for better autonomy?
 
-So when it was open sourced, I built a [SO-100](https://github.com/TheRobotStudio/SO-ARM100), then a [SO-101](https://github.com/TheRobotStudio/SO-ARM100). I mounted the latter to my wheelchair and recorded a nice video.
+So when it was open sourced, I built a [SO-100](https://github.com/TheRobotStudio/SO-ARM100), then a [SO-101](https://github.com/TheRobotStudio/SO-ARM100). I even mounted the latter to my wheelchair and recorded a nice video.
 
 <div class="post-video-wrapper">
 {% include video.liquid path="/assets/video/robot_wheelchair.mp4" controls=true caption="SO-101 arm mounted on my wheelchair." %}
 </div>
 
-But like most robotic videos back then it was carefully recorded and teleoperated to create the illusion of a useful robot. It was not yet.
+But like most robotic videos back then, it was carefully recorded and teleoperated to create the illusion of a useful robot. It was not there yet.
 
-A few months later, [Hugging Face](https://huggingface.co) and [Pollen Robotics](https://www.pollen-robotics.com) launched [Reachy Mini](https://www.pollen-robotics.com/products/reachy-mini/), so I bought and built the Lite version. It was ready for some Christmas magic and family demos.
+A few months later, [Hugging Face](https://huggingface.co) and [Pollen Robotics](https://www.pollen-robotics.com) launched [Reachy Mini](https://www.pollen-robotics.com/products/reachy-mini/), so I bought and built the Lite version. A few months ago, it was ready for some Christmas magic and family demos.
 
 <div class="post-figure-wrapper">
 {% include figure.liquid path="/assets/img/P1230385.jpg" alt="Reachy Mini next to the Christmas tree" caption="Reachy Mini Lite, ready for Christmas demos." max-width="400px" %}
 </div>
 
-Then, a few weeks ago, I thought: what about combining both robots? The arm needs a front camera if I want to make it autonomous on some tasks, and Reachy needs an arm to interact with the world around it.
+Then, a few weeks ago, I thought: what about combining both robots? The arm needs a front camera to be autonomous on some tasks, and Reachy needs an arm to interact with the world around it.
 
 So after wiring up the two cameras (Reachy's and the one mounted on the arm wrist), the big challenge was the teleoperation.
 
