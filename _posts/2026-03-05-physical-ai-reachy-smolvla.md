@@ -56,7 +56,7 @@ Then I used these episodes to finetune [SmolVLA](https://huggingface.co/blog/smo
 And here was the result!
 
 <div class="post-video-wrapper portrait">
-{% include video.liquid path="/assets/video/IMG_2898.mp4" controls=true caption="Reachy and SO-101 acting together" %}
+{% include video.liquid path="/assets/video/robots.mp4" controls=true caption="Reachy and SO-101 acting together" %}
 </div>
 
 I must say it feels weird to see a model I trained *act* in the real world. Physical AI is really something else and even though I know how it works, it still felt a bit like magic.
