@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+
+const title = "Blog - Yannis Tevissen";
+const description =
+  "Technical notes, prototypes, and side projects by Yannis Tevissen on multimodal video understanding, retrieval, and home robotics experiments.";
+---
+
+<BaseLayout title={title} description={description} showFeedLink>
+  <main id="site-main" class="site-main">
+    <div class="site-shell">
+      <h1 class="page-title">Blog</h1>
+      <p class="lede">Technical notes, prototypes, and side projects.</p>
+      <ul class="post-list">
+        {
+          posts.map((post) => {
+            const slug = post.data.customSlug ?? post.id;
+            const permalink = `/blog/${slug}/`;
+            const dateLabel = post.data.pubDate.toLocaleDateString("en-GB", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            const isoDate = post.data.pubDate.toISOString().slice(0, 10);
+            const blurb = post.data.listingBlurb ?? post.data.description;
+            const linkText = post.data.headline ?? post.data.title;
+            const hasThumb = !!post.data.listingImage;
+            return (
+              <li class={hasThumb ? "has-thumb" : undefined}>
+                {hasThumb && (
+                  <span class="thumb">
+                    <img
+                      src={post.data.listingImage}
+                      alt={post.data.listingImageAlt ?? ""}
+                      width="160"
+                      height="160"
+                      loading="lazy"
+                    />
+                  </span>
+                )}
+                <div class="item-body">
+                  <a href={permalink}>{linkText}</a>
+                  <p class="post-date">
+                    <time datetime={isoDate}>{dateLabel}</time>
+                  </p>
+                  <p>{blurb}</p>
+                </div>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </main>
+</BaseLayout>

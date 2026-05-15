@@ -1,0 +1,51 @@
+---
+import { FOOTER_SECONDARY_LINKS, SITE, SOCIAL_LINKS } from "../lib/site";
+
+export interface SecondaryLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  showContact?: boolean;
+  footerId?: string | null;
+  /** Override the default set of "Research · Press & Talks · Blog & Advocacy" links. */
+  secondaryLinks?: readonly SecondaryLink[];
+}
+
+const { showContact = true, footerId = "contact", secondaryLinks = FOOTER_SECONDARY_LINKS } = Astro.props;
+---
+
+<footer class="site-footer" {...footerId ? { id: footerId } : {}}>
+  <div class="site-shell">
+    {
+      showContact && (
+        <div class="footer-contact">
+          <p class="footer-contact-label">Get in touch</p>
+          <p class="footer-contact-email">
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          </p>
+          <p class="footer-contact-links">
+            <a href="/contact/">More options</a> · <a href={SITE.cvPath}>CV (PDF)</a>
+          </p>
+        </div>
+      )
+    }
+    <div class="footer-social">
+      {SOCIAL_LINKS.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+    <div class="footer-secondary">
+      <p>© {SITE.title}</p>
+      <p>
+        {
+          secondaryLinks.map((link, idx) => (
+            <>
+              {idx > 0 && " · "}
+              <a href={link.href}>{link.label}</a>
+            </>
+          ))
+        }
+      </p>
+    </div>
+  </div>
+</footer>

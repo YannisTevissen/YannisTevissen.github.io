@@ -1,0 +1,170 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+
+const title = "Blog & Advocacy - Yannis Tevissen";
+const description =
+  "Technical notes, prototypes, and public work on disability inclusion, accessibility, and representation in AI.";
+const footerSecondaryLinks = [
+  { href: "/research/", label: "Research" },
+  { href: "/talks/", label: "Press & Talks" },
+  { href: "/blog/", label: "Blog archive" },
+];
+---
+
+<BaseLayout title={title} description={description} footerSecondaryLinks={footerSecondaryLinks}>
+  <main id="site-main" class="site-main">
+    <div class="site-shell">
+      <h1 class="page-title">Blog &amp; Advocacy</h1>
+      <p class="lede">
+        Technical notes, prototypes, and public contributions connected to disability inclusion, accessibility, and
+        representation in AI.
+      </p>
+
+      <section aria-labelledby="blog-heading">
+        <h2 id="blog-heading">Latest from the blog</h2>
+        <ul class="post-list">
+          {
+            posts.map((post) => {
+              const slug = post.data.customSlug ?? post.id;
+              const permalink = `/blog/${slug}/`;
+              const dateLabel = post.data.pubDate.toLocaleDateString("en-GB", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+              const isoDate = post.data.pubDate.toISOString().slice(0, 10);
+              const blurb = post.data.listingBlurb ?? post.data.description;
+              const linkText = post.data.headline ?? post.data.title;
+              const hasThumb = !!post.data.listingImage;
+              return (
+                <li class={hasThumb ? "has-thumb" : undefined}>
+                  {hasThumb && (
+                    <span class="thumb">
+                      <img
+                        src={post.data.listingImage}
+                        alt={post.data.listingImageAlt ?? ""}
+                        width="160"
+                        height="160"
+                        loading="lazy"
+                      />
+                    </span>
+                  )}
+                  <div class="item-body">
+                    <a href={permalink}>{linkText}</a>
+                    <p class="post-date">
+                      <time datetime={isoDate}>{dateLabel}</time>
+                    </p>
+                    <p>{blurb}</p>
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+
+      <h2>Advocacy</h2>
+      <p class="page-lede" style="margin-bottom: 0.75rem; margin-top: 0.25rem">
+        I am personally involved in disability inclusion and accessibility in tech. This page brings together talks,
+        writing, and public contributions connected to that work.
+      </p>
+
+      <h2>Talks &amp; panels</h2>
+      <p class="page-lede" style="margin-bottom: 0.75rem; margin-top: 0.25rem">
+        Public interventions where I speak directly about disability, bias, accessibility, and representation. Broader
+        press coverage is on <a href="/talks/">Press &amp; Talks</a>.
+      </p>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <p class="pub-title">OECD panel: AI and disability</p>
+          <p class="pub-meta">
+            <time datetime="2024-12">December 2024</time> · OECD · Recommendations for inclusive AI development ·
+            <a href="https://www.youtube.com/watch?v=_CYn7HXEWuM&t=7140s">Video</a>
+          </p>
+        </li>
+        <li class="pub-item">
+          <p class="pub-title">TEDx — <span lang="fr">Handicap, Société et IA, une histoire de biais</span></p>
+          <p class="pub-meta">
+            <time datetime="2024-03">March 2024</time> · TEDxTélécom SudParis ·
+            <a href="https://www.youtube.com/watch?v=OJbTed99eb0" hreflang="fr">Video</a>
+          </p>
+        </li>
+        <li class="pub-item">
+          <p class="pub-title">Déclics Numérique — Diversidays</p>
+          <p class="pub-meta">
+            <time datetime="2023-08">August 2023</time> · Workshop on digital inclusion and diversity in tech
+          </p>
+        </li>
+        <li class="pub-item">
+          <p class="pub-title" lang="fr">Témoignage sur mon parcours en école d'ingénieurs</p>
+          <p class="pub-meta">
+            <time datetime="2022-04">April 2022</time> · Télécom SudParis ·
+            <a href="https://www.telecom-sudparis.eu/ecole/handicap/">Page handicap</a>
+          </p>
+        </li>
+      </ul>
+
+      <h2>Writing</h2>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <p class="pub-title">Graduate School Decoded: How to Navigate the Ph.D. with a Physical Disability</p>
+          <p class="pub-meta">
+            <time datetime="2023-08">August 2023</time> · The Ability Toolbox ·
+            <a href="https://theabilitytoolbox.com/navigate-phd-physical-disability/">Article</a>
+          </p>
+        </li>
+      </ul>
+
+      <h2>Projects &amp; datasets</h2>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <p class="pub-title">DiverseSpectrum</p>
+          <p class="pub-meta">
+            <time datetime="2026-01">January 2026</time> · Open-source image dataset designed to fill the representation
+            gap of minorities in popular AI datasets
+          </p>
+        </li>
+        <li class="pub-item">
+          <p class="pub-title">
+            <a href="https://huggingface.co/collections/YannisTevissen/ai-for-disability-67684a1a9966a2e699f6b114"
+              >AI for Disability</a
+            >
+          </p>
+          <p class="pub-meta">
+            Curated Hugging Face collection of datasets, models, spaces, and papers using AI for disability-related
+            tasks
+          </p>
+          <div class="artifact-links" aria-label="Artifacts for AI for Disability">
+            <a href="https://huggingface.co/collections/YannisTevissen/ai-for-disability-67684a1a9966a2e699f6b114"
+              >Hugging Face collection</a
+            >
+          </div>
+        </li>
+        <li class="pub-item">
+          <p class="pub-title">Board member — Universal Wings Mobility</p>
+          <p class="pub-meta">
+            <time datetime="2025-07">July 2025</time> – present · AVI conversational agent for accessible travel planning
+          </p>
+        </li>
+      </ul>
+
+      <h2>Research overlap</h2>
+      <p>
+        This commitment also informs part of my research. The related publication on disability representation in image
+        generation is listed on the
+        <a href="/research/#publications">Publications section of the Research page</a>:
+      </p>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <p class="pub-title">Disability Representations: Finding Biases in Automatic Image Generation</p>
+          <p class="pub-meta">Yannis Tevissen · CVPR 2024 Workshop AVA</p>
+        </li>
+      </ul>
+    </div>
+  </main>
+</BaseLayout>

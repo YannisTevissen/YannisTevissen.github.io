@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Page not found - Yannis Tevissen";
+const description =
+  "This page could not be found on yannistevissen.fr. Use the navigation to access research, publications, talks, and contact details for Yannis Tevissen.";
+const footerSecondaryLinks = [
+  { href: "/", label: "About" },
+  { href: "/advocacy/", label: "Blog & Advocacy" },
+];
+---
+
+<BaseLayout title={title} description={description} noindex footerSecondaryLinks={footerSecondaryLinks}>
+  <main id="site-main" class="site-main">
+    <div class="site-shell">
+      <h1 class="page-title">Page not found</h1>
+      <p>
+        The requested page is unavailable. Use the home page to access research, publications, and contact information.
+      </p>
+      <p><a href="/">Back to home</a></p>
+    </div>
+  </main>
+</BaseLayout>

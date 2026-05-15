@@ -1,0 +1,103 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { SITE } from "../lib/site";
+
+interface Props {
+  title: string;
+  headline?: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags?: string[];
+  section?: string;
+  ogImage?: string;
+  keywords?: string;
+  permalink: string;
+}
+
+const {
+  title,
+  headline,
+  description,
+  pubDate,
+  updatedDate,
+  tags = [],
+  section,
+  ogImage,
+  keywords,
+  permalink,
+} = Astro.props;
+
+const canonical = new URL(permalink, SITE.url).toString();
+const ogImageUrl = ogImage ? (ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE.url).toString()) : undefined;
+const displayHeadline = headline ?? title;
+const formattedDate = pubDate.toLocaleDateString("en-GB", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+function formatIsoZulu(date: Date): string {
+  // Match the original site's "+00:00" suffix style instead of ".000Z".
+  return `${date.toISOString().slice(0, 19)}+00:00`;
+}
+
+const isoPubDate = pubDate.toISOString().slice(0, 10);
+const isoPubDateTime = formatIsoZulu(pubDate);
+const isoUpdatedDateTime = formatIsoZulu(updatedDate ?? pubDate);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  alternativeHeadline: displayHeadline,
+  datePublished: isoPubDateTime,
+  dateModified: isoUpdatedDateTime,
+  inLanguage: "en",
+  ...(ogImageUrl ? { image: ogImageUrl } : {}),
+  ...(keywords ? { keywords: keywords.split(",").map((k) => k.trim()) } : {}),
+  author: {
+    "@type": "Person",
+    name: SITE.author,
+    url: `${SITE.url}/`,
+  },
+  publisher: {
+    "@type": "Person",
+    name: SITE.author,
+    url: `${SITE.url}/`,
+  },
+  description,
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogType="article"
+  ogImage={ogImage ?? SITE.defaultOgImage}
+  twitterCard={ogImage ? "summary_large_image" : "summary"}
+  keywords={keywords}
+>
+  <Fragment slot="head-extra">
+    <meta property="article:published_time" content={isoPubDateTime} />
+    <meta property="article:author" content={`${SITE.url}/`} />
+    {section && <meta property="article:section" content={section} />}
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+
+  <main id="site-main" class="site-main">
+    <article class="site-shell prose" itemscope itemtype="https://schema.org/BlogPosting">
+      <header class="post-header">
+        <h1 itemprop="headline">{displayHeadline}</h1>
+        <p class="post-date">
+          <time datetime={isoPubDate} itemprop="datePublished">{formattedDate}</time>
+        </p>
+      </header>
+      <div itemprop="articleBody">
+        <slot />
+      </div>
+    </article>
+  </main>
+</BaseLayout>

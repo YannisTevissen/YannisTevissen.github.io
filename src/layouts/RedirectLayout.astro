@@ -1,0 +1,40 @@
+---
+interface Props {
+  to: string;
+  title: string;
+  /** Defaults to the destination URL (used for canonical). */
+  canonical?: string;
+  /** Body text/markup linking to the target. */
+  bodyText?: string;
+  bodyHref?: string;
+}
+
+const { to, title, canonical, bodyText, bodyHref = to } = Astro.props;
+const canonicalHref = canonical ?? to;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonicalHref} />
+    <script is:inline set:html={`location.replace("${to}");`} />
+  </head>
+  <body>
+    {
+      bodyText ? (
+        <p>
+          {bodyText} <a href={bodyHref}>Continue</a>.
+        </p>
+      ) : (
+        <p>
+          Redirecting to <a href={bodyHref}>{bodyHref}</a>.
+        </p>
+      )
+    }
+  </body>
+</html>
