@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yannis Tevissen</title>
+  <link href="https://yannistevissen.fr/atom.xml" rel="self" />
+  <link href="https://yannistevissen.fr/" />
+  <id>https://yannistevissen.fr/</id>
+  <updated>2026-03-05T12:00:00Z</updated>
+  <author>
+    <name>Yannis Tevissen</name>
+    <uri>https://yannistevissen.fr/</uri>
+  </author>
+  <entry>
+    <title>Prototype note: multimodal teleoperation and fine-tuning on a home robotics setup</title>
+    <link href="https://yannistevissen.fr/blog/2026/physical-ai-reachy-smolvla/" />
+    <id>https://yannistevissen.fr/blog/2026/physical-ai-reachy-smolvla/</id>
+    <updated>2026-03-05T12:00:00Z</updated>
+    <summary>Prototype note on multimodal teleoperation, phone-based data collection, and SmolVLA fine-tuning for a small home robotics setup with an SO-101 arm and Reachy Mini.</summary>
+  </entry>
+</feed>

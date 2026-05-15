@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Research - Yannis Tevissen</title><meta name="description" content="Research on multimodal retrieval and reasoning over large-scale video data, with a focus on indexing, retrieval, and evaluation."><meta name="author" content="Yannis Tevissen"><link rel="canonical" href="https://yannistevissen.fr/research/"><meta property="og:type" content="website"><meta property="og:site_name" content="Yannis Tevissen"><meta property="og:locale" content="en_US"><meta property="og:title" content="Research - Yannis Tevissen"><meta property="og:description" content="Research on multimodal retrieval and reasoning over large-scale video data, with a focus on indexing, retrieval, and evaluation."><meta property="og:url" content="https://yannistevissen.fr/research/"><meta property="og:image" content="https://yannistevissen.fr/assets/img/profile.png"><meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yannistevissen"><meta name="twitter:site" content="@yannistevissen"><link rel="icon" href="/assets/img/favicon.ico" sizes="any"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/site.css"><script async src="https://www.googletagmanager.com/gtag/js?id=G-6BNR1WQ6C7"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-6BNR1WQ6C7");
+    </script></head> <body> <a class="skip-link" href="#site-main">Skip to content</a> <header class="site-header"> <div class="site-shell--wide"> <a class="site-title" href="/">Yannis Tevissen</a> <nav class="site-nav" aria-label="Main"> <a href="/"> About </a><a href="/research/" aria-current="page"> Research </a><a href="/talks/"> Press </a><a href="/advocacy/"> Blog &amp; Advocacy </a><a href="/contact/"> Contact </a> </nav> </div> </header>  <main id="site-main" class="site-main"> <div class="site-shell"> <h1 class="page-title">Research</h1> <p class="page-lede">
+I study <strong>multimodal retrieval and reasoning over large-scale video data</strong>. The work centers on
+        indexing, evidence retrieval, and evaluation for long-form collections.
+</p> <section aria-labelledby="statement-heading"> <h2 id="statement-heading">What I work on</h2> <p>
+The central problem is to retrieve the right evidence from long-form video and use it for reasoning. This is
+          difficult because video is temporally distributed, weakly structured, and queried through language, metadata,
+          and temporal constraints. I build systems that index video into searchable units and connect retrieval outputs
+          to grounded reasoning pipelines.
+</p> <p>
+A second problem is evaluation. Reported progress on video tasks can change with frame sampling, segmentation,
+          and benchmark construction. I study evaluation protocols that expose those dependencies and support comparison
+          under real operational constraints.
+</p> </section> <section aria-labelledby="pillars-heading"> <h2 id="pillars-heading">Research pillars</h2> <div class="pillars" style="margin-top: 1rem"> <div class="pillar"> <h3>Video understanding</h3> <p>
+Long-form video carries meaning across time, modalities, and context. I build shot detection, chaptering,
+              and multimodal representation pipelines that turn raw footage into structured, machine understandable
+              units.
+</p> </div> <div class="pillar"> <h3>Video retrieval</h3> <p>
+Multimodal video queries require systems to align language, vision, and time. I design retrieval and
+              reasoning pipelines that ground outputs in relevant video segments.
+</p> </div> <div class="pillar"> <h3>AI fairness</h3> <p>
+Models inherit and amplify the biases present in their training data. I study how disability, minority,
+              and representation gaps propagate through vision and language systems, and how to evaluate and mitigate
+              them.
+</p> </div> </div> </section> <section id="selected-work" aria-labelledby="selected-heading"> <h2 id="selected-heading">Selected work</h2> <p class="page-lede" style="margin-top: 0.5rem">
+Curated for the core agenda of multimodal retrieval and reasoning over video data. The complete list is below.
+</p> <ul class="work-list"> <li class="work-card has-thumb"> <span class="thumb thumb-1" aria-hidden="true"></span> <div class="item-body"> <div class="work-card-header"> <span class="type-badge">Paper</span> <p class="work-card-title"> <a href="https://arxiv.org/abs/2406.14938">Towards Retrieval Augmented Generation over Large Video Libraries</a> </p> </div> <p>
+Studies how to ground generation in large video libraries by retrieving relevant video segments as
+                evidence. HSI 2024.
+</p> <div class="artifact-links" aria-label="Artifacts for Retrieval Augmented Generation over Large Video Libraries"> <a href="https://arxiv.org/abs/2406.14938">arXiv</a> <a href="https://huggingface.co/papers/2406.14938">Hugging Face</a> <a href="https://research.momentslab.com/blog-posts/rag-video-libraries">Research note</a> <a href="https://doi.org/10.1109/HSI61632.2024.10613524">DOI</a> </div> </div> </li> <li class="work-card has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_frame_sampling.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <div class="work-card-header"> <span class="type-badge">Paper</span> <p class="work-card-title"> <a href="https://arxiv.org/abs/2509.14769">Frame Sampling Strategies Matter: A Benchmark for small vision language models</a> </p> </div> <p>
+Shows that frame sampling changes measured video reasoning performance and provides a benchmark for more
+                reliable comparison.
+</p> <div class="artifact-links" aria-label="Artifacts for Frame Sampling Strategies Matter"> <a href="https://arxiv.org/abs/2509.14769">arXiv</a> <a href="https://github.com/momentslab/frame-sampling">Code</a> <a href="https://huggingface.co/papers/2509.14769">Hugging Face</a> <a href="https://research.momentslab.com/blog-posts/frame-sampling-vlm">Research note</a> </div> </div> </li> <li class="work-card has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_chaptering.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <div class="work-card-header"> <span class="type-badge">Paper</span> <p class="work-card-title"> <a href="https://arxiv.org/abs/2406.17590">Multimodal Chaptering for Long-Form TV Newscast Video</a> </p> </div> <p>
+Addresses the lack of temporal structure in long broadcasts by building a multimodal chaptering pipeline
+                for retrieval and analysis.
+</p> <div class="artifact-links" aria-label="Artifacts for Multimodal Chaptering for Long-Form TV Newscast Video"> <a href="https://arxiv.org/abs/2406.17590">arXiv</a> <a href="https://huggingface.co/papers/2406.17590">Hugging Face</a> <a href="https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing">Colab</a> <a href="https://research.momentslab.com/blog-posts/automatic-chapters">Research note</a> </div> </div> </li> <li class="work-card has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_patent_shot_indexing.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <div class="work-card-header"> <span class="type-badge">Patent</span> <p class="work-card-title"> <a href="https://patents.justia.com/patent/12288377">
+Computer-based platforms and methods for efficient AI-based digital video shot indexing
+</a> </p> </div> <p>
+Builds a shot-level indexing method designed for large production video platforms. US 12,288,377 (2025).
+</p> <div class="artifact-links" aria-label="Artifacts for AI-based digital video shot indexing"> <a href="https://patents.justia.com/patent/12288377">Patent record</a> </div> </div> </li> </ul> <p class="section-foot"><a href="#publications">Jump to all publications ↓</a></p> </section> <section aria-labelledby="review-heading"> <h2 id="review-heading">Reviewing activities</h2> <p>
+I reviewed for <strong>ICASSP 2026</strong>, <strong>ICPRAI 2026</strong>, and <strong>ICME 2025</strong>. I
+          also served on the scientific committee of <strong>JETSAN 2025</strong>.
+</p> </section> <section aria-labelledby="teaching-heading"> <h2 id="teaching-heading">Teaching</h2> <ul class="pub-list"> <li class="pub-item has-thumb"> <span class="thumb thumb-5" aria-hidden="true"></span> <div class="item-body"> <p class="pub-title">Speaker Diarization — Guest lecture</p> <p class="pub-meta">
+2024 · Graduate course on multimodal speech and speaker recognition. Covered diarization pipelines,
+                multi-stream voice activity detection, evaluation, and fairness in real-world conditions.
+</p> </div> </li> </ul> </section> <section id="publications" aria-labelledby="publications-heading"> <h2 id="publications-heading">Publications</h2> <p class="page-lede" style="margin-top: 0.5rem">
+Recent work centers on multimodal retrieval and reasoning over video data. Earlier publications cover
+          multimodal speech processing, robustness, and fairness, which inform the current research agenda.
+          Authoritative citation data:
+<a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Google Scholar</a>.
+</p> <h3 class="pub-year">2025</h3> <ul class="pub-list"> <li class="pub-item has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_frame_sampling.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <span class="tag">Video understanding</span> <p class="pub-title">Frame Sampling Strategies Matter: A Benchmark for small vision language models</p> <p class="pub-meta">
+Marija Brkic, Anas Filali Razzouki, Yannis Tevissen, Khalil Guetari, Mounim A. El Yacoubi ·
+                arXiv:2509.14769 ·
+<a href="https://arxiv.org/abs/2509.14769">arXiv</a> </p> <div class="artifact-links" aria-label="Artifacts for Frame Sampling Strategies Matter"> <a href="https://github.com/momentslab/frame-sampling">Code</a> <a href="https://huggingface.co/papers/2509.14769">Hugging Face</a> <a href="https://research.momentslab.com/blog-posts/frame-sampling-vlm">Research note</a> </div> </div> </li> <li class="pub-item has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_patent_shot_indexing.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <span class="tag">Video retrieval</span> <p class="pub-title">
+Computer-based platforms and methods for efficient AI-based digital video shot indexing
+</p> <p class="pub-meta">
+Frédéric Petitpont, Philippe Petitpont, Yannis Tevissen, Khalil Guetari · US Patent 12,288,377 · Apr
+                2025
+</p> <div class="artifact-links" aria-label="Artifacts for AI-based digital video shot indexing"> <a href="https://patents.justia.com/patent/12288377">Patent record</a> </div> </div> </li> </ul> <h3 class="pub-year">2024</h3> <ul class="pub-list"> <li class="pub-item has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_patent_captions.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <span class="tag">Video understanding</span> <p class="pub-title">
+Systems and methods for AI generation of image captions enriched with multiple AI modalities
+</p> <p class="pub-meta">
+Frédéric Petitpont, Yannis Tevissen, Khalil Guetari · US Patent 12,148,233 · Nov 2024
+</p> <div class="artifact-links" aria-label="Artifacts for AI-generated image captions patent"> <a href="https://patents.justia.com/patent/12148233">Patent record</a> </div> </div> </li> <li class="pub-item has-thumb"> <span class="thumb thumb-4" aria-hidden="true"></span> <div class="item-body"> <span class="tag">Video retrieval</span> <p class="pub-title">Towards Retrieval Augmented Generation over Large Video Libraries</p> <p class="pub-meta">
+Yannis Tevissen, Khalil Guetari, Frédéric Petitpont · HSI 2024 ·
+<strong>Best Presentation Paper</strong> </p> <div class="artifact-links" aria-label="Artifacts for Retrieval Augmented Generation over Large Video Libraries"> <a href="https://arxiv.org/abs/2406.14938">arXiv</a> <a href="https://huggingface.co/papers/2406.14938">Hugging Face</a> <a href="https://research.momentslab.com/blog-posts/rag-video-libraries">Research note</a> <a href="https://doi.org/10.1109/HSI61632.2024.10613524">DOI</a> </div> </div> </li> <li class="pub-item has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_disability.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <span class="tag">Fairness</span> <p class="pub-title">Disability Representations: Finding Biases in Automatic Image Generation</p> <p class="pub-meta">
+Yannis Tevissen · CVPR 2024 Workshop AVA ·
+<a href="https://arxiv.org/abs/2406.14993">arXiv</a> </p> <div class="artifact-links" aria-label="Artifacts for Disability Representations paper"> <a href="https://huggingface.co/papers/2406.14993">Hugging Face</a> </div> </div> </li> <li class="pub-item has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_chaptering.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <span class="tag">Video understanding</span> <p class="pub-title">Multimodal Chaptering for Long-Form TV Newscast Video</p> <p class="pub-meta">
+Khalil Guetari, Yannis Tevissen, Frédéric Petitpont · 2024 ·
+<a href="https://arxiv.org/abs/2406.17590">arXiv</a> </p> <div class="artifact-links" aria-label="Artifacts for Multimodal Chaptering for Long-Form TV Newscast Video"> <a href="https://huggingface.co/papers/2406.17590">Hugging Face</a> <a href="https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing">Colab</a> <a href="https://research.momentslab.com/blog-posts/automatic-chapters">Research note</a> </div> </div> </li> <li class="pub-item has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_inserting_faces.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <span class="tag">Video understanding</span> <p class="pub-title">Inserting Faces inside Captions: Image Captioning with Attention Guided Merging</p> <p class="pub-meta">
+Yannis Tevissen, Khalil Guetari, Marine Tassel, Erwan Kerleroux, Frédéric Petitpont · arXiv:2405.02305 ·
+<a href="https://arxiv.org/abs/2405.02305">arXiv</a> </p> <div class="artifact-links" aria-label="Artifacts for Inserting Faces inside Captions"> <a href="https://huggingface.co/papers/2405.02305">Hugging Face</a> <a href="https://huggingface.co/datasets/momentslab/AstroCaptions">Dataset</a> </div> </div> </li> <li class="pub-item has-thumb"> <span class="thumb thumb-2" aria-hidden="true"></span> <div class="item-body"> <span class="tag">Speech processing</span> <p class="pub-title">
+Privacy Preserving Personal Assistant with On-Device Diarization and Spoken Dialogue System for Home and
+                Beyond
+</p> <p class="pub-meta">Gérard Chollet et al. · IHIET 2024</p> </div> </li> </ul> <h3 class="pub-year">2023</h3> <ul class="pub-list"> <li class="pub-item has-thumb"> <span class="thumb thumb-3" aria-hidden="true"></span> <div class="item-body"> <span class="tag">Speech processing</span> <p class="pub-title">Diarisation multimodale: vers des modèles robustes et justes en contexte réel</p> <p class="pub-meta">Yannis Tevissen · Institut Polytechnique de Paris</p> </div> </li> <li class="pub-item has-thumb"> <span class="thumb thumb-4" aria-hidden="true"></span> <div class="item-body"> <span class="tag">Speech processing</span> <p class="pub-title">Détection d'activité vocale Multi-flux pour la Diarisation du locuteur</p> <p class="pub-meta">Yannis Tevissen, Jérôme Boudy, Gérard Chollet, Frédéric Petitpont · GRETSI 2023</p> </div> </li> <li class="pub-item has-thumb"> <span class="thumb thumb-5" aria-hidden="true"></span> <div class="item-body"> <span class="tag">Speech processing</span> <p class="pub-title">
+Home monitoring for frailty detection through sound and speaker diarization analysis
+</p> <p class="pub-meta">Yannis Tevissen et al. · JETSAN 2023</p> </div> </li> <li class="pub-item has-thumb"> <span class="thumb"> <img src="/assets/img/items/pub_diarization_fairness.jpg" alt="" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <span class="tag">Fairness</span> <p class="pub-title">Towards measuring and scoring speaker diarization fairness</p> <p class="pub-meta">
+Yannis Tevissen, Jérôme Boudy, Gérard Chollet, Frédéric Petitpont · arXiv:2302.09991 ·
+<a href="https://arxiv.org/abs/2302.09991">arXiv</a> </p> </div> </li> </ul> <h3 class="pub-year">2022</h3> <ul class="pub-list"> <li class="pub-item has-thumb"> <span class="thumb thumb-1" aria-hidden="true"></span> <div class="item-body"> <span class="tag">Speech processing</span> <p class="pub-title">Multi-stream voice activity detection for robust speaker diarization</p> <p class="pub-meta">Yannis Tevissen, Jérôme Boudy, Gérard Chollet · GDR ISIS 2022</p> </div> </li> <li class="pub-item has-thumb"> <span class="thumb thumb-2" aria-hidden="true"></span> <div class="item-body"> <span class="tag">Speech processing</span> <p class="pub-title">
+The Newsbridge-Telecom SudParis VoxCeleb Speaker Recognition Challenge 2022 System Description
+</p> <p class="pub-meta">Yannis Tevissen, Jérôme Boudy, Frédéric Petitpont · VoxCeleb SRC 2022 Task 4</p> </div> </li> </ul> </section> </div> </main>  <footer class="site-footer" id="contact"> <div class="site-shell"> <div class="footer-contact"> <p class="footer-contact-label">Get in touch</p> <p class="footer-contact-email"> <a href="mailto:contact@yannistevissen.fr">contact@yannistevissen.fr</a> </p> <p class="footer-contact-links"> <a href="/contact/">More options</a> · <a href="/assets/cv/CV_YannisTevissen_en.pdf">CV (PDF)</a> </p> </div> <div class="footer-social"> <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Scholar</a><a href="https://www.linkedin.com/in/yannis-tevissen">LinkedIn</a><a href="https://github.com/YannisTevissen">GitHub</a><a href="https://huggingface.co/YannisTevissen">Hugging Face</a><a href="https://bsky.app/profile/yannistevissen.fr">Bluesky</a><a href="https://x.com/yannistevissen">X</a> </div> <div class="footer-secondary"> <p>© Yannis Tevissen</p> <p> <a href="/talks/">Press &amp; Talks</a>  · <a href="/advocacy/">Blog &amp; Advocacy</a>  </p> </div> </div> </footer> <script>
+        (function () {
+          if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          var body = document.body;
+          var raf = 0;
+          var tx = 50, ty = 0, cx = 50, cy = 0;
+          function tick() {
+            cx += (tx - cx) * 0.08;
+            cy += (ty - cy) * 0.08;
+            body.style.setProperty('--mx', cx.toFixed(2) + '%');
+            body.style.setProperty('--my', cy.toFixed(2) + '%');
+            if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) {
+              raf = requestAnimationFrame(tick);
+            } else {
+              raf = 0;
+            }
+          }
+          window.addEventListener('pointermove', function (e) {
+            tx = (e.clientX / window.innerWidth) * 100;
+            ty = (e.clientY / window.innerHeight) * 100;
+            if (!raf) raf = requestAnimationFrame(tick);
+          }, { passive: true });
+        })();
+      </script> </body> </html>

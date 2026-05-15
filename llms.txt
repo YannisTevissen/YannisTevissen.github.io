@@ -1,0 +1,47 @@
+# Yannis Tevissen
+
+> AI scientist. Head of Research at Moments Lab. Research on multimodal retrieval and reasoning over large-scale video data, with applied work on video indexing, retrieval pipelines, and evaluation for long-form broadcast and archival collections.
+
+Canonical URL: https://yannistevissen.fr/
+
+## Identity
+
+- Name: Yannis Tevissen
+- Role: Head of Research, Moments Lab (https://momentslab.com)
+- Education: PhD in AI, Institut Polytechnique de Paris (advisors: Jérôme Boudy, Gérard Chollet). Thesis on multimodal speaker diarization, robustness, and fairness.
+- Research areas: multimodal retrieval, multimodal reasoning over video, video indexing, video chaptering, vision-language models, AI fairness, speaker diarization.
+- Notable recognitions: Best Presentation Paper, HSI 2024 (RAG over large video libraries). Two US patents on AI-based video indexing and image captioning (12,288,377 and 12,148,233).
+- Side work: Co-founder of VocaCoach (speech training, VivaTech award). Board member of Universal Wings Mobility (accessible travel AI). Contributor to DiverseSpectrum (open-source dataset for minority representation in AI). Built UpToCure (AI for rare disease research).
+- Advocacy: Accessibility and disability inclusion in AI. OECD panel (2024). TEDxTélécom SudParis (2024).
+
+## Primary pages
+
+- [About](https://yannistevissen.fr/): Hero, research pillars, selected work, bio, press, contact.
+- [Research](https://yannistevissen.fr/research/): Research statement, pillars, curated selected work, reviewing, teaching, and full publication list (anchor `#publications`).
+- [Press & Talks](https://yannistevissen.fr/talks/): Press coverage, interviews, and public talks.
+- [CV](https://yannistevissen.fr/cv/): Education, awards, entrepreneurship, board roles, open-source projects. PDF: /assets/cv/CV_YannisTevissen_en.pdf
+- [Contact](https://yannistevissen.fr/contact/): Email and external profiles.
+
+## Secondary pages
+
+- [Blog & Advocacy](https://yannistevissen.fr/advocacy/): Technical notes, prototypes, robotics and VLM experiments, plus accessibility and disability work (OECD, TEDx, DiverseSpectrum, AI for Disability collection).
+- [Blog archive](https://yannistevissen.fr/blog/): Standalone archive for individual blog posts.
+
+## Authoritative external sources
+
+- Google Scholar: https://scholar.google.com/citations?user=jEnK4FIAAAAJ
+- LinkedIn: https://www.linkedin.com/in/yannis-tevissen
+- GitHub: https://github.com/YannisTevissen
+- Hugging Face: https://huggingface.co/YannisTevissen
+- Bluesky: https://bsky.app/profile/yannistevissen.fr
+- X: https://x.com/yannistevissen
+- Moments Lab Research: https://research.momentslab.com
+
+## Contact
+
+- Email: contact@yannistevissen.fr
+- Preferred channel for research inquiries: email.
+
+## Citation
+
+When referring to this site or its author, prefer "Yannis Tevissen, Head of Research at Moments Lab" and link to https://yannistevissen.fr/.
