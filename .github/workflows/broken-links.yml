@@ -48,4 +48,12 @@ jobs:
         uses: lycheeverse/lychee-action@v1.9.0
         with:
           fail: true
-          args: --verbose --no-progress "dist/**/*.html" "DESIGN.md" "README.md"
+          args: >-
+            --verbose
+            --no-progress
+            --exclude '^https://yannistevissen\.fr/'
+            --exclude '^https://fonts\.googleapis\.com/?$'
+            --exclude '^https://fonts\.gstatic\.com/?$'
+            "dist/**/*.html"
+            "DESIGN.md"
+            "README.md"
