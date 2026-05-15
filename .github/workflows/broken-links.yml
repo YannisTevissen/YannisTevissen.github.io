@@ -9,8 +9,12 @@ on:
       - "src/**"
       - "public/**"
       - "astro.config.mjs"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
       - "DESIGN.md"
       - "README.md"
+      - ".github/workflows/broken-links.yml"
   pull_request:
     branches:
       - master
@@ -19,8 +23,12 @@ on:
       - "src/**"
       - "public/**"
       - "astro.config.mjs"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
       - "DESIGN.md"
       - "README.md"
+      - ".github/workflows/broken-links.yml"
 
 jobs:
   link-checker:
@@ -30,7 +38,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22.12.0"
           cache: npm
       - name: Install
         run: npm ci
