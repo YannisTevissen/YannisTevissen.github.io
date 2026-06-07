@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const title = "Research - Yannis Tevissen";
 const description =
-  "Research on multimodal retrieval and reasoning over large-scale video data, with a focus on indexing, retrieval, and evaluation.";
+  "Research on multimodal retrieval and reasoning over large-scale video data, with a focus on indexing, retrieval, frame selection, and evaluation.";
 const footerSecondaryLinks = [
   { href: "/talks/", label: "Press & Talks" },
   { href: "/advocacy/", label: "Blog & Advocacy" },
@@ -69,6 +69,29 @@ const footerSecondaryLinks = [
           Curated for the core agenda of multimodal retrieval and reasoning over video data. The complete list is below.
         </p>
         <ul class="work-list">
+          <li class="work-card has-thumb">
+            <span class="thumb thumb-6" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="work-card-header">
+                <span class="type-badge">Paper</span>
+                <p class="work-card-title">
+                  <a href="https://arxiv.org/abs/2605.31029"
+                    >PEEK: Picking Essential frames via Efficient Knowledge distillation</a
+                  >
+                </p>
+              </div>
+              <p>
+                Introduces a lightweight dynamic frame selector that distills caption-conditioned relevance from a
+                teacher model for efficient low-budget video captioning.
+              </p>
+              <div class="artifact-links" aria-label="Artifacts for PEEK">
+                <a href="https://arxiv.org/abs/2605.31029">arXiv</a>
+                <a href="https://github.com/momentslab/peek">Code</a>
+                <a href="https://huggingface.co/papers/2605.31029">Hugging Face</a>
+                <a href="https://www.killian-steunou.com/peek/">Project page</a>
+              </div>
+            </div>
+          </li>
           <li class="work-card has-thumb">
             <span class="thumb thumb-1" aria-hidden="true"></span>
             <div class="item-body">
@@ -210,6 +233,27 @@ const footerSecondaryLinks = [
           Authoritative citation data:
           <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Google Scholar</a>.
         </p>
+
+        <h3 class="pub-year">2026</h3>
+        <ul class="pub-list">
+          <li class="pub-item has-thumb">
+            <span class="thumb thumb-6" aria-hidden="true"></span>
+            <div class="item-body">
+              <span class="tag">Video understanding</span>
+              <p class="pub-title">PEEK: Picking Essential frames via Efficient Knowledge distillation</p>
+              <p class="pub-meta">
+                Killian Steunou, Anas Filali Razzouki, Khalil Guetari, Mounim A. El Yacoubi, Yannis Tevissen ·
+                arXiv:2605.31029 ·
+                <a href="https://arxiv.org/abs/2605.31029">arXiv</a>
+              </p>
+              <div class="artifact-links" aria-label="Artifacts for PEEK">
+                <a href="https://github.com/momentslab/peek">Code</a>
+                <a href="https://huggingface.co/papers/2605.31029">Hugging Face</a>
+                <a href="https://www.killian-steunou.com/peek/">Project page</a>
+              </div>
+            </div>
+          </li>
+        </ul>
 
         <h3 class="pub-year">2025</h3>
         <ul class="pub-list">

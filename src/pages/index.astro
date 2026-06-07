@@ -6,7 +6,7 @@ const title = "Yannis Tevissen - Unraveling the science of videos";
 const description =
   "Research on multimodal retrieval and reasoning over large-scale video data. Head of Research at Moments Lab.";
 const keywords =
-  "Yannis Tevissen, multimodal retrieval, video understanding, video indexing, vision language models, AI fairness, Moments Lab, Head of Research";
+  "Yannis Tevissen, multimodal retrieval, video understanding, video indexing, frame selection, PEEK, vision language models, AI fairness, Moments Lab, Head of Research";
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -37,6 +37,7 @@ const personSchema = {
     "Multimodal retrieval",
     "Multimodal reasoning",
     "Video indexing",
+    "Frame selection",
     "Large-scale video data",
     "AI fairness",
     "Speaker diarization",
@@ -215,6 +216,26 @@ const websiteSchema = {
           is on the <a href="/research/#selected-work">Research page</a>.
         </p>
         <ul class="work-list">
+          <li class="work-card">
+            <div class="work-card-header">
+              <span class="type-badge">Paper</span>
+              <p class="work-card-title">
+                <a href="https://arxiv.org/abs/2605.31029"
+                  >PEEK: Picking Essential frames via Efficient Knowledge distillation</a
+                >
+              </p>
+            </div>
+            <p>
+              Introduces a lightweight dynamic frame selector that distills caption-conditioned relevance from a teacher
+              model for efficient low-budget video captioning.
+            </p>
+            <div class="artifact-links" aria-label="Artifacts for PEEK">
+              <a href="https://arxiv.org/abs/2605.31029">arXiv</a>
+              <a href="https://github.com/momentslab/peek">Code</a>
+              <a href="https://huggingface.co/papers/2605.31029">Hugging Face</a>
+              <a href="https://www.killian-steunou.com/peek/">Project page</a>
+            </div>
+          </li>
           <li class="work-card">
             <div class="work-card-header">
               <span class="type-badge">Paper</span>

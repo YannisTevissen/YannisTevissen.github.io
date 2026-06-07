@@ -1,6 +1,6 @@
 # Yannis Tevissen
 
-> AI scientist. Head of Research at Moments Lab. Research on multimodal retrieval and reasoning over large-scale video data, with applied work on video indexing, retrieval pipelines, and evaluation for long-form broadcast and archival collections.
+> AI scientist. Head of Research at Moments Lab. Research on multimodal retrieval and reasoning over large-scale video data, with applied work on video indexing, frame selection, retrieval pipelines, and evaluation for long-form broadcast and archival collections.
 
 Canonical URL: https://yannistevissen.fr/
 
@@ -9,8 +9,8 @@ Canonical URL: https://yannistevissen.fr/
 - Name: Yannis Tevissen
 - Role: Head of Research, Moments Lab (https://momentslab.com)
 - Education: PhD in AI, Institut Polytechnique de Paris (advisors: Jérôme Boudy, Gérard Chollet). Thesis on multimodal speaker diarization, robustness, and fairness.
-- Research areas: multimodal retrieval, multimodal reasoning over video, video indexing, video chaptering, vision-language models, AI fairness, speaker diarization.
-- Notable recognitions: Best Presentation Paper, HSI 2024 (RAG over large video libraries). Two US patents on AI-based video indexing and image captioning (12,288,377 and 12,148,233).
+- Research areas: multimodal retrieval, multimodal reasoning over video, video indexing, video chaptering, efficient frame selection, vision-language models, AI fairness, speaker diarization.
+- Notable research outputs: PEEK: Picking Essential frames via Efficient Knowledge distillation (arXiv:2605.31029). Best Presentation Paper, HSI 2024 (RAG over large video libraries). Two US patents on AI-based video indexing and image captioning (12,288,377 and 12,148,233).
 - Side work: Co-founder of VocaCoach (speech training, VivaTech award). Board member of Universal Wings Mobility (accessible travel AI). Contributor to DiverseSpectrum (open-source dataset for minority representation in AI). Built UpToCure (AI for rare disease research).
 - Advocacy: Accessibility and disability inclusion in AI. OECD panel (2024). TEDxTélécom SudParis (2024).
 
