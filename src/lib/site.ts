@@ -4,7 +4,7 @@ export const SITE = {
   description: "Multimodal retrieval and reasoning over large-scale video data.",
   author: "Yannis Tevissen",
   email: "contact@yannistevissen.fr",
-  defaultOgImage: "/assets/img/profile.png",
+  defaultOgImage: "/assets/img/og-card.png",
   gaId: "G-6BNR1WQ6C7",
   twitter: "@yannistevissen",
   cvPath: "/assets/cv/CV_YannisTevissen_en.pdf",

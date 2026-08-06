@@ -51,16 +51,109 @@ const websiteSchema = {
   url: "https://yannistevissen.fr/",
   description: "Multimodal retrieval and reasoning over large-scale video data.",
 };
+
+type WorkEntry = {
+  kind: "Paper" | "Patent";
+  title: string;
+  href: string;
+  summary: string;
+  /** Teaser figure. Drop a file in /public/assets/img/work/ and reference it here. */
+  figure?: { src: string; alt: string };
+  /** Looping teaser clip. `poster` is what reduced-motion users and slow connections see. */
+  clip?: { src: string; poster: string; alt: string };
+  links: { label: string; href: string }[];
+};
+
+const selectedWork: WorkEntry[] = [
+  {
+    kind: "Paper",
+    title: "PEEK: Picking Essential frames via Efficient Knowledge distillation",
+    href: "https://arxiv.org/abs/2605.31029",
+    summary:
+      "Introduces a lightweight dynamic frame selector that distills caption-conditioned relevance from a teacher model for efficient low-budget video captioning.",
+    clip: {
+      src: "/assets/img/work/peek.mp4",
+      poster: "/assets/img/work/peek-poster.jpg",
+      alt: "PEEK selecting the informative frames of a basketball dunk clip, shown as an overlay on the video",
+    },
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2605.31029" },
+      { label: "Code", href: "https://github.com/momentslab/peek" },
+      { label: "Hugging Face", href: "https://huggingface.co/papers/2605.31029" },
+      { label: "Project page", href: "https://www.killian-steunou.com/peek/" },
+    ],
+  },
+  {
+    kind: "Paper",
+    title: "Towards Retrieval Augmented Generation over Large Video Libraries",
+    href: "https://arxiv.org/abs/2406.14938",
+    summary:
+      "Addresses how to ground answers in large video libraries by combining retrieval over video segments with generation conditioned on retrieved evidence.",
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2406.14938" },
+      { label: "Hugging Face", href: "https://huggingface.co/papers/2406.14938" },
+      { label: "Research note", href: "https://research.momentslab.com/blog-posts/rag-video-libraries" },
+      { label: "DOI", href: "https://doi.org/10.1109/HSI61632.2024.10613524" },
+    ],
+  },
+  {
+    kind: "Paper",
+    title: "Frame Sampling Strategies Matter: A Benchmark for small vision language models",
+    href: "https://arxiv.org/abs/2509.14769",
+    summary:
+      "Shows that video reasoning results depend strongly on frame sampling and provides a benchmark for evaluating small vision-language models under controlled settings.",
+    figure: {
+      src: "/assets/img/items/pub_frame_sampling.jpg",
+      alt: "Benchmark results comparing frame sampling strategies for small vision-language models",
+    },
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2509.14769" },
+      { label: "Code", href: "https://github.com/momentslab/frame-sampling" },
+      { label: "Hugging Face", href: "https://huggingface.co/papers/2509.14769" },
+      { label: "Research note", href: "https://research.momentslab.com/blog-posts/frame-sampling-vlm" },
+    ],
+  },
+  {
+    kind: "Paper",
+    title: "Multimodal Chaptering for Long-Form TV Newscast Video",
+    href: "https://arxiv.org/abs/2406.17590",
+    summary:
+      "Studies how to segment long-form news video into retrievable chapters and builds a multimodal chaptering pipeline for downstream search.",
+    figure: {
+      src: "/assets/img/items/pub_chaptering.jpg",
+      alt: "Multimodal chaptering pipeline for long-form TV newscast video",
+    },
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2406.17590" },
+      { label: "Hugging Face", href: "https://huggingface.co/papers/2406.17590" },
+      {
+        label: "Colab",
+        href: "https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing",
+      },
+      { label: "Research note", href: "https://research.momentslab.com/blog-posts/automatic-chapters" },
+    ],
+  },
+  {
+    kind: "Patent",
+    title: "Computer-based platforms and methods for efficient AI-based digital video shot indexing",
+    href: "https://patents.justia.com/patent/12288377",
+    summary: "Builds an industrial method for shot-level video indexing so large collections can be searched at scale.",
+    figure: {
+      src: "/assets/img/items/pub_patent_shot_indexing.jpg",
+      alt: "Patent figure for AI-based digital video shot indexing",
+    },
+    links: [{ label: "Patent record", href: "https://patents.justia.com/patent/12288377" }],
+  },
+];
 ---
 
 <BaseLayout
   title={title}
   description={description}
   keywords={keywords}
-  ogImageAlt="Portrait of Yannis Tevissen"
+  ogImageAlt="Yannis Tevissen, Head of Research at Moments Lab — unraveling the science of videos"
   twitterCard="summary_large_image"
   showFeedLink
-  htmlClass="page-home-html"
   bodyClass="page-home"
 >
   <Fragment slot="head-extra">
@@ -70,114 +163,108 @@ const websiteSchema = {
 
   <main id="site-main" class="site-main site-main--home">
     <div class="site-shell">
-      <div class="home-hero-screen">
-        <section class="hero hero--video" aria-labelledby="hero-title">
-          <div class="hero-layout">
-            <figure class="hero-figure">
-              <div class="hero-photo-wrap">
-                <img
-                  class="hero-photo"
-                  src="/assets/img/profile.png"
-                  alt="Photo of Yannis Tevissen"
-                  width="136"
-                  height="136"
-                  loading="eager"
-                  decoding="async"
-                />
-              </div>
-              <figcaption
-                class="hero-caption hero-quick-links hero-quick-links--icons hero-quick-links--brand"
-                aria-label="Profiles"
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-layout">
+          <figure class="hero-figure">
+            <div class="hero-photo-wrap">
+              <img
+                class="hero-photo"
+                src="/assets/img/profile.png"
+                alt="Photo of Yannis Tevissen"
+                width="136"
+                height="136"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <figcaption
+              class="hero-caption hero-quick-links hero-quick-links--icons hero-quick-links--brand"
+              aria-label="Profiles"
+            >
+              <a
+                class="brand-icon brand-icon--scholar"
+                href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ"
+                rel="me"
+                aria-label="Google Scholar"
+                title="Google Scholar"
               >
-                <a
-                  class="brand-icon brand-icon--scholar"
-                  href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ"
-                  rel="me"
-                  aria-label="Google Scholar"
-                  title="Google Scholar"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path
-                      fill="#4285F4"
-                      d="M12 2L1 9l4 2.6V18l7 4 7-4v-6.4l3-1.95V18h2V9L12 2zm0 2.36L19.27 9 12 13.64 4.73 9 12 4.36zM7 13.07l5 3.27 5-3.27V16.8l-5 2.86-5-2.86v-3.73z"
-                    ></path>
-                  </svg>
-                </a>
-                <a
-                  class="brand-icon brand-icon--linkedin"
-                  href="https://www.linkedin.com/in/yannis-tevissen"
-                  rel="me"
-                  aria-label="LinkedIn"
-                  title="LinkedIn"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path
-                      fill="#0A66C2"
-                      d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"
-                    ></path>
-                  </svg>
-                </a>
-                <a
-                  class="brand-icon brand-icon--github"
-                  href="https://github.com/YannisTevissen"
-                  rel="me"
-                  aria-label="GitHub"
-                  title="GitHub"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path
-                      fill="#181717"
-                      d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.02c-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98.01 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
-                    ></path>
-                  </svg>
-                </a>
-                <a
-                  class="brand-icon brand-icon--hf"
-                  href="https://huggingface.co/YannisTevissen"
-                  rel="me"
-                  aria-label="Hugging Face"
-                  title="Hugging Face"
-                >
-                  <img src="/assets/img/huggingface_logo-noborder.svg" alt="" width="95" height="88" loading="eager" />
-                </a>
-                <a
-                  class="brand-icon brand-icon--x"
-                  href="https://x.com/yannistevissen"
-                  rel="me"
-                  aria-label="X"
-                  title="X"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path
-                      fill="#000000"
-                      d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.84L7.08 4.13H5.12l11.96 15.64Z"
-                    ></path>
-                  </svg>
-                </a>
-              </figcaption>
-            </figure>
-            <div class="hero-copy">
-              <p class="hero-kicker">Head of Research · <a href="https://momentslab.com">Moments Lab</a></p>
-              <h1 id="hero-title" class="hero-title">Unraveling the science of videos.</h1>
-              <p class="hero-lead">
-                Large video collections are difficult to search because evidence is distributed across time, modalities,
-                and incomplete metadata. I design indexing, retrieval, and reasoning pipelines that connect queries to
-                relevant video segments and grounded outputs. The goal is to make broadcast and archival video usable
-                for search, analysis, and decision support.
-              </p>
-              <div class="hero-actions">
-                <a href="/research/#publications">Publications</a>
-                <span aria-hidden="true">·</span>
-                <a href="/research/#selected-work">Selected work</a>
-                <span aria-hidden="true">·</span>
-                <a href={SITE.cvPath}>CV (PDF)</a>
-                <span aria-hidden="true">·</span>
-                <a href="/contact/">Contact</a>
-              </div>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    fill="#4285F4"
+                    d="M12 2L1 9l4 2.6V18l7 4 7-4v-6.4l3-1.95V18h2V9L12 2zm0 2.36L19.27 9 12 13.64 4.73 9 12 4.36zM7 13.07l5 3.27 5-3.27V16.8l-5 2.86-5-2.86v-3.73z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                class="brand-icon brand-icon--linkedin"
+                href="https://www.linkedin.com/in/yannis-tevissen"
+                rel="me"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    fill="#0A66C2"
+                    d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                class="brand-icon brand-icon--github"
+                href="https://github.com/YannisTevissen"
+                rel="me"
+                aria-label="GitHub"
+                title="GitHub"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    fill="#181717"
+                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.02c-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98.01 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                class="brand-icon brand-icon--hf"
+                href="https://huggingface.co/YannisTevissen"
+                rel="me"
+                aria-label="Hugging Face"
+                title="Hugging Face"
+              >
+                <img src="/assets/img/huggingface_logo-noborder.svg" alt="" width="95" height="88" loading="eager" />
+              </a>
+              <a class="brand-icon brand-icon--x" href="https://x.com/yannistevissen" rel="me" aria-label="X" title="X">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    fill="#000000"
+                    d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.84L7.08 4.13H5.12l11.96 15.64Z"
+                  ></path>
+                </svg>
+              </a>
+            </figcaption>
+          </figure>
+          <div class="hero-copy">
+            <p class="hero-kicker">Head of Research · <a href="https://momentslab.com">Moments Lab</a></p>
+            <h1 id="hero-title" class="hero-title">Unraveling the science of videos.</h1>
+            <p class="hero-lead">
+              I lead research on multimodal retrieval and reasoning at <a href="https://momentslab.com">Moments Lab</a>,
+              after a PhD at Institut Polytechnique de Paris. Video is where the hard version of long-context
+              understanding shows up first: the evidence is spread across time and modalities, most of it is redundant,
+              and the compute available per hour of footage is small. My recent work is about deciding what a model
+              should look at — frame selection by distillation, retrieval that grounds generation in specific segments —
+              and about benchmarks that separate real reasoning gains from artefacts of how frames were sampled.
+            </p>
+            <div class="hero-actions">
+              <a href="/research/#publications">Publications</a>
+              <span aria-hidden="true">·</span>
+              <a href="/research/#selected-work">Selected work</a>
+              <span aria-hidden="true">·</span>
+              <a href={SITE.cvPath}>CV (PDF)</a>
+              <span aria-hidden="true">·</span>
+              <a href="/contact/">Contact</a>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       <section class="home-card home-card--focus" aria-labelledby="focus-heading">
         <p class="section-label" id="focus-heading">Research focus</p>
@@ -216,106 +303,43 @@ const websiteSchema = {
           is on the <a href="/research/#selected-work">Research page</a>.
         </p>
         <ul class="work-list">
-          <li class="work-card">
-            <div class="work-card-header">
-              <span class="type-badge">Paper</span>
-              <p class="work-card-title">
-                <a href="https://arxiv.org/abs/2605.31029"
-                  >PEEK: Picking Essential frames via Efficient Knowledge distillation</a
-                >
-              </p>
-            </div>
-            <p>
-              Introduces a lightweight dynamic frame selector that distills caption-conditioned relevance from a teacher
-              model for efficient low-budget video captioning.
-            </p>
-            <div class="artifact-links" aria-label="Artifacts for PEEK">
-              <a href="https://arxiv.org/abs/2605.31029">arXiv</a>
-              <a href="https://github.com/momentslab/peek">Code</a>
-              <a href="https://huggingface.co/papers/2605.31029">Hugging Face</a>
-              <a href="https://www.killian-steunou.com/peek/">Project page</a>
-            </div>
-          </li>
-          <li class="work-card">
-            <div class="work-card-header">
-              <span class="type-badge">Paper</span>
-              <p class="work-card-title">
-                <a href="https://arxiv.org/abs/2406.14938"
-                  >Towards Retrieval Augmented Generation over Large Video Libraries</a
-                >
-              </p>
-            </div>
-            <p>
-              Addresses how to ground answers in large video libraries by combining retrieval over video segments with
-              generation conditioned on retrieved evidence.
-            </p>
-            <div
-              class="artifact-links"
-              aria-label="Artifacts for Retrieval Augmented Generation over Large Video Libraries"
-            >
-              <a href="https://arxiv.org/abs/2406.14938">arXiv</a>
-              <a href="https://huggingface.co/papers/2406.14938">Hugging Face</a>
-              <a href="https://research.momentslab.com/blog-posts/rag-video-libraries">Research note</a>
-              <a href="https://doi.org/10.1109/HSI61632.2024.10613524">DOI</a>
-            </div>
-          </li>
-          <li class="work-card">
-            <div class="work-card-header">
-              <span class="type-badge">Paper</span>
-              <p class="work-card-title">
-                <a href="https://arxiv.org/abs/2509.14769"
-                  >Frame Sampling Strategies Matter: A Benchmark for small vision language models</a
-                >
-              </p>
-            </div>
-            <p>
-              Shows that video reasoning results depend strongly on frame sampling and provides a benchmark for
-              evaluating small vision-language models under controlled settings.
-            </p>
-            <div class="artifact-links" aria-label="Artifacts for Frame Sampling Strategies Matter">
-              <a href="https://arxiv.org/abs/2509.14769">arXiv</a>
-              <a href="https://github.com/momentslab/frame-sampling">Code</a>
-              <a href="https://huggingface.co/papers/2509.14769">Hugging Face</a>
-              <a href="https://research.momentslab.com/blog-posts/frame-sampling-vlm">Research note</a>
-            </div>
-          </li>
-          <li class="work-card">
-            <div class="work-card-header">
-              <span class="type-badge">Paper</span>
-              <p class="work-card-title">
-                <a href="https://arxiv.org/abs/2406.17590">Multimodal Chaptering for Long-Form TV Newscast Video</a>
-              </p>
-            </div>
-            <p>
-              Studies how to segment long-form news video into retrievable chapters and builds a multimodal chaptering
-              pipeline for downstream search.
-            </p>
-            <div
-              class="artifact-links"
-              aria-label="Artifacts for Multimodal Chaptering for Long-Form TV Newscast Video"
-            >
-              <a href="https://arxiv.org/abs/2406.17590">arXiv</a>
-              <a href="https://huggingface.co/papers/2406.17590">Hugging Face</a>
-              <a href="https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing">Colab</a>
-              <a href="https://research.momentslab.com/blog-posts/automatic-chapters">Research note</a>
-            </div>
-          </li>
-          <li class="work-card">
-            <div class="work-card-header">
-              <span class="type-badge">Patent</span>
-              <p class="work-card-title">
-                <a href="https://patents.justia.com/patent/12288377">
-                  Computer-based platforms and methods for efficient AI-based digital video shot indexing
-                </a>
-              </p>
-            </div>
-            <p>
-              Builds an industrial method for shot-level video indexing so large collections can be searched at scale.
-            </p>
-            <div class="artifact-links" aria-label="Artifacts for AI-based digital video shot indexing">
-              <a href="https://patents.justia.com/patent/12288377">Patent record</a>
-            </div>
-          </li>
+          {
+            selectedWork.map((entry) => (
+              <li class={entry.figure || entry.clip ? "work-card work-card--figure" : "work-card"}>
+                {entry.clip && (
+                  <figure class="work-figure">
+                    <video
+                      src={entry.clip.src}
+                      poster={entry.clip.poster}
+                      aria-label={entry.clip.alt}
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      preload="metadata"
+                    />
+                  </figure>
+                )}
+                {entry.figure && !entry.clip && (
+                  <figure class="work-figure">
+                    <img src={entry.figure.src} alt={entry.figure.alt} loading="lazy" decoding="async" />
+                  </figure>
+                )}
+                <div class="work-card-header">
+                  <span class="type-badge">{entry.kind}</span>
+                  <p class="work-card-title">
+                    <a href={entry.href}>{entry.title}</a>
+                  </p>
+                </div>
+                <p>{entry.summary}</p>
+                <div class="artifact-links" aria-label={`Artifacts for ${entry.title}`}>
+                  {entry.links.map((link) => (
+                    <a href={link.href}>{link.label}</a>
+                  ))}
+                </div>
+              </li>
+            ))
+          }
         </ul>
         <p class="section-foot"><a href="/research/#publications">See all publications →</a></p>
       </section>
@@ -323,20 +347,23 @@ const websiteSchema = {
       <section id="bio" class="bio-compact home-card home-card--bio" aria-labelledby="bio-heading">
         <h2 id="bio-heading">Bio</h2>
         <p>
-          I am Head of Research at <a href="https://momentslab.com">Moments Lab</a>, where I lead research on multimodal
-          retrieval and reasoning over large-scale video data. I build video indexing systems, retrieval pipelines, and
-          evaluation methods for long-form broadcast and archival collections.
+          At <a href="https://momentslab.com">Moments Lab</a> I lead a research group building indexing systems, retrieval
+          pipelines, and evaluation methods for long-form broadcast and archival video, and I supervise doctoral work on
+          small omni-modal models. Most of what I care about there is efficiency: which of the available signal a model actually
+          needs, and how to tell when a reported gain is real.
         </p>
         <p>
-          I completed a PhD at Institut Polytechnique de Paris (advised by Jérôme Boudy and Gérard Chollet) on
-          multimodal speaker diarization with work on robustness and fairness in real-world conditions.
+          My PhD at Institut Polytechnique de Paris (advised by Jérôme Boudy and Gérard Chollet) was on multimodal
+          speaker diarization, focused on robustness and fairness under real recording conditions. That question — who a
+          system quietly fails for, and how you would measure it — has stayed with the rest of my work.
         </p>
         <p>
-          Outside of Moments Lab, I co-founded <strong>VocaCoach</strong>, a speech training platform (VivaTech award,
-          covered by Le Parisien). I also built <a href="https://github.com/YannisTevissen/UpToCure">UpToCure</a>, an
-          AI-powered rare disease research platform, and serve on the board of
-          <strong>Universal Wings Mobility</strong> (accessible travel AI). I contributed to
-          <strong>DiverseSpectrum</strong>, an open-source dataset for minority representation in AI.
+          Outside media, the same retrieval and evidence-grounding methods apply to scientific literature. I built
+          <a href="https://github.com/YannisTevissen/UpToCure">UpToCure</a>, which assembles research on rare diseases
+          into readable, sourced reports, and I contributed to <strong>DiverseSpectrum</strong>, an open-source dataset
+          addressing representation gaps in AI training data. I also co-founded <strong>VocaCoach</strong>, a speech
+          training platform (VivaTech award, covered by Le Parisien), and serve on the board of
+          <strong>Universal Wings Mobility</strong>.
         </p>
         <p>
           <a href="/research/#publications">Publications</a> ·
@@ -382,76 +409,15 @@ const websiteSchema = {
   </main>
 
   <script is:inline>
-    (() => {
-      const cards = Array.from(document.querySelectorAll(".page-home .site-shell > section.home-card"));
-      if (!cards.length) return;
-
-      const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-        cards.forEach((card) => card.classList.add("is-visible", "is-active"));
-        return;
-      }
-
-      document.body.classList.add("home-card-motion");
-
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { rootMargin: "0px 0px -12% 0px", threshold: 0.18 }
-      );
-
-      cards.forEach((card) => revealObserver.observe(card));
-
-      let ticking = false;
-
-      const setActiveCard = (activeCard) => {
-        const activeIndex = cards.indexOf(activeCard);
-
-        cards.forEach((card, index) => {
-          card.classList.toggle("is-active", index === activeIndex);
-          card.classList.toggle("is-before-active", index < activeIndex);
-          card.classList.toggle("is-after-active", index > activeIndex);
-        });
-      };
-
-      const updateActiveCard = () => {
-        ticking = false;
-
-        const viewportCenter = window.innerHeight * 0.52;
-        let closestCard = cards[0];
-        let closestDistance = Number.POSITIVE_INFINITY;
-
-        cards.forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-
-          const cardCenter = rect.top + rect.height / 2;
-          const distance = Math.abs(cardCenter - viewportCenter);
-
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestCard = card;
-          }
-        });
-
-        setActiveCard(closestCard);
-      };
-
-      const requestActiveCardUpdate = () => {
-        if (ticking) return;
-        ticking = true;
-        window.requestAnimationFrame(updateActiveCard);
-      };
-
-      updateActiveCard();
-      window.addEventListener("scroll", requestActiveCardUpdate, { passive: true });
-      window.addEventListener("resize", requestActiveCardUpdate);
-    })();
+    // A looping clip is motion the user may not want. Honour the OS setting:
+    // stop autoplay, show the poster, and expose controls so it stays reachable.
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll(".work-figure video[autoplay]").forEach((video) => {
+        video.autoplay = false;
+        video.loop = false;
+        video.controls = true;
+        video.pause();
+      });
+    }
   </script>
 </BaseLayout>
