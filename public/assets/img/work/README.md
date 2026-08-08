@@ -11,12 +11,15 @@ layout, which is why the list still reads like a bibliography rather than a proj
 
 ```ts
 {
-  kind: "Paper",
+  venue: "BMVC 2026",
   title: "PEEK: Picking Essential frames via Efficient Knowledge distillation",
   figure: { src: "/assets/img/work/peek.png", alt: "Frame selector picking 4 of 64 frames for a caption query" },
   ...
 }
 ```
+
+The card shows `venue` as a snug mono chip above the title. Optional `award`
+sits beside it in muted sans (e.g. Best Presentation next to HSI 2024).
 
 The entry picks up `work-card--figure` automatically and switches to the two-column layout.
 

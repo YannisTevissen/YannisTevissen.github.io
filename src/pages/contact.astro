@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProfileLinks from "../components/ProfileLinks.astro";
 import { SITE } from "../lib/site";
 
 const title = "Contact - Yannis Tevissen";
@@ -13,67 +14,13 @@ const description =
       <h1 class="page-title">Contact</h1>
       <p class="page-lede">For research collaboration, speaking invitations, or technical discussion.</p>
 
-      <section aria-labelledby="contact-email-heading">
-        <h2 id="contact-email-heading">Email</h2>
-        <p style="font-size: 1.1rem"><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-      </section>
+      <p class="contact-email"><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
 
-      <section aria-labelledby="contact-profiles-heading">
-        <h2 id="contact-profiles-heading">Profiles</h2>
-        <ul class="pub-list">
-          <li class="pub-item">
-            <p class="pub-title">
-              <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Google Scholar</a>
-            </p>
-            <p class="pub-meta">Citation data and publication list</p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title"><a href="https://www.linkedin.com/in/yannis-tevissen">LinkedIn</a></p>
-            <p class="pub-meta">Professional network and experience</p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title"><a href="https://github.com/YannisTevissen">GitHub</a></p>
-            <p class="pub-meta">Open-source projects and code</p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title"><a href="https://huggingface.co/YannisTevissen">Hugging Face</a></p>
-            <p class="pub-meta">Models, datasets, and AI for Disability collection</p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title"><a href="https://bsky.app/profile/yannistevissen.fr">Bluesky</a></p>
-            <p class="pub-meta">Short-form updates</p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title"><a href="https://x.com/yannistevissen">X</a></p>
-            <p class="pub-meta">Short-form updates</p>
-          </li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="contact-cv-heading">
-        <h2 id="contact-cv-heading">Curriculum Vitae</h2>
-        <p class="page-lede">
-          <a href={SITE.cvPath} download="CV_YannisTevissen_en.pdf">Download CV (PDF, English)</a>
-          or browse it below.
-        </p>
-        <div class="cv-embed">
-          <object
-            data={`${SITE.cvPath}#view=FitH`}
-            type="application/pdf"
-            aria-label="Curriculum Vitae of Yannis Tevissen"
-          >
-            <iframe
-              src={`${SITE.cvPath}#view=FitH`}
-              title="Curriculum Vitae of Yannis Tevissen"
-              loading="lazy"
-              set:html={`<p>Your browser does not support embedded PDFs. <a href="${SITE.cvPath}">Download the CV (PDF)</a> instead.</p>`}
-            />
-          </object>
-        </div>
-      </section>
+      <ProfileLinks variant="labelled" ariaLabel="Profiles" />
 
       <p class="section-foot">
-        <a href="/">← About</a>
+        <a href="/cv/">Resume</a> ·
+        <a href={SITE.cvPath} download="CV_YannisTevissen_en.pdf">CV (PDF)</a>
       </p>
     </div>
   </main>

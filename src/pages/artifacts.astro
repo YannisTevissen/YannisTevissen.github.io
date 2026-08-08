@@ -1,6 +1,6 @@
 ---
-const to = "/research/#publications";
-const title = "Redirecting to Research - publications";
+const to = "/research/#artifacts";
+const title = "Redirecting to Research - artifacts";
 const canonical = "https://yannistevissen.fr/research/";
 ---
 
@@ -15,15 +15,15 @@ const canonical = "https://yannistevissen.fr/research/";
     <link rel="canonical" href={canonical} />
     <script is:inline>
       (() => {
-        // Preserve deep links such as /publications/#thesis on the research page.
+        // Preserve deep links such as /artifacts/#ai-for-science on the research page.
         const hash = location.hash;
-        location.replace(hash && hash !== "#" ? `/research/${hash}` : "/research/#publications");
+        location.replace(hash && hash !== "#" ? `/research/${hash}` : "/research/#artifacts");
       })();
     </script>
   </head>
   <body>
     <p>
-      The publication list lives under Publications on the Research page.
+      Open datasets, models, code, and demos live under Artifacts on the Research page.
       <a href={to}>Continue</a>.
     </p>
   </body>

@@ -1,7 +1,8 @@
 export const SITE = {
   url: "https://yannistevissen.fr",
   title: "Yannis Tevissen",
-  description: "Multimodal retrieval and reasoning over large-scale video data.",
+  description:
+    "Research on retrieval and reasoning over long-form video, and on fairness, accessibility, and disability representation in AI.",
   author: "Yannis Tevissen",
   email: "contact@yannistevissen.fr",
   defaultOgImage: "/assets/img/og-card.png",
@@ -10,18 +11,48 @@ export const SITE = {
   cvPath: "/assets/cv/CV_YannisTevissen_en.pdf",
 } as const;
 
+export type NavChild = {
+  href: string;
+  label: string;
+};
+
 export type NavItem = {
   href: string;
   label: string;
   matches?: string[];
+  children?: NavChild[];
 };
 
 export const NAV: NavItem[] = [
   { href: "/", label: "About", matches: ["/"] },
-  { href: "/research/", label: "Research", matches: ["/research/", "/publications/", "/selected-work/"] },
-  { href: "/talks/", label: "Press", matches: ["/talks/"] },
-  { href: "/advocacy/", label: "Blog & Advocacy", matches: ["/advocacy/", "/blog/"] },
-  { href: "/contact/", label: "Contact", matches: ["/contact/"] },
+  {
+    href: "/research/",
+    label: "Research",
+    matches: ["/research/", "/publications/", "/artifacts/", "/students/", "/selected-work/"],
+    children: [
+      { href: "/research/#publications", label: "Publications" },
+      { href: "/research/#artifacts", label: "Artifacts" },
+      { href: "/research/#teaching", label: "Teaching & mentoring" },
+    ],
+  },
+  {
+    href: "/advocacy/",
+    label: "Blog & Advocacy",
+    matches: ["/advocacy/", "/blog/", "/talks/"],
+    children: [
+      { href: "/blog/", label: "Blog & Press" },
+      { href: "/advocacy/", label: "Advocacy" },
+    ],
+  },
+  {
+    href: "/contact/",
+    label: "Contact",
+    matches: ["/contact/", "/cv/"],
+    children: [
+      { href: "/contact/", label: "Contact" },
+      { href: "/cv/", label: "Resume" },
+    ],
+  },
 ];
 
 export const SOCIAL_LINKS = [
@@ -35,7 +66,8 @@ export const SOCIAL_LINKS = [
 
 export const FOOTER_SECONDARY_LINKS = [
   { href: "/research/", label: "Research" },
-  { href: "/talks/", label: "Press & Talks" },
+  { href: "/research/#publications", label: "Publications" },
+  { href: "/research/#artifacts", label: "Artifacts" },
   { href: "/advocacy/", label: "Blog & Advocacy" },
 ] as const;
 

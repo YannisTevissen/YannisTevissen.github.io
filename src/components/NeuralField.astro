@@ -1,0 +1,230 @@
+---
+/**
+ * Soft neural-net ambient field. Pointer-driven on fine pointers only;
+ * decorative, non-interactive, and off under prefers-reduced-motion.
+ */
+---
+
+<canvas
+  class="neural-field"
+  id="neural-field"
+  aria-hidden="true"
+  role="presentation"
+></canvas>
+
+<script>
+  type Node = {
+    x: number;
+    y: number;
+    ox: number;
+    oy: number;
+    phase: number;
+    size: number;
+  };
+
+  type Edge = { a: number; b: number };
+
+  const canvasEl = document.getElementById("neural-field") as HTMLCanvasElement | null;
+  if (canvasEl) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const context = canvasEl.getContext("2d", { alpha: true });
+
+    if (!context || reduceMotion.matches) {
+      canvasEl.remove();
+    } else {
+      // Rebound as non-nullable: the draw loop below is callable at any time, so
+      // the checks above do not narrow inside it.
+      const canvas: HTMLCanvasElement = canvasEl;
+      const ctx: CanvasRenderingContext2D = context;
+      const ACCENT = { r: 31, g: 79, b: 122 }; // --accent #1f4f7a
+      const LINK_DIST = 148;
+      const INFLUENCE = 220;
+      let nodes: Node[] = [];
+      let edges: Edge[] = [];
+      let w = 0;
+      let h = 0;
+      let dpr = 1;
+      let running = false;
+      let raf = 0;
+      let pointer = { x: -9999, y: -9999, active: false };
+      let soft = { x: -9999, y: -9999 };
+      let t0 = performance.now();
+
+      function density(): number {
+        const area = (w * h) / 1e6;
+        return Math.max(28, Math.min(72, Math.round(38 + area * 18)));
+      }
+
+      function rebuild() {
+        const count = density();
+        const next: Node[] = [];
+        const margin = 24;
+        for (let i = 0; i < count; i++) {
+          const x = margin + Math.random() * Math.max(1, w - margin * 2);
+          const y = margin + Math.random() * Math.max(1, h - margin * 2);
+          next.push({
+            x,
+            y,
+            ox: x,
+            oy: y,
+            phase: Math.random() * Math.PI * 2,
+            size: 0.7 + Math.random() * 1.1,
+          });
+        }
+        nodes = next;
+
+        const nextEdges: Edge[] = [];
+        const maxDist2 = LINK_DIST * LINK_DIST;
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].ox - nodes[j].ox;
+            const dy = nodes[i].oy - nodes[j].oy;
+            if (dx * dx + dy * dy < maxDist2) {
+              nextEdges.push({ a: i, b: j });
+            }
+          }
+        }
+        edges = nextEdges;
+      }
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = `${w}px`;
+        canvas.style.height = `${h}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        rebuild();
+      }
+
+      function draw(now: number) {
+        const t = (now - t0) / 1000;
+        ctx.clearRect(0, 0, w, h);
+
+        if (pointer.active) {
+          soft.x += (pointer.x - soft.x) * 0.08;
+          soft.y += (pointer.y - soft.y) * 0.08;
+        } else {
+          soft.x += (-9999 - soft.x) * 0.04;
+          soft.y += (-9999 - soft.y) * 0.04;
+        }
+
+        // Extremely faint radial wash around the pointer — reads as life, not a spotlight.
+        if (pointer.active && soft.x > -500) {
+          const wash = ctx.createRadialGradient(soft.x, soft.y, 0, soft.x, soft.y, INFLUENCE * 1.35);
+          wash.addColorStop(0, `rgba(${ACCENT.r}, ${ACCENT.g}, ${ACCENT.b}, 0.028)`);
+          wash.addColorStop(0.55, `rgba(${ACCENT.r}, ${ACCENT.g}, ${ACCENT.b}, 0.012)`);
+          wash.addColorStop(1, `rgba(${ACCENT.r}, ${ACCENT.g}, ${ACCENT.b}, 0)`);
+          ctx.fillStyle = wash;
+          ctx.fillRect(0, 0, w, h);
+        }
+
+        for (const n of nodes) {
+          const breathX = Math.sin(t * 0.35 + n.phase) * 2.2;
+          const breathY = Math.cos(t * 0.28 + n.phase * 1.3) * 2.2;
+          let px = n.ox + breathX;
+          let py = n.oy + breathY;
+
+          if (pointer.active) {
+            const dx = soft.x - px;
+            const dy = soft.y - py;
+            const dist = Math.hypot(dx, dy);
+            if (dist < INFLUENCE && dist > 0.001) {
+              const pull = (1 - dist / INFLUENCE) * 7;
+              px += (dx / dist) * pull;
+              py += (dy / dist) * pull;
+            }
+          }
+
+          n.x = px;
+          n.y = py;
+        }
+
+        for (const e of edges) {
+          const a = nodes[e.a];
+          const b = nodes[e.b];
+          const mx = (a.x + b.x) * 0.5;
+          const my = (a.y + b.y) * 0.5;
+          let alpha = 0.045;
+          if (pointer.active) {
+            const d = Math.hypot(soft.x - mx, soft.y - my);
+            if (d < INFLUENCE) {
+              alpha += (1 - d / INFLUENCE) * 0.11;
+            }
+          }
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(${ACCENT.r}, ${ACCENT.g}, ${ACCENT.b}, ${alpha})`;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+        }
+
+        for (const n of nodes) {
+          let alpha = 0.07;
+          let r = n.size;
+          if (pointer.active) {
+            const d = Math.hypot(soft.x - n.x, soft.y - n.y);
+            if (d < INFLUENCE) {
+              const k = 1 - d / INFLUENCE;
+              alpha += k * 0.18;
+              r += k * 1.1;
+            }
+          }
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${ACCENT.r}, ${ACCENT.g}, ${ACCENT.b}, ${alpha})`;
+          ctx.fill();
+        }
+
+        if (running) raf = requestAnimationFrame(draw);
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+        t0 = performance.now();
+        raf = requestAnimationFrame(draw);
+      }
+
+      function stop() {
+        running = false;
+        cancelAnimationFrame(raf);
+      }
+
+      function onMove(ev: PointerEvent) {
+        if (!finePointer.matches) return;
+        pointer.x = ev.clientX;
+        pointer.y = ev.clientY;
+        pointer.active = true;
+      }
+
+      function onLeave() {
+        pointer.active = false;
+      }
+
+      function onVisibility() {
+        if (document.hidden) stop();
+        else start();
+      }
+
+      resize();
+      start();
+
+      window.addEventListener("resize", resize, { passive: true });
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("pointerleave", onLeave, { passive: true });
+      document.addEventListener("visibilitychange", onVisibility);
+
+      reduceMotion.addEventListener("change", (ev) => {
+        if (ev.matches) {
+          stop();
+          canvas.remove();
+        }
+      });
+    }
+  }
+</script>

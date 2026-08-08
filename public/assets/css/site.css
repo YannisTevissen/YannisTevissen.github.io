@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------- tokens */
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   --ink: #17171b;
   --ink-muted: #55555f;
@@ -34,20 +34,6 @@
   --radius: 3px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #e8e6e1;
-    --ink-muted: #a3a099;
-    --ink-faint: #8f8c85;
-    --paper: #121214;
-    --paper-raised: #1b1b1e;
-    --rule: #2c2c30;
-    --rule-strong: #3d3d43;
-    --accent: #8fb8dd;
-    --accent-hover: #b3d0ea;
-  }
-}
-
 *,
 *::before,
 *::after {
@@ -57,6 +43,10 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  /* Stops iOS Safari inflating body text when a phone is turned to landscape,
+     which would reflow the page mid-read. Pinch zoom is unaffected. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -75,8 +65,20 @@ body {
   line-height: 1.65;
   color: var(--ink);
   background: var(--paper);
+  isolation: isolate;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Soft neural-net ambient field. Behind content, never captures input.
+   Removed entirely when prefers-reduced-motion is set (see NeuralField.astro). */
+.neural-field {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* --------------------------------------------------------------- typography */
@@ -159,6 +161,14 @@ strong {
   max-width: var(--measure);
 }
 
+.page-lede > p {
+  margin: 0 0 1rem;
+}
+
+.page-lede > p:last-child {
+  margin-bottom: 0;
+}
+
 /* ------------------------------------------------------------------ layout */
 
 /* Header, main and footer share one column so the site title sits on the same
@@ -239,10 +249,17 @@ strong {
   color: var(--accent);
 }
 
-.site-nav {
+.nav-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 1.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
 }
 
 .site-nav a {
@@ -263,23 +280,239 @@ strong {
   border-bottom-color: var(--accent);
 }
 
-/* Five nav items wrap to two rows on a phone, which makes a sticky header eat
-   ~16% of the viewport. Below this width it scrolls away instead. */
-@media (max-width: 700px) {
+/* A parent whose section is open but which is not itself the current page. */
+.site-nav a.is-section:not([aria-current="page"]) {
+  color: var(--ink);
+}
+
+.nav-item--parent > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.nav-caret {
+  width: 0.5rem;
+  height: 0.35rem;
+  flex: none;
+  opacity: 0.6;
+  transition: transform 120ms ease;
+}
+
+.nav-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.nav-submenu li {
+  margin: 0;
+}
+
+.nav-submenu a:hover,
+.nav-submenu a:focus-visible {
+  border-bottom: none;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.nav-submenu a[aria-current="page"] {
+  border-bottom: none;
+  color: var(--accent);
+}
+
+/* The toggle only exists on the phone layout, where the row of sections is
+   replaced by an expandable list. */
+.nav-toggle {
+  display: none;
+}
+
+/* -------------------------------------------------- nav: pointer / wide layout */
+
+/* Dropdowns require both room and a real pointer. A tablet has the room but not
+   the hover, so it gets the tap-driven menu below instead of panels it could
+   never open. This query and the one below are exact complements: every device
+   matches one of them. */
+@media (min-width: 701px) and (hover: hover) {
+  .nav-submenu {
+    position: absolute;
+    top: 100%;
+    left: -0.85rem;
+    min-width: max-content;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 8%);
+    /* Kept in the layout but inert, so the submenu can animate and so a mouse
+       travelling from the parent to the first item never crosses dead space. */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-2px);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
+  }
+
+  .nav-submenu a {
+    display: block;
+    padding: 0.3rem 1.1rem;
+    border-bottom: none;
+    white-space: nowrap;
+  }
+
+  /* :focus-within covers the no-JS case; .is-open is set by the keyboard handler
+     so the state is explicit and does not depend on transition timing. */
+  .nav-item--parent:hover > .nav-submenu,
+  .nav-item--parent:focus-within > .nav-submenu,
+  .nav-item--parent.is-open > .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-item--parent:hover > a .nav-caret,
+  .nav-item--parent:focus-within > a .nav-caret,
+  .nav-item--parent.is-open > a .nav-caret {
+    transform: rotate(180deg);
+  }
+
+  /* Escape closes the panel while its trigger still holds focus. This has to
+     outrank the :focus-within rule above, but not a deliberate hover. */
+  .nav-item--parent.is-dismissed:not(:hover) > .nav-submenu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-2px);
+  }
+
+  .nav-item--parent.is-dismissed:not(:hover) > a .nav-caret {
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-submenu,
+    .nav-caret {
+      transition: none;
+    }
+  }
+}
+
+/* ------------------------------------------------------- nav: phone layout */
+
+/* Twelve destinations cannot sit in a header row on a phone, and hiding the
+   sub-pages made them reachable only by going through a section page. The row
+   becomes a toggle plus a full list, every row thumb-sized. Tablets are included
+   because they cannot hover, so a dropdown would be unopenable there. */
+@media (max-width: 700px), (hover: none) {
   .site-header {
     position: static;
   }
 
+  /* No sticky header to clear, so anchors do not need to leave room for one. */
+  html {
+    scroll-padding-top: 1rem;
+  }
+
   .site-header .site-shell--wide {
-    gap: 0.5rem 1.25rem;
+    align-items: center;
+    gap: 0 1rem;
+    padding-block: 0.5rem;
+  }
+
+  .site-title {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 0.25rem;
+    margin-right: -0.25rem;
+    background: none;
+    border: 0;
+    font: inherit;
+    font-size: 0.9375rem;
+    color: var(--ink-muted);
+    cursor: pointer;
+  }
+
+  .nav-toggle-bars {
+    display: grid;
+    gap: 4px;
+    width: 18px;
+  }
+
+  .nav-toggle-bars span {
+    display: block;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+
+  .nav-toggle[aria-expanded="true"] {
+    color: var(--ink);
   }
 
   .site-nav {
-    gap: 0.35rem 1.1rem;
+    display: none;
+    width: 100%;
   }
 
-  .site-nav a {
-    font-size: 0.875rem;
+  .site-nav.is-open {
+    display: block;
+    border-top: 1px solid var(--rule);
+    margin-top: 0.25rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-item {
+    position: static;
+  }
+
+  .site-nav .nav-list > .nav-item > a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0;
+    font-size: 1.0625rem;
+    color: var(--ink);
+    border-bottom: 0;
+  }
+
+  .nav-item + .nav-item > a {
+    border-top: 1px solid var(--rule);
+  }
+
+  /* Submenus are always shown on a phone: an accordion would add a tap to reach
+     any sub-page, and there is room for the full list once it is vertical. */
+  .nav-submenu {
+    padding: 0 0 0.35rem;
+  }
+
+  .site-nav .nav-submenu a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding-left: 1rem;
+    font-size: 0.9375rem;
+    color: var(--ink-muted);
+    border-bottom: 0;
+  }
+
+  .site-nav .nav-submenu a[aria-current="page"] {
+    color: var(--accent);
+  }
+
+  .nav-caret {
+    display: none;
   }
 }
 
@@ -366,6 +599,82 @@ strong {
   filter: none;
 }
 
+/* Students: a plain name-and-role list, deliberately not a card grid. */
+.student-list {
+  list-style: none;
+  margin: 1rem 0 var(--step-lg);
+  padding: 0;
+}
+
+.student-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.student-list li:last-child {
+  border-bottom: 0;
+}
+
+.student-role {
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Contact page: the logo carries the recognition, the label carries the link. */
+.contact-email {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin: 0 0 var(--step);
+}
+
+.profile-list {
+  list-style: none;
+  margin: 0 0 var(--step);
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+@media (min-width: 560px) {
+  .profile-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.15rem 1.5rem;
+  }
+}
+
+.profile-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.45rem 0;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.profile-list a:hover {
+  color: var(--accent);
+}
+
+.profile-list a:hover span:last-child {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.profile-list .brand-icon {
+  flex: none;
+  opacity: 0.75;
+}
+
+.profile-list a:hover .brand-icon {
+  opacity: 1;
+}
+
 .hero-kicker {
   font-size: 0.8125rem;
   font-weight: 600;
@@ -385,6 +694,28 @@ strong {
 
 .hero-title {
   margin-bottom: 1.1rem;
+}
+
+/* The home page has no display headline: the role line is both the visual
+   opener and the document's h1, so it resets the heading scale. */
+.hero-role {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 1.1rem;
+}
+
+.hero-role a {
+  color: inherit;
+  text-decoration-color: var(--rule-strong);
+}
+
+.hero-role a:hover {
+  color: var(--accent);
 }
 
 .hero-lead {
@@ -445,6 +776,18 @@ strong {
   border-top: 2px solid var(--accent);
 }
 
+.pillar h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pillar h3 a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
 .pillar p {
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -499,6 +842,30 @@ strong {
   background: var(--paper-raised);
 }
 
+/* The figure is the largest target on a card and reads as clickable, so it links
+   to the same place as the title. */
+.work-figure-link {
+  display: block;
+  text-decoration: none;
+}
+
+.work-figure-link img,
+.work-figure-link video {
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.work-figure-link:hover img,
+.work-figure-link:hover video {
+  border-color: var(--accent);
+  opacity: 0.92;
+}
+
+/* The clip has no controls, so nothing is lost by letting the click through to
+   the link, and it removes any browser-specific handling of clicks on a video. */
+.work-figure-link video {
+  pointer-events: none;
+}
+
 /* Clips keep their native 16:9 — these figures carry a plotted overlay along the
    bottom edge that a 16:10 crop would cut into. */
 .work-figure video {
@@ -506,14 +873,56 @@ strong {
   object-fit: contain;
 }
 
-.work-card-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.65rem;
+/* Same reasoning for a 2:1 source: a grid of generated samples has nothing
+   expendable at its edges, so the frame follows the image rather than cropping
+   whole panels out of it. */
+.work-figure--wide img {
+  aspect-ratio: 2 / 1;
 }
 
-/* Type badge as tracked uppercase text in the accent, not a coloured chip. */
+.work-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.work-card .work-venue-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.65rem;
+  margin: 0;
+  max-width: none;
+  font-size: inherit;
+  line-height: 1;
+  color: inherit;
+}
+
+/* Venue chip — snug mono label above the title. Stronger than `.work-card p`. */
+.work-card .work-venue {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--accent);
+  background: var(--paper-raised);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--rule));
+  border-radius: var(--radius);
+  padding: 0.28rem 0.55rem;
+}
+
+.work-card .work-venue-award {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-faint);
+}
+
+/* Kept for artifact kind labels elsewhere; not used on selected-work cards. */
 .type-badge {
   font-size: 0.6875rem;
   font-weight: 600;
@@ -528,18 +937,22 @@ strong {
   font-weight: 600;
   line-height: 1.35;
   margin: 0;
-  flex: 1 1 14rem;
 }
 
+/* A hover-only underline gave no affordance at rest, so these titles read as
+   headings and nobody tried clicking them. They keep the ink colour of a title
+   but carry a faint rule to mark them as links. */
 .work-card-title a {
   color: var(--ink);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent);
 }
 
 .work-card-title a:hover {
   color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration-color: currentColor;
 }
 
 .work-card p {
@@ -618,15 +1031,19 @@ strong {
   margin: 0 0 0.2rem;
 }
 
+/* Same reasoning as .work-card-title: entries whose title links out should look
+   like it, and the underline also separates them from the many that do not. */
 .pub-title a {
   color: var(--ink);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent);
 }
 
 .pub-title a:hover {
   color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration-color: currentColor;
 }
 
 .pub-meta {
@@ -669,27 +1086,30 @@ li.has-thumb {
   display: block;
 }
 
+/* Matches .work-figure--wide: a 2:1 sample grid keeps its shape so the outer
+   panels are not cropped away. */
+.thumb.is-wide {
+  aspect-ratio: 2 / 1;
+}
+
 .item-body > *:last-child {
   margin-bottom: 0;
 }
 
 /* thumb-1 … thumb-6 are decorative placeholders for items that have no real
-   image. An empty grey box is worse than no box, so collapse the row instead. */
-.thumb[class*="thumb-"] {
+   image. An empty grey box is worse than no box, so collapse the row instead.
+   Enumerated rather than matched on the "thumb-" prefix, which would also catch
+   any modifier class that happens to start with it. */
+.thumb:is(.thumb-1, .thumb-2, .thumb-3, .thumb-4, .thumb-5, .thumb-6) {
   display: none;
 }
 
-li.has-thumb:has(> .thumb[class*="thumb-"]) {
+li.has-thumb:has(> .thumb:is(.thumb-1, .thumb-2, .thumb-3, .thumb-4, .thumb-5, .thumb-6)) {
   display: block;
 }
 
-@media (max-width: 520px) {
-  .pub-item.has-thumb,
-  li.has-thumb {
-    grid-template-columns: 4rem 1fr;
-    gap: 0.75rem;
-  }
-}
+/* Narrower thumbnail columns for small screens are set with the other phone
+   refinements at the end of this file, so the sizes stay in one ladder. */
 
 .tag {
   display: inline-block;
@@ -698,6 +1118,22 @@ li.has-thumb:has(> .thumb[class*="thumb-"]) {
   text-transform: uppercase;
   color: var(--ink-faint);
   margin-right: 0.6rem;
+}
+
+/* Authorship role, which a committee reads down the list rather than per entry:
+   an outlined pill so first, last, and sole authorship separate at a glance
+   without a fifth-of-five paper looking louder than the topic tag beside it. */
+.role-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
 }
 
 /* ------------------------------------------------------------------- prose */
@@ -824,11 +1260,31 @@ li.has-thumb:has(> .thumb[class*="thumb-"]) {
   border-radius: var(--radius);
 }
 
+/* The embed had no sized child, so the PDF collapsed to the object's intrinsic
+   default inside a tall empty box. */
 .cv-embed {
   width: 100%;
-  height: 80vh;
+  height: min(85vh, 1180px);
+  min-height: 34rem;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--paper-raised);
+}
+
+.cv-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Mobile browsers refuse to render a PDF inline, leaving a blank frame. The frame
+   is dropped there and the download link in the page lede is what works. */
+@media (max-width: 640px) {
+  .cv-embed {
+    display: none;
+  }
 }
 
 /* ------------------------------------------------------------------ footer */
@@ -916,4 +1372,145 @@ li.has-thumb:has(> .thumb[class*="thumb-"]) {
 
 .footer-secondary a:hover {
   color: var(--accent);
+}
+
+/* ------------------------------------------------------- phone refinements */
+
+/* Audited at 320, 360, 375, and 390px. Nothing overflows horizontally; what
+   needed work was thumb-sized hit areas and a floor under the small label sizes.
+   The glyphs and type scale are unchanged — only the tappable box around them
+   grows, so the desktop composition is not disturbed. Keyed on the absence of
+   hover as well as width, so tablets get the same hit areas. */
+@media (max-width: 700px), (hover: none) {
+  .skip-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Icon links: 20px glyph, 44px target. */
+  .hero-quick-links {
+    gap: 0.35rem;
+    /* Cancels the target's own padding so the first glyph lines up with the
+       left edge of the text below it. */
+    margin-left: -12px;
+  }
+
+  .hero-quick-links .brand-icon {
+    width: 44px;
+    height: 44px;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .artifact-links {
+    gap: 0 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .artifact-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    /* A border-bottom would sit at the foot of the enlarged hit box, detached
+       from the word; a text underline stays on the text. */
+    border-bottom: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--rule-strong);
+    text-underline-offset: 0.25em;
+  }
+
+  .artifact-links a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .footer-social {
+    gap: 0 1.35rem;
+    padding-block: 0.75rem;
+  }
+
+  .footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    /* "X" is a single glyph, which left a 9px-wide target. The extra width lands
+       in the gap between links, so the row still reads as evenly spaced. */
+    min-width: 44px;
+  }
+
+  .hero-actions a,
+  .pillar h3 a,
+  .section-foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Inline links inside a heading cannot take a 44px box without breaking the
+     line, but vertical padding on an inline box grows the hit area without
+     moving any text. */
+  .hero-role a,
+  .hero-lead a {
+    padding-block: 0.4rem;
+  }
+
+  .footer-secondary a,
+  .footer-contact-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  .profile-list a {
+    min-height: 48px;
+    padding-block: 0;
+  }
+
+  .student-list li {
+    min-height: 48px;
+    padding-block: 0;
+  }
+
+  /* 11px uppercase is too tight to read at arm's length; 13px is the floor. */
+  .type-badge,
+  .tag,
+  .role-badge,
+  .section-label,
+  .footer-contact-label,
+  .footer-secondary {
+    font-size: 0.8125rem;
+  }
+
+  .pub-meta,
+  .post-date {
+    font-size: 0.875rem;
+  }
+
+  /* The schematic figures lose their structure at 4rem, so give them more room. */
+  .pub-item.has-thumb,
+  li.has-thumb {
+    grid-template-columns: 5rem 1fr;
+    gap: 0.85rem;
+  }
+}
+
+/* Width-only, unlike the block above: a tablet has room for the icon row beside
+   the portrait, so only a phone needs the figure stacked. Six 44px targets need
+   292px, which does not fit next to the photo on a phone, and wrapping left one
+   lone icon on a second line. */
+@media (max-width: 700px) {
+  .hero-figure {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .pub-item.has-thumb,
+  li.has-thumb {
+    grid-template-columns: 4.25rem 1fr;
+    gap: 0.7rem;
+  }
 }

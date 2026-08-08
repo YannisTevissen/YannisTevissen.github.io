@@ -2,6 +2,7 @@
 import { SITE } from "../lib/site";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter, { type SecondaryLink } from "../components/SiteFooter.astro";
+import NeuralField from "../components/NeuralField.astro";
 
 export interface Props {
   title: string;
@@ -75,8 +76,7 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE.
     <meta name="twitter:creator" content={SITE.twitter} />
     <meta name="twitter:site" content={SITE.twitter} />
     <link rel="icon" href="/assets/img/favicon.ico" sizes="any" />
-    <meta name="theme-color" content="#fcfbf9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fcfbf9" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -99,6 +99,7 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE.
     />
   </head>
   <body {...bodyClass ? { class: bodyClass } : {}}>
+    <NeuralField />
     <a class="skip-link" href="#site-main">Skip to content</a>
     <SiteHeader pathname={pathname} />
     <slot />

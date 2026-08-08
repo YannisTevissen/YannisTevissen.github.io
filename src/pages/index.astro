@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProfileLinks from "../components/ProfileLinks.astro";
 import { SITE } from "../lib/site";
 
-const title = "Yannis Tevissen - Unraveling the science of videos";
+const title = "Yannis Tevissen - Head of Research at Moments Lab";
 const description =
-  "Research on multimodal retrieval and reasoning over large-scale video data. Head of Research at Moments Lab.";
+  "How can a model efficiently understand long-context data with complex temporal, spatial, and narrative dependencies? Research at Moments Lab, with work on fairness, accessibility, and disability representation.";
 const keywords =
-  "Yannis Tevissen, multimodal retrieval, video understanding, video indexing, frame selection, PEEK, vision language models, AI fairness, Moments Lab, Head of Research";
+  "Yannis Tevissen, multimodal retrieval, video understanding, video indexing, frame selection, PEEK, vision language models, AI fairness, accessibility, assistive technology, AI4Science, Moments Lab, Head of Research";
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -41,6 +42,8 @@ const personSchema = {
     "Large-scale video data",
     "AI fairness",
     "Speaker diarization",
+    "Accessibility and assistive technology",
+    "AI for science",
   ],
 };
 
@@ -49,16 +52,24 @@ const websiteSchema = {
   "@type": "WebSite",
   name: "Yannis Tevissen",
   url: "https://yannistevissen.fr/",
-  description: "Multimodal retrieval and reasoning over large-scale video data.",
+  description:
+    "Multimodal retrieval and reasoning: how a model can efficiently understand long-context data with complex temporal, spatial, and narrative dependencies.",
 };
 
 type WorkEntry = {
-  kind: "Paper" | "Patent";
+  /** Conference or venue shown as the card badge. */
+  venue: string;
+  /** Optional award line shown next to the venue badge. */
+  award?: string;
   title: string;
   href: string;
   summary: string;
-  /** Teaser figure. Drop a file in /public/assets/img/work/ and reference it here. */
-  figure?: { src: string; alt: string };
+  /**
+   * Teaser figure. Drop a file in /public/assets/img/work/ and reference it here.
+   * Set `wide` for a 2:1 source, which is shown at its own ratio instead of being
+   * cropped to the 16:10 the other figures use.
+   */
+  figure?: { src: string; alt: string; wide?: boolean };
   /** Looping teaser clip. `poster` is what reduced-motion users and slow connections see. */
   clip?: { src: string; poster: string; alt: string };
   links: { label: string; href: string }[];
@@ -66,11 +77,11 @@ type WorkEntry = {
 
 const selectedWork: WorkEntry[] = [
   {
-    kind: "Paper",
+    venue: "BMVC 2026",
     title: "PEEK: Picking Essential frames via Efficient Knowledge distillation",
     href: "https://arxiv.org/abs/2605.31029",
     summary:
-      "Introduces a lightweight dynamic frame selector that distills caption-conditioned relevance from a teacher model for efficient low-budget video captioning.",
+      "Distils caption-conditioned relevance from a teacher model into a small frame selector, so a captioning model can work from far fewer frames.",
     clip: {
       src: "/assets/img/work/peek.mp4",
       poster: "/assets/img/work/peek-poster.jpg",
@@ -84,11 +95,16 @@ const selectedWork: WorkEntry[] = [
     ],
   },
   {
-    kind: "Paper",
+    venue: "HSI 2024",
+    award: "Best Presentation",
     title: "Towards Retrieval Augmented Generation over Large Video Libraries",
     href: "https://arxiv.org/abs/2406.14938",
     summary:
-      "Addresses how to ground answers in large video libraries by combining retrieval over video segments with generation conditioned on retrieved evidence.",
+      "Answers questions about a large video library by retrieving the relevant segments first and generating only from what came back, so the answer can cite the moments it rests on.",
+    figure: {
+      src: "/assets/img/items/pub_rag_video.svg",
+      alt: "A query searches a library of indexed video segments; three matching segments are retrieved and grounded into an answer that cites specific moments",
+    },
     links: [
       { label: "arXiv", href: "https://arxiv.org/abs/2406.14938" },
       { label: "Hugging Face", href: "https://huggingface.co/papers/2406.14938" },
@@ -97,52 +113,20 @@ const selectedWork: WorkEntry[] = [
     ],
   },
   {
-    kind: "Paper",
-    title: "Frame Sampling Strategies Matter: A Benchmark for small vision language models",
-    href: "https://arxiv.org/abs/2509.14769",
+    venue: "AVA @ CVPR 2024",
+    title: "Disability Representations: Finding Biases in Automatic Image Generation",
+    href: "https://arxiv.org/abs/2406.14993",
     summary:
-      "Shows that video reasoning results depend strongly on frame sampling and provides a benchmark for evaluating small vision-language models under controlled settings.",
+      "Measures how image generation models depict disability. Prompted only for “a disabled man” and “a disabled woman”, Midjourney and SDXL Turbo returned a wheelchair every time.",
     figure: {
-      src: "/assets/img/items/pub_frame_sampling.jpg",
-      alt: "Benchmark results comparing frame sampling strategies for small vision-language models",
+      src: "/assets/img/items/pub_disability.jpg",
+      alt: "Eight generated portraits, four from Midjourney for the prompt “a disabled man” and four from SDXL Turbo for “a disabled woman”. Every one shows a seated wheelchair user, the men in dark and gritty scenes and the women older and in bright daylight.",
+      wide: true,
     },
     links: [
-      { label: "arXiv", href: "https://arxiv.org/abs/2509.14769" },
-      { label: "Code", href: "https://github.com/momentslab/frame-sampling" },
-      { label: "Hugging Face", href: "https://huggingface.co/papers/2509.14769" },
-      { label: "Research note", href: "https://research.momentslab.com/blog-posts/frame-sampling-vlm" },
+      { label: "arXiv", href: "https://arxiv.org/abs/2406.14993" },
+      { label: "Hugging Face", href: "https://huggingface.co/papers/2406.14993" },
     ],
-  },
-  {
-    kind: "Paper",
-    title: "Multimodal Chaptering for Long-Form TV Newscast Video",
-    href: "https://arxiv.org/abs/2406.17590",
-    summary:
-      "Studies how to segment long-form news video into retrievable chapters and builds a multimodal chaptering pipeline for downstream search.",
-    figure: {
-      src: "/assets/img/items/pub_chaptering.jpg",
-      alt: "Multimodal chaptering pipeline for long-form TV newscast video",
-    },
-    links: [
-      { label: "arXiv", href: "https://arxiv.org/abs/2406.17590" },
-      { label: "Hugging Face", href: "https://huggingface.co/papers/2406.17590" },
-      {
-        label: "Colab",
-        href: "https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing",
-      },
-      { label: "Research note", href: "https://research.momentslab.com/blog-posts/automatic-chapters" },
-    ],
-  },
-  {
-    kind: "Patent",
-    title: "Computer-based platforms and methods for efficient AI-based digital video shot indexing",
-    href: "https://patents.justia.com/patent/12288377",
-    summary: "Builds an industrial method for shot-level video indexing so large collections can be searched at scale.",
-    figure: {
-      src: "/assets/img/items/pub_patent_shot_indexing.jpg",
-      alt: "Patent figure for AI-based digital video shot indexing",
-    },
-    links: [{ label: "Patent record", href: "https://patents.justia.com/patent/12288377" }],
   },
 ];
 ---
@@ -151,7 +135,7 @@ const selectedWork: WorkEntry[] = [
   title={title}
   description={description}
   keywords={keywords}
-  ogImageAlt="Yannis Tevissen, Head of Research at Moments Lab — unraveling the science of videos"
+  ogImageAlt="Yannis Tevissen, Head of Research at Moments Lab"
   twitterCard="summary_large_image"
   showFeedLink
   bodyClass="page-home"
@@ -177,86 +161,49 @@ const selectedWork: WorkEntry[] = [
                 decoding="async"
               />
             </div>
-            <figcaption
-              class="hero-caption hero-quick-links hero-quick-links--icons hero-quick-links--brand"
-              aria-label="Profiles"
-            >
-              <a
-                class="brand-icon brand-icon--scholar"
-                href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ"
-                rel="me"
-                aria-label="Google Scholar"
-                title="Google Scholar"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="#4285F4"
-                    d="M12 2L1 9l4 2.6V18l7 4 7-4v-6.4l3-1.95V18h2V9L12 2zm0 2.36L19.27 9 12 13.64 4.73 9 12 4.36zM7 13.07l5 3.27 5-3.27V16.8l-5 2.86-5-2.86v-3.73z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                class="brand-icon brand-icon--linkedin"
-                href="https://www.linkedin.com/in/yannis-tevissen"
-                rel="me"
-                aria-label="LinkedIn"
-                title="LinkedIn"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="#0A66C2"
-                    d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                class="brand-icon brand-icon--github"
-                href="https://github.com/YannisTevissen"
-                rel="me"
-                aria-label="GitHub"
-                title="GitHub"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="#181717"
-                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.02c-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98.01 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                class="brand-icon brand-icon--hf"
-                href="https://huggingface.co/YannisTevissen"
-                rel="me"
-                aria-label="Hugging Face"
-                title="Hugging Face"
-              >
-                <img src="/assets/img/huggingface_logo-noborder.svg" alt="" width="95" height="88" loading="eager" />
-              </a>
-              <a class="brand-icon brand-icon--x" href="https://x.com/yannistevissen" rel="me" aria-label="X" title="X">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="#000000"
-                    d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.84L7.08 4.13H5.12l11.96 15.64Z"
-                  ></path>
-                </svg>
-              </a>
+            <figcaption class="hero-caption">
+              <ProfileLinks ariaLabel="Profiles" eager />
             </figcaption>
           </figure>
           <div class="hero-copy">
-            <p class="hero-kicker">Head of Research · <a href="https://momentslab.com">Moments Lab</a></p>
-            <h1 id="hero-title" class="hero-title">Unraveling the science of videos.</h1>
+            <h1 id="hero-title" class="hero-role">
+              Head of Research · <a href="https://research.momentslab.com">Moments Lab</a>
+            </h1>
             <p class="hero-lead">
-              I lead research on multimodal retrieval and reasoning at <a href="https://momentslab.com">Moments Lab</a>,
-              after a PhD at Institut Polytechnique de Paris. Video is where the hard version of long-context
-              understanding shows up first: the evidence is spread across time and modalities, most of it is redundant,
-              and the compute available per hour of footage is small. My recent work is about deciding what a model
-              should look at — frame selection by distillation, retrieval that grounds generation in specific segments —
-              and about benchmarks that separate real reasoning gains from artefacts of how frames were sampled.
+              I lead research on <a href="/research/">multimodal retrieval and reasoning</a> at
+              <a href="https://research.momentslab.com">Moments Lab</a>, after a PhD at
+              <a href="https://www.ip-paris.fr/">Institut Polytechnique de Paris</a> on
+              <a href="/research/#thesis">multimodal speaker diarization</a>, advised by Jérôme Boudy and Gérard
+              Chollet. One question
+              governs my work: how can a model efficiently understand long-context data with complex temporal, spatial
+              and narrative dependencies?
+            </p>
+            <p>
+              I also contribute to research on <a href="https://arxiv.org/abs/2302.09991">fairness</a>, accessibility and
+              <a href="https://arxiv.org/abs/2406.14993">disability representation</a> while openly
+              <a href="https://theabilitytoolbox.com/navigate-phd-physical-disability/">writing</a>,
+              <a href="/advocacy/">speaking about my experience</a> and advocating for a more inclusive science.
+            </p>
+            <p>
+              Finally, I built <a href="https://github.com/YannisTevissen/UpToCure">UpToCure</a>, which assembles
+              research on rare diseases into readable, sourced reports. I co-founded
+              <a href="https://www.linkedin.com/company/vocacoach/">VocaCoach</a>, a speech training platform (€1M
+              valuation,
+              <a href="https://www.telecom-sudparis.eu/ecole/vocacoach-remporte-le-prix-coup-de-coeur-au-next-startupper-challenge-a-vivatech/"
+                >VivaTech award</a
+              >, covered by
+              <a
+                href="https://www.leparisien.fr/vie-de-bureau/vocacoach-une-nouvelle-plate-forme-pour-sentrainer-a-parler-en-public-03-02-2022-7LVIIAH7FJAAPMKKBURFIYCI4I.php"
+                >Le Parisien</a
+              >), and serve on the board of <a href="https://universalwings.org/">Universal Wings Mobility</a>, the
+              French startup building AVI, a smart travel assistant for people with disabilities.
             </p>
             <div class="hero-actions">
+              <a href="/research/">Research</a>
+              <span aria-hidden="true">·</span>
               <a href="/research/#publications">Publications</a>
               <span aria-hidden="true">·</span>
-              <a href="/research/#selected-work">Selected work</a>
+              <a href="/research/#artifacts">Artifacts</a>
               <span aria-hidden="true">·</span>
               <a href={SITE.cvPath}>CV (PDF)</a>
               <span aria-hidden="true">·</span>
@@ -267,40 +214,41 @@ const selectedWork: WorkEntry[] = [
       </section>
 
       <section class="home-card home-card--focus" aria-labelledby="focus-heading">
-        <p class="section-label" id="focus-heading">Research focus</p>
+        <h2 class="section-label" id="focus-heading">Research focus</h2>
         <div class="pillars">
           <div class="pillar">
-            <h3>Video understanding</h3>
+            <h3>Multimodal learning</h3>
             <p>
-              Long-form video carries meaning across time, modalities, and context. I build shot detection, chaptering,
-              and multimodal representation pipelines that turn raw footage into structured, machine understandable
-              units.
+              A useful answer usually needs more than one signal at once: vision, language, audio, and time. I build
+              models and pipelines that combine those modalities so retrieval and reasoning stay grounded in what
+              actually happened in the input.
             </p>
           </div>
           <div class="pillar">
-            <h3>Video retrieval</h3>
+            <h3>Long context efficiency</h3>
             <p>
-              Video queries combine language, vision, and time, which makes evidence retrieval ambiguous and expensive.
-              I design multimodal retrieval systems that ground reasoning in relevant segments rather than coarse video
-              summaries.
+              Long inputs are expensive to process and easy to summarise poorly. I work on selecting and compressing
+              evidence so a model can handle hours of video or speech without losing the moments that matter.
             </p>
           </div>
           <div class="pillar">
-            <h3>AI fairness</h3>
+            <h3>Fairness and biases</h3>
             <p>
-              Models inherit and amplify the biases present in their training data. I study how disability, minority,
-              and representation gaps propagate through vision and language systems, and how to evaluate and mitigate
-              them.
+              Models inherit the gaps in their training data, and the people furthest from the distribution pay for it
+              first. I measure how disability and demographic biases show up in vision and speech systems, and I build
+              open data and benchmarks for those settings.
             </p>
           </div>
         </div>
+        <p class="section-foot"><a href="/research/">More on the research agenda →</a></p>
       </section>
 
       <section class="home-card home-card--selected" aria-labelledby="selected-heading">
         <h2 id="selected-heading">Selected work</h2>
         <p class="page-lede" style="margin-bottom: 0.5rem">
-          Representative outputs on multimodal retrieval, reasoning, and indexing for video data. The full curated list
-          is on the <a href="/research/#selected-work">Research page</a>.
+          Three papers that carry the agenda. The full record is under
+          <a href="/research/#publications">Publications</a>;
+          the code, datasets, and demos are under <a href="/research/#artifacts">Artifacts</a>.
         </p>
         <ul class="work-list">
           {
@@ -308,25 +256,34 @@ const selectedWork: WorkEntry[] = [
               <li class={entry.figure || entry.clip ? "work-card work-card--figure" : "work-card"}>
                 {entry.clip && (
                   <figure class="work-figure">
-                    <video
-                      src={entry.clip.src}
-                      poster={entry.clip.poster}
-                      aria-label={entry.clip.alt}
-                      autoplay
-                      loop
-                      muted
-                      playsinline
-                      preload="metadata"
-                    />
+                    <a class="work-figure-link" href={entry.href} tabindex="-1">
+                      <video
+                        src={entry.clip.src}
+                        poster={entry.clip.poster}
+                        aria-label={entry.clip.alt}
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        preload="metadata"
+                      />
+                    </a>
                   </figure>
                 )}
                 {entry.figure && !entry.clip && (
-                  <figure class="work-figure">
-                    <img src={entry.figure.src} alt={entry.figure.alt} loading="lazy" decoding="async" />
+                  <figure class:list={["work-figure", entry.figure.wide && "work-figure--wide"]}>
+                    {/* Not a tab stop: the title link below goes to the same place, so a
+                        second one would only add a duplicate stop for keyboard users. */}
+                    <a class="work-figure-link" href={entry.href} tabindex="-1">
+                      <img src={entry.figure.src} alt={entry.figure.alt} loading="lazy" decoding="async" />
+                    </a>
                   </figure>
                 )}
                 <div class="work-card-header">
-                  <span class="type-badge">{entry.kind}</span>
+                  <p class="work-venue-row">
+                    <span class="work-venue">{entry.venue}</span>
+                    {entry.award && <span class="work-venue-award">{entry.award}</span>}
+                  </p>
                   <p class="work-card-title">
                     <a href={entry.href}>{entry.title}</a>
                   </p>
@@ -344,66 +301,32 @@ const selectedWork: WorkEntry[] = [
         <p class="section-foot"><a href="/research/#publications">See all publications →</a></p>
       </section>
 
-      <section id="bio" class="bio-compact home-card home-card--bio" aria-labelledby="bio-heading">
-        <h2 id="bio-heading">Bio</h2>
-        <p>
-          At <a href="https://momentslab.com">Moments Lab</a> I lead a research group building indexing systems, retrieval
-          pipelines, and evaluation methods for long-form broadcast and archival video, and I supervise doctoral work on
-          small omni-modal models. Most of what I care about there is efficiency: which of the available signal a model actually
-          needs, and how to tell when a reported gain is real.
-        </p>
-        <p>
-          My PhD at Institut Polytechnique de Paris (advised by Jérôme Boudy and Gérard Chollet) was on multimodal
-          speaker diarization, focused on robustness and fairness under real recording conditions. That question — who a
-          system quietly fails for, and how you would measure it — has stayed with the rest of my work.
-        </p>
-        <p>
-          Outside media, the same retrieval and evidence-grounding methods apply to scientific literature. I built
-          <a href="https://github.com/YannisTevissen/UpToCure">UpToCure</a>, which assembles research on rare diseases
-          into readable, sourced reports, and I contributed to <strong>DiverseSpectrum</strong>, an open-source dataset
-          addressing representation gaps in AI training data. I also co-founded <strong>VocaCoach</strong>, a speech
-          training platform (VivaTech award, covered by Le Parisien), and serve on the board of
-          <strong>Universal Wings Mobility</strong>.
-        </p>
-        <p>
-          <a href="/research/#publications">Publications</a> ·
-          <a href="https://research.momentslab.com">Moments Lab research</a> ·
-          <a href="https://huggingface.co/YannisTevissen">Hugging Face</a>
-        </p>
-      </section>
-
-      <section class="section-muted home-card home-card--media" aria-labelledby="secondary-heading">
-        <h2 id="secondary-heading">Press &amp; Talks</h2>
-        <p>Selected public interventions and press coverage.</p>
-        <ul class="pub-list">
-          <li class="pub-item">
-            <p class="pub-title">
-              <a href="https://www.adworldnews.com/news/ai-video-understanding-yannis-tevissen-moments-labs"
-                >How AI Video Understanding is Rewriting the Rules of Media Production and Discovery</a
-              >
+      <section class="home-card home-card--sections" aria-labelledby="sections-heading">
+        <h2 id="sections-heading">See also</h2>
+        <div class="pillars">
+          <div class="pillar">
+            <h3><a href="/research/">Research</a></h3>
+            <p>
+              The research agenda, <a href="/research/#publications">publications</a>,
+              <a href="/research/#artifacts">artifacts</a>, and
+              <a href="/research/#teaching">teaching and mentoring</a>.
             </p>
-            <p class="pub-meta"><time datetime="2025-11">November 2025</time> · Ad World News</p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title">Generation AI (FOST)</p>
-            <p class="pub-meta">
-              <time datetime="2025-12">December 2025</time> · Speaker · Future of Software Technologies
+          </div>
+          <div class="pillar">
+            <h3><a href="/advocacy/">Blog &amp; Advocacy</a></h3>
+            <p>
+              Technical notes, press, and talks on <a href="/blog/">Blog &amp; Press</a>, and disability and accessibility
+              work under <a href="/advocacy/">advocacy</a>.
             </p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title">
-              <a href="https://www.youtube.com/watch?v=_CYn7HXEWuM&t=7140s">OECD panel: AI and disability</a>
+          </div>
+          <div class="pillar">
+            <h3><a href="/contact/">Contact</a></h3>
+            <p>
+              Email and profiles for research collaboration, speaking invitations, or technical discussion, plus the
+              <a href="/cv/">resume</a>.
             </p>
-            <p class="pub-meta"><time datetime="2024-12">December 2024</time></p>
-          </li>
-          <li class="pub-item">
-            <p class="pub-title">
-              <a href="https://www.youtube.com/watch?v=OJbTed99eb0">TEDx: Handicap, Société et IA</a>
-            </p>
-            <p class="pub-meta"><time datetime="2024-03">March 2024</time> · TEDxTélécom SudParis</p>
-          </li>
-        </ul>
-        <p class="section-foot"><a href="/talks/">Press &amp; Talks →</a></p>
+          </div>
+        </div>
       </section>
     </div>
   </main>

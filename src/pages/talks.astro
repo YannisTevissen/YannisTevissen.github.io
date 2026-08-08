@@ -1,186 +1,35 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-
-const title = "Press & Talks - Yannis Tevissen";
-const description =
-  "Press coverage, interviews, and public talks related to multimodal video systems, accessibility, and AI.";
-const footerSecondaryLinks = [
-  { href: "/research/", label: "Research" },
-  { href: "/advocacy/", label: "Blog & Advocacy" },
-];
+const to = "/blog/#press";
+const title = "Redirecting to Blog & Press";
+const canonical = "https://yannistevissen.fr/blog/";
 ---
 
-<BaseLayout title={title} description={description} footerSecondaryLinks={footerSecondaryLinks}>
-  <main id="site-main" class="site-main">
-    <div class="site-shell">
-      <h1 class="page-title">Press &amp; Talks</h1>
-      <p class="page-lede">
-        Press coverage, interviews, and public talks. The main technical record remains on the
-        <a href="/research/">Research</a> page (publications listed at the bottom).
-      </p>
-
-      <h2>Press</h2>
-      <ul class="pub-list">
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/nojitter.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title">
-              <a href="https://www.nojitter.com/ai-voice/even-as-ai-transcription-leaps-forward-pitfalls-remain"
-                >Even as AI transcription leaps forward, pitfalls remain</a
-              >
-            </p>
-            <p class="pub-meta">
-              <time datetime="2025-12-12">12 December 2025</time> · No Jitter · Commentary on speech systems, captions, and
-              production constraints.
-            </p>
-          </div>
-        </li>
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/adworld.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title">
-              <a href="https://www.adworldnews.com/news/ai-video-understanding-yannis-tevissen-moments-labs"
-                >How AI Video Understanding is Rewriting the Rules of Media Production and Discovery</a
-              >
-            </p>
-            <p class="pub-meta">
-              <time datetime="2025-11-19">19 November 2025</time> · Ad World News · Interview on video retrieval, archives,
-              and media workflows.
-            </p>
-          </div>
-        </li>
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/tvbeurope.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title">
-              <a href="https://www.tvbeurope.com/features/how-tf1-is-exploring-an-ai-driven-future-with-moments-lab"
-                >How TF1 is exploring an AI-driven future with Moments Lab</a
-              >
-            </p>
-            <p class="pub-meta">
-              <time datetime="2024-06-25">25 June 2024</time> · TVBEurope · Discussion of retrieval and search systems for
-              broadcast archives.
-            </p>
-          </div>
-        </li>
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/iabm.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title">
-              <a
-                href="https://theiabm.org/news/moments-lab-launches-ai-research-program-to-advance-video-understanding/"
-                >IABM: Moments Lab AI research program</a
-              >
-            </p>
-            <p class="pub-meta">
-              <time datetime="2024-04">April 2024</time> · Industry coverage of the research program launch, with attributable
-              quotation.
-            </p>
-          </div>
-        </li>
-      </ul>
-
-      <h2>Talks</h2>
-      <ul class="pub-list">
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/fost.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title">Generation AI (FOST)</p>
-            <p class="pub-meta">
-              <time datetime="2025-12-09">9</time>-<time datetime="2025-12-11">11 December 2025</time> · Speaker · CNIT Forest,
-              Paris La Défense ·
-              <a href="https://www.futureofsoftwaretechnologies.com/">Future of Software Technologies (FOST) 2025</a>
-            </p>
-          </div>
-        </li>
-        <li class="pub-item has-thumb">
-          <span class="thumb thumb-6" aria-hidden="true"></span>
-          <div class="item-body">
-            <p class="pub-title">OECD - AI and disability</p>
-            <p class="pub-meta">
-              <time datetime="2024-12">December 2024</time> · Panel · OECD ·
-              <a href="https://www.youtube.com/watch?v=_CYn7HXEWuM&t=7140s">Video</a>
-            </p>
-          </div>
-        </li>
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/tedx.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title">TEDx — <span lang="fr">Handicap, Société et IA, une histoire de biais</span></p>
-            <p class="pub-meta">
-              <time datetime="2024-03">March 2024</time> · TEDxTélécom SudParis ·
-              <a href="https://www.youtube.com/watch?v=9M6xRLEkyV8">Video</a>
-            </p>
-          </div>
-        </li>
-      </ul>
-
-      <h2>Additional references</h2>
-      <ul class="pub-list">
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/leparisien.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title" lang="fr">
-              <a
-                href="https://www.leparisien.fr/vie-de-bureau/vocacoach-une-nouvelle-plate-forme-pour-sentrainer-a-parler-en-public-03-02-2022-7LVIIAH7FJAAPMKKBURFIYCI4I.php"
-                >VocaCoach, une nouvelle plate-forme pour s'entraîner à parler en public</a
-              >
-            </p>
-            <p class="pub-meta">
-              <time datetime="2022-02-03">3 February 2022</time> · Le Parisien · Coverage naming the builders of the project.
-            </p>
-          </div>
-        </li>
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/telecomsudparis.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title" lang="fr">
-              <a
-                href="https://www.telecom-sudparis.eu/ecole/vocacoach-remporte-le-prix-coup-de-coeur-au-next-startupper-challenge-a-vivatech/"
-                >VocaCoach, prix coup de cœur au Next Startupper Challenge</a
-              >
-            </p>
-            <p class="pub-meta">
-              <time datetime="2021-05">May 2021</time> · Télécom SudParis · Institutional coverage of the project and team.
-            </p>
-          </div>
-        </li>
-        <li class="pub-item has-thumb">
-          <span class="thumb">
-            <img src="/assets/img/items/jaimelesstartups.jpg" alt="" width="160" height="160" loading="lazy" />
-          </span>
-          <div class="item-body">
-            <p class="pub-title" lang="fr">
-              <a href="https://www.jaimelesstartups.fr/vocacoach-plateforme-de-coach-en-expression-orale/"
-                >VocaCoach, profil startup</a
-              >
-            </p>
-            <p class="pub-meta">
-              <time datetime="2021-06-29">29 June 2021</time> · J'aime les Startups · Startup profile referencing the founding
-              team.
-            </p>
-          </div>
-        </li>
-      </ul>
-      <p class="section-foot">
-        Accessibility-related work is collected on <a href="/advocacy/">Blog &amp; Advocacy</a>.
-      </p>
-    </div>
-  </main>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <script is:inline>
+      (() => {
+        // Preserve deep links such as /talks/#talks onto the merged page.
+        const hash = location.hash;
+        const known = new Set(["#press", "#talks", "#notes", "#references"]);
+        if (hash && hash !== "#" && known.has(hash)) {
+          location.replace(`/blog/${hash}`);
+          return;
+        }
+        location.replace("/blog/#press");
+      })();
+    </script>
+  </head>
+  <body>
+    <p>
+      Press coverage, interviews, and talks now live on the Blog &amp; Press page.
+      <a href={to}>Continue</a>.
+    </p>
+  </body>
+</html>
