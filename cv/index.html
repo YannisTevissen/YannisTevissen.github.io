@@ -1,2 +1,91 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=/contact/#contact-cv-heading"><meta name="robots" content="noindex"><title>Redirecting to CV (now embedded on Contact)</title><link rel="canonical" href="https://yannistevissen.fr/contact/"><script>location.replace("/contact/#contact-cv-heading");</script></head> <body> <p> The CV is now embedded on the contact page. <a href="/contact/#contact-cv-heading">Continue</a>.
-</p> </body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Resume - Yannis Tevissen</title><meta name="description" content="Curriculum vitae of Yannis Tevissen, Head of Research at Moments Lab: research leadership, publications, patents, and supervision."><meta name="author" content="Yannis Tevissen"><link rel="canonical" href="https://yannistevissen.fr/cv/"><meta property="og:type" content="website"><meta property="og:site_name" content="Yannis Tevissen"><meta property="og:locale" content="en_US"><meta property="og:title" content="Resume - Yannis Tevissen"><meta property="og:description" content="Curriculum vitae of Yannis Tevissen, Head of Research at Moments Lab: research leadership, publications, patents, and supervision."><meta property="og:url" content="https://yannistevissen.fr/cv/"><meta property="og:image" content="https://yannistevissen.fr/assets/img/og-card.png"><meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yannistevissen"><meta name="twitter:site" content="@yannistevissen"><link rel="icon" href="/assets/img/favicon.ico" sizes="any"><meta name="theme-color" content="#fcfbf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/site.css"><script async src="https://www.googletagmanager.com/gtag/js?id=G-6BNR1WQ6C7"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-6BNR1WQ6C7");
+    </script></head> <body> <canvas class="neural-field" id="neural-field" aria-hidden="true" role="presentation"></canvas> <script type="module" src="/_astro/NeuralField.astro_astro_type_script_index_0_lang.BNytcjeg.js"></script> <a class="skip-link" href="#site-main">Skip to content</a> <header class="site-header"> <div class="site-shell--wide"> <a class="site-title" href="/">Yannis Tevissen</a> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"> <span class="nav-toggle-bars" aria-hidden="true"> <span></span><span></span><span></span> </span>
+Menu
+</button> <nav class="site-nav" id="site-nav" aria-label="Main"> <ul class="nav-list"> <li class="nav-item"> <a href="/"> About  </a>  </li><li class="nav-item nav-item--parent"> <a href="/research/"> Research <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false"> <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path> </svg> </a> <ul class="nav-submenu"> <li> <a href="/research/#publications"> Publications </a> </li><li> <a href="/research/#artifacts"> Artifacts </a> </li><li> <a href="/research/#teaching"> Teaching &amp; mentoring </a> </li> </ul> </li><li class="nav-item nav-item--parent"> <a href="/advocacy/"> Blog &amp; Advocacy <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false"> <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path> </svg> </a> <ul class="nav-submenu"> <li> <a href="/blog/"> Blog &amp; Press </a> </li><li> <a href="/advocacy/"> Advocacy </a> </li> </ul> </li><li class="nav-item nav-item--parent"> <a href="/contact/" class="is-section"> Contact <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false"> <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path> </svg> </a> <ul class="nav-submenu"> <li> <a href="/contact/"> Contact </a> </li><li> <a href="/cv/" aria-current="page"> Resume </a> </li> </ul> </li> </ul> </nav> </div> </header> <script>
+  (() => {
+    /* ---------------------------------------------------------- phone toggle */
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.getElementById("site-nav");
+
+    if (toggle && nav) {
+      const setOpen = (open) => {
+        nav.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+      };
+
+      toggle.addEventListener("click", () => {
+        setOpen(nav.classList.contains("is-open") === false);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || !nav.classList.contains("is-open")) return;
+        setOpen(false);
+        toggle.focus();
+      });
+
+      // Leaving the phone layout must not strand the nav in its collapsed state,
+      // because the toggle that would reopen it is display:none above 700px.
+      const wide = window.matchMedia("(min-width: 701px)");
+      wide.addEventListener("change", (event) => {
+        if (event.matches) setOpen(false);
+      });
+    }
+
+    /* ------------------------------------------- pointer-layout dropdown keys */
+    // Submenus already open on hover and on :focus-within with CSS alone, so the
+    // nav works without JS. This adds the keyboard affordances CSS cannot express:
+    // arrow keys to move through a submenu, and Escape to dismiss it without
+    // having to tab past every item inside.
+    //
+    // "is-dismissed" exists because Escape has to beat the CSS :focus-within rule,
+    // which would otherwise reopen the panel while the trigger still holds focus.
+    // Only an explicit reopen clears it: focusin must not, because returning focus
+    // to the trigger after Escape fires focusin and would undo the dismissal.
+    for (const parent of document.querySelectorAll(".nav-item--parent")) {
+      const trigger = parent.querySelector(":scope > a");
+      const items = Array.from(parent.querySelectorAll(".nav-submenu a"));
+      if (!trigger || !items.length) continue;
+
+      const reopen = () => {
+        parent.classList.remove("is-dismissed");
+        parent.classList.add("is-open");
+      };
+
+      parent.addEventListener("focusin", () => parent.classList.add("is-open"));
+      parent.addEventListener("focusout", (event) => {
+        if (parent.contains(event.relatedTarget)) return;
+        parent.classList.remove("is-open");
+        parent.classList.remove("is-dismissed");
+      });
+
+      parent.addEventListener("keydown", (event) => {
+        const index = items.indexOf(document.activeElement);
+
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          reopen();
+          items[Math.min(index + 1, items.length - 1)].focus();
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          reopen();
+          if (index <= 0) trigger.focus();
+          else items[index - 1].focus();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          parent.classList.remove("is-open");
+          parent.classList.add("is-dismissed");
+          trigger.focus();
+        }
+      });
+    }
+  })();
+</script>  <main id="site-main" class="site-main"> <div class="site-shell"> <h1 class="page-title">Resume</h1> <p class="page-lede"> <a href="/assets/cv/CV_YannisTevissen_en.pdf" download="CV_YannisTevissen_en.pdf">Download the CV (PDF, English)</a>. The full
+        publication record is under <a href="/research/#publications">Publications</a>.
+</p> <div class="cv-embed"> <iframe src="/assets/cv/CV_YannisTevissen_en.pdf#view=FitH&#38;navpanes=0" title="Curriculum Vitae of Yannis Tevissen" loading="lazy"></iframe> </div> <p class="section-foot"> <a href="/contact/">← Contact</a> ·
+<a href="/research/#publications">Publications →</a> </p> </div> </main>  <footer class="site-footer" id="contact"> <div class="site-shell"> <div class="footer-contact"> <p class="footer-contact-label">Get in touch</p> <p class="footer-contact-email"> <a href="mailto:contact@yannistevissen.fr">contact@yannistevissen.fr</a> </p> <p class="footer-contact-links"> <a href="/contact/">More options</a> · <a href="/assets/cv/CV_YannisTevissen_en.pdf">CV (PDF)</a> </p> </div> <div class="footer-social"> <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Scholar</a><a href="https://www.linkedin.com/in/yannis-tevissen">LinkedIn</a><a href="https://github.com/YannisTevissen">GitHub</a><a href="https://huggingface.co/YannisTevissen">Hugging Face</a><a href="https://bsky.app/profile/yannistevissen.fr">Bluesky</a><a href="https://x.com/yannistevissen">X</a> </div> <div class="footer-secondary"> <p>© Yannis Tevissen</p> <p> <a href="/research/">Research</a>  · <a href="/research/#publications">Publications</a>  · <a href="/contact/">Contact</a>  </p> </div> </div> </footer> </body></html>

@@ -1,55 +1,113 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Blog &amp; Advocacy - Yannis Tevissen</title><meta name="description" content="Technical notes, prototypes, and public work on disability inclusion, accessibility, and representation in AI."><meta name="author" content="Yannis Tevissen"><link rel="canonical" href="https://yannistevissen.fr/advocacy/"><meta property="og:type" content="website"><meta property="og:site_name" content="Yannis Tevissen"><meta property="og:locale" content="en_US"><meta property="og:title" content="Blog &#38; Advocacy - Yannis Tevissen"><meta property="og:description" content="Technical notes, prototypes, and public work on disability inclusion, accessibility, and representation in AI."><meta property="og:url" content="https://yannistevissen.fr/advocacy/"><meta property="og:image" content="https://yannistevissen.fr/assets/img/profile.png"><meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yannistevissen"><meta name="twitter:site" content="@yannistevissen"><link rel="icon" href="/assets/img/favicon.ico" sizes="any"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/site.css"><script async src="https://www.googletagmanager.com/gtag/js?id=G-6BNR1WQ6C7"></script><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Advocacy - Yannis Tevissen</title><meta name="description" content="Talks, writing, and public contributions on disability inclusion, accessibility, and representation in AI."><meta name="author" content="Yannis Tevissen"><meta name="keywords" content="Yannis Tevissen advocacy, disability inclusion, accessibility in tech, AI bias, representation, TEDx, OECD, DiverseSpectrum"><link rel="canonical" href="https://yannistevissen.fr/advocacy/"><meta property="og:type" content="website"><meta property="og:site_name" content="Yannis Tevissen"><meta property="og:locale" content="en_US"><meta property="og:title" content="Advocacy - Yannis Tevissen"><meta property="og:description" content="Talks, writing, and public contributions on disability inclusion, accessibility, and representation in AI."><meta property="og:url" content="https://yannistevissen.fr/advocacy/"><meta property="og:image" content="https://yannistevissen.fr/assets/img/og-card.png"><meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@yannistevissen"><meta name="twitter:site" content="@yannistevissen"><link rel="icon" href="/assets/img/favicon.ico" sizes="any"><meta name="theme-color" content="#fcfbf9"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/site.css"><script async src="https://www.googletagmanager.com/gtag/js?id=G-6BNR1WQ6C7"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
       gtag("config", "G-6BNR1WQ6C7");
-    </script></head> <body> <a class="skip-link" href="#site-main">Skip to content</a> <header class="site-header"> <div class="site-shell--wide"> <a class="site-title" href="/">Yannis Tevissen</a> <nav class="site-nav" aria-label="Main"> <a href="/"> About </a><a href="/research/"> Research </a><a href="/talks/"> Press </a><a href="/advocacy/" aria-current="page"> Blog &amp; Advocacy </a><a href="/contact/"> Contact </a> </nav> </div> </header>  <main id="site-main" class="site-main"> <div class="site-shell"> <h1 class="page-title">Blog &amp; Advocacy</h1> <p class="lede">
-Technical notes, prototypes, and public contributions connected to disability inclusion, accessibility, and
-        representation in AI.
-</p> <section aria-labelledby="blog-heading"> <h2 id="blog-heading">Latest from the blog</h2> <ul class="post-list"> <li class="has-thumb"> <span class="thumb"> <img src="/assets/img/items/blog_reachy.jpg" alt="Reachy Mini and SO-101 arm used in the home robotics prototype" width="160" height="160" loading="lazy"> </span> <div class="item-body"> <a href="/blog/2026/physical-ai-reachy-smolvla/">Prototype note: multimodal teleoperation and fine-tuning on a home robotics setup</a> <p class="post-date"> <time datetime="2026-03-05">5 March 2026</time> </p> <p>Documents a small multimodal control prototype, the data collection setup, and the fine-tuning process for a narrow manipulation task.</p> </div> </li> </ul> </section> <h2>Advocacy</h2> <p class="page-lede" style="margin-bottom: 0.75rem; margin-top: 0.25rem">
-I am personally involved in disability inclusion and accessibility in tech. This page brings together talks,
-        writing, and public contributions connected to that work.
-</p> <h2>Talks &amp; panels</h2> <p class="page-lede" style="margin-bottom: 0.75rem; margin-top: 0.25rem">
-Public interventions where I speak directly about disability, bias, accessibility, and representation. Broader
-        press coverage is on <a href="/talks/">Press &amp; Talks</a>.
-</p> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">OECD panel: AI and disability</p> <p class="pub-meta"> <time datetime="2024-12">December 2024</time> · OECD · Recommendations for inclusive AI development ·
+    </script></head> <body> <canvas class="neural-field" id="neural-field" aria-hidden="true" role="presentation"></canvas> <script type="module" src="/_astro/NeuralField.astro_astro_type_script_index_0_lang.BNytcjeg.js"></script> <a class="skip-link" href="#site-main">Skip to content</a> <header class="site-header"> <div class="site-shell--wide"> <a class="site-title" href="/">Yannis Tevissen</a> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"> <span class="nav-toggle-bars" aria-hidden="true"> <span></span><span></span><span></span> </span>
+Menu
+</button> <nav class="site-nav" id="site-nav" aria-label="Main"> <ul class="nav-list"> <li class="nav-item"> <a href="/"> About  </a>  </li><li class="nav-item nav-item--parent"> <a href="/research/"> Research <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false"> <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path> </svg> </a> <ul class="nav-submenu"> <li> <a href="/research/#publications"> Publications </a> </li><li> <a href="/research/#artifacts"> Artifacts </a> </li><li> <a href="/research/#teaching"> Teaching &amp; mentoring </a> </li> </ul> </li><li class="nav-item nav-item--parent"> <a href="/advocacy/" class="is-section" aria-current="page"> Blog &amp; Advocacy <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false"> <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path> </svg> </a> <ul class="nav-submenu"> <li> <a href="/blog/"> Blog &amp; Press </a> </li><li> <a href="/advocacy/" aria-current="page"> Advocacy </a> </li> </ul> </li><li class="nav-item nav-item--parent"> <a href="/contact/"> Contact <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false"> <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path> </svg> </a> <ul class="nav-submenu"> <li> <a href="/contact/"> Contact </a> </li><li> <a href="/cv/"> Resume </a> </li> </ul> </li> </ul> </nav> </div> </header> <script>
+  (() => {
+    /* ---------------------------------------------------------- phone toggle */
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.getElementById("site-nav");
+
+    if (toggle && nav) {
+      const setOpen = (open) => {
+        nav.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+      };
+
+      toggle.addEventListener("click", () => {
+        setOpen(nav.classList.contains("is-open") === false);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || !nav.classList.contains("is-open")) return;
+        setOpen(false);
+        toggle.focus();
+      });
+
+      // Leaving the phone layout must not strand the nav in its collapsed state,
+      // because the toggle that would reopen it is display:none above 700px.
+      const wide = window.matchMedia("(min-width: 701px)");
+      wide.addEventListener("change", (event) => {
+        if (event.matches) setOpen(false);
+      });
+    }
+
+    /* ------------------------------------------- pointer-layout dropdown keys */
+    // Submenus already open on hover and on :focus-within with CSS alone, so the
+    // nav works without JS. This adds the keyboard affordances CSS cannot express:
+    // arrow keys to move through a submenu, and Escape to dismiss it without
+    // having to tab past every item inside.
+    //
+    // "is-dismissed" exists because Escape has to beat the CSS :focus-within rule,
+    // which would otherwise reopen the panel while the trigger still holds focus.
+    // Only an explicit reopen clears it: focusin must not, because returning focus
+    // to the trigger after Escape fires focusin and would undo the dismissal.
+    for (const parent of document.querySelectorAll(".nav-item--parent")) {
+      const trigger = parent.querySelector(":scope > a");
+      const items = Array.from(parent.querySelectorAll(".nav-submenu a"));
+      if (!trigger || !items.length) continue;
+
+      const reopen = () => {
+        parent.classList.remove("is-dismissed");
+        parent.classList.add("is-open");
+      };
+
+      parent.addEventListener("focusin", () => parent.classList.add("is-open"));
+      parent.addEventListener("focusout", (event) => {
+        if (parent.contains(event.relatedTarget)) return;
+        parent.classList.remove("is-open");
+        parent.classList.remove("is-dismissed");
+      });
+
+      parent.addEventListener("keydown", (event) => {
+        const index = items.indexOf(document.activeElement);
+
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          reopen();
+          items[Math.min(index + 1, items.length - 1)].focus();
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          reopen();
+          if (index <= 0) trigger.focus();
+          else items[index - 1].focus();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          parent.classList.remove("is-open");
+          parent.classList.add("is-dismissed");
+          trigger.focus();
+        }
+      });
+    }
+  })();
+</script>  <main id="site-main" class="site-main"> <div class="site-shell"> <h1 class="page-title">Advocacy</h1> <p class="page-lede">
+Disability inclusion and accessibility in tech are personal to me, and this page collects the talks, writing, and
+        projects that come out of that. Technical notes, press coverage, and general talks are on
+<a href="/blog/">Blog &amp; Press</a>.
+</p> <section aria-labelledby="talks-heading"> <h2 id="talks-heading">Talks &amp; panels</h2> <p class="page-lede" style="margin-bottom: 0.75rem; margin-top: 0.25rem">
+Where disability, bias, and representation are the subject rather than a passing mention.
+</p> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">OECD — AI and disability</p> <p class="pub-meta"> <time datetime="2024-12">December 2024</time> · Panel on recommendations for inclusive AI development, at
+              the Association APHPP colloquium hosted by the OECD ·
 <a href="https://www.youtube.com/watch?v=_CYn7HXEWuM&t=7140s">Video</a> </p> </li> <li class="pub-item"> <p class="pub-title">TEDx — <span lang="fr">Handicap, Société et IA, une histoire de biais</span></p> <p class="pub-meta"> <time datetime="2024-03">March 2024</time> · TEDxTélécom SudParis ·
-<a href="https://www.youtube.com/watch?v=OJbTed99eb0" hreflang="fr">Video</a> </p> </li> <li class="pub-item"> <p class="pub-title">Déclics Numérique — Diversidays</p> <p class="pub-meta"> <time datetime="2023-08">August 2023</time> · Workshop on digital inclusion and diversity in tech
+<a href="https://www.youtube.com/watch?v=9M6xRLEkyV8" hreflang="fr">Video</a> </p> </li> <li class="pub-item"> <p class="pub-title">Déclics Numérique — Diversidays</p> <p class="pub-meta"> <time datetime="2023-08">August 2023</time> · Workshop on digital inclusion and diversity in tech
 </p> </li> <li class="pub-item"> <p class="pub-title" lang="fr">Témoignage sur mon parcours en école d'ingénieurs</p> <p class="pub-meta"> <time datetime="2022-04">April 2022</time> · Télécom SudParis ·
-<a href="https://www.telecom-sudparis.eu/ecole/handicap/">Page handicap</a> </p> </li> </ul> <h2>Writing</h2> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">Graduate School Decoded: How to Navigate the Ph.D. with a Physical Disability</p> <p class="pub-meta"> <time datetime="2023-08">August 2023</time> · The Ability Toolbox ·
-<a href="https://theabilitytoolbox.com/navigate-phd-physical-disability/">Article</a> </p> </li> </ul> <h2>Projects &amp; datasets</h2> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">DiverseSpectrum</p> <p class="pub-meta"> <time datetime="2026-01">January 2026</time> · Open-source image dataset designed to fill the representation
-            gap of minorities in popular AI datasets
+<a href="https://www.telecom-sudparis.eu/ecole/handicap/">Page handicap</a> </p> </li> </ul> </section> <section aria-labelledby="writing-heading"> <h2 id="writing-heading">Writing</h2> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">Graduate School Decoded: How to Navigate the Ph.D. with a Physical Disability</p> <p class="pub-meta"> <time datetime="2023-08">August 2023</time> · The Ability Toolbox ·
+<a href="https://theabilitytoolbox.com/navigate-phd-physical-disability/">Article</a> </p> </li> </ul> </section> <section aria-labelledby="projects-heading"> <h2 id="projects-heading">Projects &amp; datasets</h2> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">DiverseSpectrum</p> <p class="pub-meta"> <time datetime="2026-01">January 2026</time> · Open image dataset addressing the representation gap for
+              minorities in popular AI training data
 </p> </li> <li class="pub-item"> <p class="pub-title"> <a href="https://huggingface.co/collections/YannisTevissen/ai-for-disability-67684a1a9966a2e699f6b114">AI for Disability</a> </p> <p class="pub-meta">
 Curated Hugging Face collection of datasets, models, spaces, and papers using AI for disability-related
-            tasks
-</p> <div class="artifact-links" aria-label="Artifacts for AI for Disability"> <a href="https://huggingface.co/collections/YannisTevissen/ai-for-disability-67684a1a9966a2e699f6b114">Hugging Face collection</a> </div> </li> <li class="pub-item"> <p class="pub-title">Board member — Universal Wings Mobility</p> <p class="pub-meta"> <time datetime="2025-07">July 2025</time> – present · AVI conversational agent for accessible travel planning
-</p> </li> </ul> <h2>Research overlap</h2> <p>
-This commitment also informs part of my research. The related publication on disability representation in image
-        generation is listed on the
-<a href="/research/#publications">Publications section of the Research page</a>:
-</p> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">Disability Representations: Finding Biases in Automatic Image Generation</p> <p class="pub-meta">Yannis Tevissen · CVPR 2024 Workshop AVA</p> </li> </ul> </div> </main>  <footer class="site-footer" id="contact"> <div class="site-shell"> <div class="footer-contact"> <p class="footer-contact-label">Get in touch</p> <p class="footer-contact-email"> <a href="mailto:contact@yannistevissen.fr">contact@yannistevissen.fr</a> </p> <p class="footer-contact-links"> <a href="/contact/">More options</a> · <a href="/assets/cv/CV_YannisTevissen_en.pdf">CV (PDF)</a> </p> </div> <div class="footer-social"> <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Scholar</a><a href="https://www.linkedin.com/in/yannis-tevissen">LinkedIn</a><a href="https://github.com/YannisTevissen">GitHub</a><a href="https://huggingface.co/YannisTevissen">Hugging Face</a><a href="https://bsky.app/profile/yannistevissen.fr">Bluesky</a><a href="https://x.com/yannistevissen">X</a> </div> <div class="footer-secondary"> <p>© Yannis Tevissen</p> <p> <a href="/research/">Research</a>  · <a href="/talks/">Press &amp; Talks</a>  · <a href="/blog/">Blog archive</a>  </p> </div> </div> </footer> <script>
-        (function () {
-          if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-          var body = document.body;
-          var raf = 0;
-          var tx = 50, ty = 0, cx = 50, cy = 0;
-          function tick() {
-            cx += (tx - cx) * 0.08;
-            cy += (ty - cy) * 0.08;
-            body.style.setProperty('--mx', cx.toFixed(2) + '%');
-            body.style.setProperty('--my', cy.toFixed(2) + '%');
-            if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) {
-              raf = requestAnimationFrame(tick);
-            } else {
-              raf = 0;
-            }
-          }
-          window.addEventListener('pointermove', function (e) {
-            tx = (e.clientX / window.innerWidth) * 100;
-            ty = (e.clientY / window.innerHeight) * 100;
-            if (!raf) raf = requestAnimationFrame(tick);
-          }, { passive: true });
-        })();
-      </script> </body> </html>
+              tasks
+</p> <div class="artifact-links" aria-label="Artifacts for AI for Disability"> <a href="https://huggingface.co/collections/YannisTevissen/ai-for-disability-67684a1a9966a2e699f6b114">Hugging Face collection</a> </div> </li> <li class="pub-item"> <p class="pub-title">Board member — Universal Wings Mobility</p> <p class="pub-meta"> <time datetime="2025-07">July 2025</time> – present · AVI conversational agent for accessible travel
+              planning
+</p> </li> </ul> <p class="section-foot">
+More open data and code, including the SMA research collection, is on the
+<a href="/research/#artifacts">Artifacts</a> section.
+</p> </section> <section aria-labelledby="overlap-heading"> <h2 id="overlap-heading">Research overlap</h2> <p>
+The same subject is also a research line. The paper on disability representation in image generation is listed
+          with the <a href="/research/#publications">publications</a>:
+</p> <ul class="pub-list"> <li class="pub-item"> <p class="pub-title">Disability Representations: Finding Biases in Automatic Image Generation</p> <p class="pub-meta">Yannis Tevissen · CVPR 2024 Workshop AVA</p> </li> </ul> </section> <p class="section-foot"> <a href="/blog/">Blog &amp; Press →</a> </p> </div> </main>  <footer class="site-footer" id="contact"> <div class="site-shell"> <div class="footer-contact"> <p class="footer-contact-label">Get in touch</p> <p class="footer-contact-email"> <a href="mailto:contact@yannistevissen.fr">contact@yannistevissen.fr</a> </p> <p class="footer-contact-links"> <a href="/contact/">More options</a> · <a href="/assets/cv/CV_YannisTevissen_en.pdf">CV (PDF)</a> </p> </div> <div class="footer-social"> <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Scholar</a><a href="https://www.linkedin.com/in/yannis-tevissen">LinkedIn</a><a href="https://github.com/YannisTevissen">GitHub</a><a href="https://huggingface.co/YannisTevissen">Hugging Face</a><a href="https://bsky.app/profile/yannistevissen.fr">Bluesky</a><a href="https://x.com/yannistevissen">X</a> </div> <div class="footer-secondary"> <p>© Yannis Tevissen</p> <p> <a href="/research/">Research</a>  · <a href="/blog/">Blog &amp; Press</a>  </p> </div> </div> </footer> </body></html>

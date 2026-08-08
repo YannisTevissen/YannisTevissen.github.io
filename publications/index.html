@@ -1,2 +1,10 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=/research/#publications"><meta name="robots" content="noindex"><title>Publications - Yannis Tevissen</title><link rel="canonical" href="https://yannistevissen.fr/research/"><script>location.replace("/research/#publications");</script></head> <body> <p> Publications have moved to the Research page. <a href="/research/#publications">Continue</a>.
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=/research/#publications"><meta name="robots" content="noindex"><title>Redirecting to Research - publications</title><link rel="canonical" href="https://yannistevissen.fr/research/"><script>
+      (() => {
+        // Preserve deep links such as /publications/#thesis on the research page.
+        const hash = location.hash;
+        location.replace(hash && hash !== "#" ? `/research/${hash}` : "/research/#publications");
+      })();
+    </script></head> <body> <p>
+The publication list lives under Publications on the Research page.
+<a href="/research/#publications">Continue</a>.
 </p> </body></html>

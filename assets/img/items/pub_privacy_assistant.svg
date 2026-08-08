@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" role="img" aria-label="Speech is transcribed and separated by speaker entirely on the device; nothing is sent to the cloud.">
+  <rect width="640" height="400" fill="#fcfbf9"/>
+  <rect x="72" y="74" width="248" height="258" rx="16" fill="#f4f2ee" stroke="#dedbd4" stroke-width="2"/>
+  <rect x="96" y="104" width="200" height="198" rx="7" fill="#fcfbf9" stroke="#dedbd4" stroke-width="1.5"/>
+  <g fill="#1f4f7a">
+    <rect x="116" y="163" width="4" height="10" rx="2"/>
+    <rect x="127" y="153" width="4" height="30" rx="2"/>
+    <rect x="138" y="152" width="4" height="32" rx="2"/>
+    <rect x="149" y="142" width="4" height="52" rx="2"/>
+    <rect x="160" y="156" width="4" height="24" rx="2"/>
+    <rect x="171" y="136" width="4" height="64" rx="2"/>
+    <rect x="182" y="146" width="4" height="44" rx="2"/>
+    <rect x="193" y="153" width="4" height="30" rx="2"/>
+    <rect x="204" y="153" width="4" height="31" rx="2"/>
+    <rect x="215" y="131" width="4" height="74" rx="2"/>
+    <rect x="226" y="134" width="4" height="69" rx="2"/>
+    <rect x="237" y="147" width="4" height="43" rx="2"/>
+    <rect x="248" y="151" width="4" height="34" rx="2"/>
+    <rect x="259" y="153" width="4" height="30" rx="2"/>
+    <rect x="270" y="157" width="4" height="23" rx="2"/>
+  </g>
+  <g>
+    <rect x="116" y="232" width="51" height="14" rx="3" fill="#1f4f7a"/>
+    <rect x="173" y="232" width="34" height="14" rx="3" fill="#c4c0b7"/>
+    <rect x="213" y="232" width="68" height="14" rx="3" fill="#1f4f7a"/>
+  </g>
+  <g>
+    <rect x="116" y="256" width="38" height="14" rx="3" fill="#c4c0b7"/>
+    <rect x="160" y="256" width="76" height="14" rx="3" fill="#1f4f7a"/>
+    <rect x="242" y="256" width="38" height="14" rx="3" fill="#c4c0b7"/>
+  </g>
+  <g fill="#cbc5b9">
+    <circle cx="476" cy="196" r="20"/>
+    <circle cx="503" cy="187" r="25"/>
+    <circle cx="528" cy="198" r="17"/>
+    <rect x="458" y="198" width="88" height="20" rx="10"/>
+  </g>
+  <line x1="332" y1="203" x2="436" y2="203" stroke="#c4c0b7" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/>
+  <circle cx="502" cy="200" r="54" fill="none" stroke="#1f4f7a" stroke-width="4.5"/>
+  <line x1="464" y1="162" x2="540" y2="238" stroke="#1f4f7a" stroke-width="4.5" stroke-linecap="round"/>
+</svg>
