@@ -67,7 +67,10 @@ const loading = eager ? "eager" : "lazy";
 
 {
   variant === "icons" ? (
-    <div class:list={["hero-quick-links", "hero-quick-links--icons", "hero-quick-links--brand", className]} aria-label={ariaLabel}>
+    <div
+      class:list={["hero-quick-links", "hero-quick-links--icons", "hero-quick-links--brand", className]}
+      aria-label={ariaLabel}
+    >
       {PROFILES.map((p) => (
         <a class={`brand-icon brand-icon--${p.key}`} href={p.href} rel="me" aria-label={p.label} title={p.label}>
           {p.img ? (

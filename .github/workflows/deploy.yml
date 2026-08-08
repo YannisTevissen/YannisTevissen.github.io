@@ -54,6 +54,10 @@ jobs:
           name: dist
           path: dist
           retention-days: 1
+          # Without this, the artifact drops public/.nojekyll, GitHub Pages falls
+          # back to Jekyll, and Jekyll refuses to publish _astro/ — every hashed
+          # asset 404s.
+          include-hidden-files: true
 
   deploy:
     needs: build

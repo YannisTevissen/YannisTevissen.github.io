@@ -14,4 +14,11 @@ jobs:
         uses: lycheeverse/lychee-action@v1.9.0
         with:
           fail: true
-          args: --verbose --no-progress --max-redirects 5 --exclude-mail https://YannisTevissen.github.io/
+          args: >-
+            --verbose
+            --no-progress
+            --max-redirects 5
+            --exclude-mail
+            --exclude '^https://fonts\.googleapis\.com/?$'
+            --exclude '^https://fonts\.gstatic\.com/?$'
+            https://YannisTevissen.github.io/
