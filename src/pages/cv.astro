@@ -1,11 +1,36 @@
 ---
-import RedirectLayout from "../layouts/RedirectLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/site";
+
+const title = "Resume - Yannis Tevissen";
+const description =
+  "Curriculum vitae of Yannis Tevissen, Head of Research at Moments Lab: research leadership, publications, patents, and supervision.";
+const footerSecondaryLinks = [
+  { href: "/research/", label: "Research" },
+  { href: "/research/#publications", label: "Publications" },
+  { href: "/contact/", label: "Contact" },
+];
 ---
 
-<RedirectLayout
-  to="/contact/#contact-cv-heading"
-  title="Redirecting to CV (now embedded on Contact)"
-  canonical="https://yannistevissen.fr/contact/"
-  bodyText="The CV is now embedded on the contact page."
-  bodyHref="/contact/#contact-cv-heading"
-/>
+<BaseLayout title={title} description={description} footerSecondaryLinks={footerSecondaryLinks}>
+  <main id="site-main" class="site-main">
+    <div class="site-shell">
+      <h1 class="page-title">Resume</h1>
+      <p class="page-lede">
+        <a href={SITE.cvPath} download="CV_YannisTevissen_en.pdf">Download the CV (PDF, English)</a>. The full
+        publication record is under <a href="/research/#publications">Publications</a>.
+      </p>
+
+      <div class="cv-embed">
+        <iframe
+          src={`${SITE.cvPath}#view=FitH&navpanes=0`}
+          title="Curriculum Vitae of Yannis Tevissen"
+          loading="lazy"></iframe>
+      </div>
+      <p class="section-foot">
+        <a href="/contact/">← Contact</a> ·
+        <a href="/research/#publications">Publications →</a>
+      </p>
+    </div>
+  </main>
+</BaseLayout>

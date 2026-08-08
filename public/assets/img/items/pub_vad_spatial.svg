@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" role="img" aria-label="One speaker is captured by several microphones placed around the room, and their streams are combined into one voice activity decision.">
+  <rect width="640" height="400" fill="#fcfbf9"/>
+  <circle cx="112" cy="200" r="13" fill="#1f4f7a"/>
+  <g fill="none" stroke="#1f4f7a" stroke-width="2" stroke-linecap="round" opacity="0.8">
+    <path d="M140 164 A 46 46 0 0 1 140 236"/>
+    <path d="M158 146 A 72 72 0 0 1 158 254"/>
+    <path d="M176 128 A 98 98 0 0 1 176 272"/>
+  </g>
+  <g stroke="#c4c0b7" stroke-width="1.5" stroke-dasharray="4 5" stroke-linecap="round">
+    <line x1="128" y1="200" x2="298" y2="104"/>
+    <line x1="128" y1="200" x2="348" y2="168"/>
+    <line x1="128" y1="200" x2="348" y2="232"/>
+    <line x1="128" y1="200" x2="298" y2="296"/>
+  </g>
+  <g>
+    <circle cx="316" cy="104" r="17" fill="#f4f2ee" stroke="#c4c0b7" stroke-width="2"/>
+    <circle cx="316" cy="104" r="7" fill="#1f4f7a"/>
+  </g>
+  <g>
+    <circle cx="366" cy="168" r="17" fill="#f4f2ee" stroke="#c4c0b7" stroke-width="2"/>
+    <circle cx="366" cy="168" r="7" fill="#1f4f7a"/>
+  </g>
+  <g>
+    <circle cx="366" cy="232" r="17" fill="#f4f2ee" stroke="#c4c0b7" stroke-width="2"/>
+    <circle cx="366" cy="232" r="7" fill="#1f4f7a"/>
+  </g>
+  <g>
+    <circle cx="316" cy="296" r="17" fill="#f4f2ee" stroke="#c4c0b7" stroke-width="2"/>
+    <circle cx="316" cy="296" r="7" fill="#1f4f7a"/>
+  </g>
+  <g fill="none" stroke="#c4c0b7" stroke-width="1.5">
+    <path d="M333 104 C 386 104 470 104 490 190"/>
+    <path d="M383 168 C 436 168 470 168 490 190"/>
+    <path d="M383 232 C 436 232 470 232 490 210"/>
+    <path d="M333 296 C 386 296 470 296 490 210"/>
+  </g>
+  <circle cx="496" cy="200" r="5" fill="#1f4f7a"/>
+  <rect x="516" y="164" width="76" height="72" rx="4" fill="#fcfbf9" stroke="#c4c0b7" stroke-width="1.5"/>
+  <line x1="530" y1="218" x2="578" y2="218" stroke="#dedbd4" stroke-width="1.5"/>
+  <path d="M530 218 H544 V184 H562 V218 H578" fill="none" stroke="#1f4f7a" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>

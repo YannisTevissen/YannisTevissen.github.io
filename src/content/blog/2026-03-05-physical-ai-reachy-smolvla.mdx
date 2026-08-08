@@ -12,13 +12,12 @@ keywords: "multimodal robotics, teleoperation, SmolVLA, fine-tuning, SO-101, Rea
 listingImage: "/assets/img/items/blog_reachy.jpg"
 listingImageAlt: "Reachy Mini and SO-101 arm used in the home robotics prototype"
 ogImage: "/assets/img/items/blog_reachy.jpg"
-listingBlurb: "Documents a small multimodal control prototype, the data collection setup, and the fine-tuning process for a narrow manipulation task."
+listingBlurb: "Phone teleoperation, about 50 recorded episodes, and a SmolVLA fine-tune for one narrow manipulation task."
 customSlug: "2026/physical-ai-reachy-smolvla"
 ---
 
-This note documents a secondary prototype outside my main research agenda on multimodal retrieval and reasoning over
-video data. The goal was to test whether a low-cost arm and a desk robot could share visual inputs and execute a simple
-manipulation task.
+A side prototype, outside my main work on retrieval and reasoning over video. I wanted to see whether a low-cost arm and
+a desk robot could share visual input and carry out one simple manipulation task.
 
 The setup combined an [SO-101](https://github.com/TheRobotStudio/SO-ARM100) arm with
 [Reachy Mini](https://www.pollen-robotics.com/products/reachy-mini/). The target task was to pick up a pen with the arm
@@ -89,8 +88,8 @@ produced better training behavior than LoRA and completed in about 9 hours on a 
   </figure>
 </div>
 
-The resulting policy executed the narrow pick-and-present behavior on the desk setup. The scope remains limited, but the
-prototype was useful for studying multimodal perception, teleoperation, and small-scale data collection.
+The resulting policy performed the pick-and-present on the desk setup. It does that one task and nothing else, but that
+was enough to find out how the two camera views, the phone teleoperation, and a few dozen episodes hold up in practice.
 
 <div class="post-video-wrapper portrait">
   <figure>

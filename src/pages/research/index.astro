@@ -3,247 +3,206 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const title = "Research - Yannis Tevissen";
 const description =
-  "Research on multimodal retrieval and reasoning over large-scale video data, with a focus on indexing, retrieval, frame selection, and evaluation.";
+  "Research on reliable multimodal learning when evidence is long, incomplete, or unevenly represented — over long-form video, and in capability-conditioned accessibility and AI4Science settings.";
+const keywords =
+  "Yannis Tevissen research, multimodal learning, video retrieval, frame sampling, capability-conditioned accessibility, open SMA datasets, teaching, mentoring";
 const footerSecondaryLinks = [
-  { href: "/talks/", label: "Press & Talks" },
-  { href: "/advocacy/", label: "Blog & Advocacy" },
+  { href: "/blog/", label: "Blog & Press" },
+  { href: "/advocacy/", label: "Advocacy" },
+  { href: "/contact/", label: "Contact" },
+];
+
+type Artifact = {
+  name: string;
+  href: string;
+  kind: "Dataset" | "Model" | "Code" | "Space" | "Collection";
+  summary: string;
+  meta?: string;
+  links?: { label: string; href: string }[];
+};
+
+type ArtifactGroup = {
+  id: string;
+  heading: string;
+  lede: string;
+  items: Artifact[];
+};
+
+const artifactGroups: ArtifactGroup[] = [
+  {
+    id: "video-understanding",
+    heading: "Video understanding research",
+    lede: "Code and data behind the frame selection, captioning, retrieval, and diarization work, across video, image, and speech. The recurring question is how much of the available signal a model actually needs, and how to tell when a reported gain is real rather than an artefact of how the input was sampled.",
+    items: [
+      {
+        name: "PEEK",
+        href: "https://github.com/momentslab/peek",
+        kind: "Code",
+        summary:
+          "A lightweight dynamic frame selector that distils caption-conditioned relevance from a teacher model, for video captioning under a small frame budget. BMVC 2026.",
+        links: [
+          { label: "Code", href: "https://github.com/momentslab/peek" },
+          { label: "arXiv", href: "https://arxiv.org/abs/2605.31029" },
+          { label: "Hugging Face", href: "https://huggingface.co/papers/2605.31029" },
+          { label: "Project page", href: "https://www.killian-steunou.com/peek/" },
+        ],
+      },
+      {
+        name: "Frame sampling benchmark",
+        href: "https://github.com/momentslab/frame-sampling",
+        kind: "Code",
+        summary:
+          "A controlled benchmark showing that measured video reasoning performance for small vision-language models shifts substantially with the frame sampling strategy alone.",
+        links: [
+          { label: "Code", href: "https://github.com/momentslab/frame-sampling" },
+          { label: "arXiv", href: "https://arxiv.org/abs/2509.14769" },
+          { label: "Hugging Face", href: "https://huggingface.co/papers/2509.14769" },
+          { label: "Research note", href: "https://research.momentslab.com/blog-posts/frame-sampling-vlm" },
+        ],
+      },
+      {
+        name: "AstroCaptions",
+        href: "https://huggingface.co/datasets/momentslab/AstroCaptions",
+        kind: "Dataset",
+        summary: "Captioning dataset built from archival space imagery, used for multimodal caption enrichment work.",
+      },
+      {
+        name: "Falcon-TSCPD",
+        href: "https://huggingface.co/YannisTevissen/Falcon-TSCPD",
+        kind: "Model",
+        summary: "A PEFT adapter for text-based speaker change point detection.",
+      },
+      {
+        name: "VoxConverse TSCPD",
+        href: "https://huggingface.co/datasets/YannisTevissen/voxconverse_tscpd",
+        kind: "Dataset",
+        summary:
+          "Speaker change point annotations derived from VoxConverse, for evaluating text-side change detection in diarization pipelines.",
+        meta: "BSD 3-Clause",
+      },
+    ],
+  },
+  {
+    id: "ai-for-science",
+    heading: "AI for science",
+    lede: "Retrieval and evidence grounding applied to scientific literature and clinical data, and the data work that makes capability-conditioned settings measurable at all.",
+    items: [
+      {
+        name: "UpToCure",
+        href: "https://github.com/YannisTevissen/UpToCure",
+        kind: "Code",
+        summary:
+          "Assembles published research on rare diseases into readable, sourced reports, applying retrieval and evidence grounding to scientific literature.",
+      },
+      {
+        name: "Open SMA Research Data",
+        href: "https://huggingface.co/collections/YannisTevissen/open-sma-research-data",
+        kind: "Collection",
+        summary:
+          "A provenance-first index of the spinal muscular atrophy data that is genuinely open, mirrored from the original studies with attribution and checksums, plus a derived reach-intent benchmark and a browser explorer. Licences, access conditions, and stated limitations sit with each repository.",
+        links: [
+          {
+            label: "Collection",
+            href: "https://huggingface.co/collections/YannisTevissen/open-sma-research-data",
+          },
+          { label: "Explorer", href: "https://huggingface.co/spaces/YannisTevissen/sma-data-explorer" },
+        ],
+      },
+      {
+        name: "AI for Disability",
+        href: "https://huggingface.co/collections/YannisTevissen/ai-for-disability-67684a1a9966a2e699f6b114",
+        kind: "Collection",
+        summary:
+          "A curated collection of datasets, models, Spaces, and papers that apply AI to disability-related tasks.",
+      },
+    ],
+  },
+];
+
+type Course = {
+  name: string;
+  meta: string;
+  summary: string;
+};
+
+const teaching: Course[] = [
+  {
+    name: "Speaker Diarization — Guest lecture",
+    meta: "2024 · Télécom SudParis, graduate course on multimodal speech and speaker recognition",
+    summary:
+      "Diarization pipelines, multi-stream voice activity detection, evaluation, and fairness in real-world recording conditions.",
+  },
+];
+
+type Mentee = {
+  name: string;
+  role: string;
+  linkedin?: string;
+};
+
+// Only link a profile Yannis supplied, published himself, or tagged. Never one found
+// by name search: a wrong profile on a real person's name is not recoverable.
+const mentees: Mentee[] = [
+  { name: "Killian Steunou", role: "PhD", linkedin: "https://www.linkedin.com/in/killian-steunou" },
+  { name: "Anas Filali Razzouki", role: "Postdoc", linkedin: "https://www.linkedin.com/in/anas-filali-phd-11301815a" },
+  { name: "Ruben Leon", role: "Intern", linkedin: "https://www.linkedin.com/in/rubenwleon" },
+  { name: "Marija Brkic", role: "Intern", linkedin: "https://www.linkedin.com/in/marija-brkic-416a10338" },
+  { name: "Estelle Zheng", role: "Intern", linkedin: "https://www.linkedin.com/in/estellezheng" },
+  { name: "Prateek Gulati", role: "Intern", linkedin: "https://www.linkedin.com/in/gulati-prateek1" },
 ];
 ---
 
-<BaseLayout title={title} description={description} footerSecondaryLinks={footerSecondaryLinks}>
+<BaseLayout title={title} description={description} keywords={keywords} footerSecondaryLinks={footerSecondaryLinks}>
   <main id="site-main" class="site-main">
     <div class="site-shell">
       <h1 class="page-title">Research</h1>
-      <p class="page-lede">
-        I study <strong>multimodal retrieval and reasoning over large-scale video data</strong>. The work centers on
-        indexing, evidence retrieval, and evaluation for long-form collections.
-      </p>
-
-      <section aria-labelledby="statement-heading">
-        <h2 id="statement-heading">What I work on</h2>
+      <div class="page-lede">
         <p>
-          The central problem is to retrieve the right evidence from long-form video and use it for reasoning. This is
-          difficult because video is temporally distributed, weakly structured, and queried through language, metadata,
-          and temporal constraints. I build systems that index video into searchable units and connect retrieval outputs
-          to grounded reasoning pipelines.
+          I study how multimodal models use evidence when the input is long, incomplete, or unevenly represented. An
+          hour of video has almost no explicit structure, and the query mixes language, metadata, and time. I build
+          systems that select which frames or segments to keep, retrieve the evidence that matters, and keep answers
+          anchored to specific moments. Evaluation is part of the same problem: reported gains move when you change the
+          frame sampling or how the benchmark was built, so the protocols have to make those dependencies visible
+          instead of averaging them away.
         </p>
         <p>
-          A second problem is evaluation. Reported progress on video tasks can change with frame sampling, segmentation,
-          and benchmark construction. I study evaluation protocols that expose those dependencies and support comparison
-          under real operational constraints.
+          The same choices about which evidence to keep decide whose signal a model can read at all. I study that when
+          speech or movement falls outside the training distribution: fairness in speaker diarization, disability
+          representation in image generation, and open data and benchmarks for capability-conditioned settings. Papers
+          are under <a href="#publications">Publications</a>; datasets, models, and demos under
+          <a href="#artifacts">Artifacts</a>.
         </p>
-      </section>
+      </div>
 
-      <section aria-labelledby="pillars-heading">
-        <h2 id="pillars-heading">Research pillars</h2>
-        <div class="pillars" style="margin-top: 1rem">
-          <div class="pillar">
-            <h3>Video understanding</h3>
-            <p>
-              Long-form video carries meaning across time, modalities, and context. I build shot detection, chaptering,
-              and multimodal representation pipelines that turn raw footage into structured, machine understandable
-              units.
-            </p>
-          </div>
-          <div class="pillar">
-            <h3>Video retrieval</h3>
-            <p>
-              Multimodal video queries require systems to align language, vision, and time. I design retrieval and
-              reasoning pipelines that ground outputs in relevant video segments.
-            </p>
-          </div>
-          <div class="pillar">
-            <h3>AI fairness</h3>
-            <p>
-              Models inherit and amplify the biases present in their training data. I study how disability, minority,
-              and representation gaps propagate through vision and language systems, and how to evaluate and mitigate
-              them.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="selected-work" aria-labelledby="selected-heading">
-        <h2 id="selected-heading">Selected work</h2>
-        <p class="page-lede" style="margin-top: 0.5rem">
-          Curated for the core agenda of multimodal retrieval and reasoning over video data. The complete list is below.
-        </p>
-        <ul class="work-list">
-          <li class="work-card has-thumb">
-            <span class="thumb thumb-6" aria-hidden="true"></span>
-            <div class="item-body">
-              <div class="work-card-header">
-                <span class="type-badge">Paper</span>
-                <p class="work-card-title">
-                  <a href="https://arxiv.org/abs/2605.31029"
-                    >PEEK: Picking Essential frames via Efficient Knowledge distillation</a
-                  >
-                </p>
-              </div>
-              <p>
-                Introduces a lightweight dynamic frame selector that distills caption-conditioned relevance from a
-                teacher model for efficient low-budget video captioning.
-              </p>
-              <div class="artifact-links" aria-label="Artifacts for PEEK">
-                <a href="https://arxiv.org/abs/2605.31029">arXiv</a>
-                <a href="https://github.com/momentslab/peek">Code</a>
-                <a href="https://huggingface.co/papers/2605.31029">Hugging Face</a>
-                <a href="https://www.killian-steunou.com/peek/">Project page</a>
-              </div>
-            </div>
-          </li>
-          <li class="work-card has-thumb">
-            <span class="thumb thumb-1" aria-hidden="true"></span>
-            <div class="item-body">
-              <div class="work-card-header">
-                <span class="type-badge">Paper</span>
-                <p class="work-card-title">
-                  <a href="https://arxiv.org/abs/2406.14938"
-                    >Towards Retrieval Augmented Generation over Large Video Libraries</a
-                  >
-                </p>
-              </div>
-              <p>
-                Studies how to ground generation in large video libraries by retrieving relevant video segments as
-                evidence. HSI 2024.
-              </p>
-              <div
-                class="artifact-links"
-                aria-label="Artifacts for Retrieval Augmented Generation over Large Video Libraries"
-              >
-                <a href="https://arxiv.org/abs/2406.14938">arXiv</a>
-                <a href="https://huggingface.co/papers/2406.14938">Hugging Face</a>
-                <a href="https://research.momentslab.com/blog-posts/rag-video-libraries">Research note</a>
-                <a href="https://doi.org/10.1109/HSI61632.2024.10613524">DOI</a>
-              </div>
-            </div>
-          </li>
-          <li class="work-card has-thumb">
-            <span class="thumb">
-              <img src="/assets/img/items/pub_frame_sampling.jpg" alt="" width="160" height="160" loading="lazy" />
-            </span>
-            <div class="item-body">
-              <div class="work-card-header">
-                <span class="type-badge">Paper</span>
-                <p class="work-card-title">
-                  <a href="https://arxiv.org/abs/2509.14769"
-                    >Frame Sampling Strategies Matter: A Benchmark for small vision language models</a
-                  >
-                </p>
-              </div>
-              <p>
-                Shows that frame sampling changes measured video reasoning performance and provides a benchmark for more
-                reliable comparison.
-              </p>
-              <div class="artifact-links" aria-label="Artifacts for Frame Sampling Strategies Matter">
-                <a href="https://arxiv.org/abs/2509.14769">arXiv</a>
-                <a href="https://github.com/momentslab/frame-sampling">Code</a>
-                <a href="https://huggingface.co/papers/2509.14769">Hugging Face</a>
-                <a href="https://research.momentslab.com/blog-posts/frame-sampling-vlm">Research note</a>
-              </div>
-            </div>
-          </li>
-          <li class="work-card has-thumb">
-            <span class="thumb">
-              <img src="/assets/img/items/pub_chaptering.jpg" alt="" width="160" height="160" loading="lazy" />
-            </span>
-            <div class="item-body">
-              <div class="work-card-header">
-                <span class="type-badge">Paper</span>
-                <p class="work-card-title">
-                  <a href="https://arxiv.org/abs/2406.17590">Multimodal Chaptering for Long-Form TV Newscast Video</a>
-                </p>
-              </div>
-              <p>
-                Addresses the lack of temporal structure in long broadcasts by building a multimodal chaptering pipeline
-                for retrieval and analysis.
-              </p>
-              <div
-                class="artifact-links"
-                aria-label="Artifacts for Multimodal Chaptering for Long-Form TV Newscast Video"
-              >
-                <a href="https://arxiv.org/abs/2406.17590">arXiv</a>
-                <a href="https://huggingface.co/papers/2406.17590">Hugging Face</a>
-                <a href="https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing">Colab</a
-                >
-                <a href="https://research.momentslab.com/blog-posts/automatic-chapters">Research note</a>
-              </div>
-            </div>
-          </li>
-          <li class="work-card has-thumb">
-            <span class="thumb">
-              <img
-                src="/assets/img/items/pub_patent_shot_indexing.jpg"
-                alt=""
-                width="160"
-                height="160"
-                loading="lazy"
-              />
-            </span>
-            <div class="item-body">
-              <div class="work-card-header">
-                <span class="type-badge">Patent</span>
-                <p class="work-card-title">
-                  <a href="https://patents.justia.com/patent/12288377">
-                    Computer-based platforms and methods for efficient AI-based digital video shot indexing
-                  </a>
-                </p>
-              </div>
-              <p>
-                Builds a shot-level indexing method designed for large production video platforms. US 12,288,377 (2025).
-              </p>
-              <div class="artifact-links" aria-label="Artifacts for AI-based digital video shot indexing">
-                <a href="https://patents.justia.com/patent/12288377">Patent record</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <p class="section-foot"><a href="#publications">Jump to all publications ↓</a></p>
-      </section>
-
-      <section aria-labelledby="review-heading">
-        <h2 id="review-heading">Reviewing activities</h2>
-        <p>
-          I reviewed for <strong>ICASSP 2026</strong>, <strong>ICPRAI 2026</strong>, and <strong>ICME 2025</strong>. I
-          also served on the scientific committee of <strong>JETSAN 2025</strong>.
-        </p>
-      </section>
-
-      <section aria-labelledby="teaching-heading">
-        <h2 id="teaching-heading">Teaching</h2>
-        <ul class="pub-list">
-          <li class="pub-item has-thumb">
-            <span class="thumb thumb-5" aria-hidden="true"></span>
-            <div class="item-body">
-              <p class="pub-title">Speaker Diarization — Guest lecture</p>
-              <p class="pub-meta">
-                2024 · Graduate course on multimodal speech and speaker recognition. Covered diarization pipelines,
-                multi-stream voice activity detection, evaluation, and fairness in real-world conditions.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </section>
+      <nav class="artifact-links" aria-label="On this page">
+        <a href="#publications">Publications</a>
+        <a href="#artifacts">Artifacts</a>
+        <a href="#teaching">Teaching &amp; mentoring</a>
+        <a href="#service">Service</a>
+      </nav>
 
       <section id="publications" aria-labelledby="publications-heading">
         <h2 id="publications-heading">Publications</h2>
         <p class="page-lede" style="margin-top: 0.5rem">
-          Recent work centers on multimodal retrieval and reasoning over video data. Earlier publications cover
-          multimodal speech processing, robustness, and fairness, which inform the current research agenda.
-          Authoritative citation data:
-          <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Google Scholar</a>.
+          Recent work is on multimodal retrieval and reasoning over video. The earlier papers are on multimodal speech
+          processing, robustness, and fairness, and those questions carried over. Citation counts are on
+          <a href="https://scholar.google.com/citations?user=jEnK4FIAAAAJ">Google Scholar</a>; code, datasets, and demos
+          are under <a href="#artifacts">Artifacts</a>.
         </p>
 
         <h3 class="pub-year">2026</h3>
         <ul class="pub-list">
           <li class="pub-item has-thumb">
-            <span class="thumb thumb-6" aria-hidden="true"></span>
+            <span class="thumb">
+              <img src="/assets/img/work/peek-poster.jpg" alt="" width="160" height="100" loading="lazy" />
+            </span>
             <div class="item-body">
               <span class="tag">Video understanding</span>
+              <span class="role-badge">Last author</span>
               <p class="pub-title">PEEK: Picking Essential frames via Efficient Knowledge distillation</p>
               <p class="pub-meta">
                 Killian Steunou, Anas Filali Razzouki, Khalil Guetari, Mounim A. El Yacoubi, Yannis Tevissen ·
-                arXiv:2605.31029 ·
+                BMVC 2026 · arXiv:2605.31029 ·
                 <a href="https://arxiv.org/abs/2605.31029">arXiv</a>
               </p>
               <div class="artifact-links" aria-label="Artifacts for PEEK">
@@ -263,6 +222,7 @@ const footerSecondaryLinks = [
             </span>
             <div class="item-body">
               <span class="tag">Video understanding</span>
+              <span class="role-badge">Co-author</span>
               <p class="pub-title">Frame Sampling Strategies Matter: A Benchmark for small vision language models</p>
               <p class="pub-meta">
                 Marija Brkic, Anas Filali Razzouki, Yannis Tevissen, Khalil Guetari, Mounim A. El Yacoubi ·
@@ -278,22 +238,16 @@ const footerSecondaryLinks = [
           </li>
           <li class="pub-item has-thumb">
             <span class="thumb">
-              <img
-                src="/assets/img/items/pub_patent_shot_indexing.jpg"
-                alt=""
-                width="160"
-                height="160"
-                loading="lazy"
-              />
+              <img src="/assets/img/items/pub_patent_shot_indexing.jpg" alt="" width="160" height="160" loading="lazy" />
             </span>
             <div class="item-body">
               <span class="tag">Video retrieval</span>
+              <span class="role-badge">Co-inventor</span>
               <p class="pub-title">
                 Computer-based platforms and methods for efficient AI-based digital video shot indexing
               </p>
               <p class="pub-meta">
-                Frédéric Petitpont, Philippe Petitpont, Yannis Tevissen, Khalil Guetari · US Patent 12,288,377 · Apr
-                2025
+                Frédéric Petitpont, Philippe Petitpont, Yannis Tevissen, Khalil Guetari · US Patent 12,288,377 · Apr 2025
               </p>
               <div class="artifact-links" aria-label="Artifacts for AI-based digital video shot indexing">
                 <a href="https://patents.justia.com/patent/12288377">Patent record</a>
@@ -310,6 +264,7 @@ const footerSecondaryLinks = [
             </span>
             <div class="item-body">
               <span class="tag">Video understanding</span>
+              <span class="role-badge">Co-inventor</span>
               <p class="pub-title">
                 Systems and methods for AI generation of image captions enriched with multiple AI modalities
               </p>
@@ -322,13 +277,15 @@ const footerSecondaryLinks = [
             </div>
           </li>
           <li class="pub-item has-thumb">
-            <span class="thumb thumb-4" aria-hidden="true"></span>
+            <span class="thumb">
+              <img src="/assets/img/items/pub_rag_video.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
             <div class="item-body">
               <span class="tag">Video retrieval</span>
+              <span class="role-badge">First author</span>
               <p class="pub-title">Towards Retrieval Augmented Generation over Large Video Libraries</p>
               <p class="pub-meta">
-                Yannis Tevissen, Khalil Guetari, Frédéric Petitpont · HSI 2024 ·
-                <strong>Best Presentation Paper</strong>
+                Yannis Tevissen, Khalil Guetari, Frédéric Petitpont · HSI 2024 · Best Presentation Paper
               </p>
               <div
                 class="artifact-links"
@@ -342,11 +299,12 @@ const footerSecondaryLinks = [
             </div>
           </li>
           <li class="pub-item has-thumb">
-            <span class="thumb">
-              <img src="/assets/img/items/pub_disability.jpg" alt="" width="160" height="160" loading="lazy" />
+            <span class="thumb is-wide">
+              <img src="/assets/img/items/pub_disability.jpg" alt="" width="1200" height="600" loading="lazy" />
             </span>
             <div class="item-body">
               <span class="tag">Fairness</span>
+              <span class="role-badge">Sole author</span>
               <p class="pub-title">Disability Representations: Finding Biases in Automatic Image Generation</p>
               <p class="pub-meta">
                 Yannis Tevissen · CVPR 2024 Workshop AVA ·
@@ -363,6 +321,7 @@ const footerSecondaryLinks = [
             </span>
             <div class="item-body">
               <span class="tag">Video understanding</span>
+              <span class="role-badge">Co-author</span>
               <p class="pub-title">Multimodal Chaptering for Long-Form TV Newscast Video</p>
               <p class="pub-meta">
                 Khalil Guetari, Yannis Tevissen, Frédéric Petitpont · 2024 ·
@@ -373,7 +332,8 @@ const footerSecondaryLinks = [
                 aria-label="Artifacts for Multimodal Chaptering for Long-Form TV Newscast Video"
               >
                 <a href="https://huggingface.co/papers/2406.17590">Hugging Face</a>
-                <a href="https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing">Colab</a
+                <a href="https://colab.research.google.com/drive/1IGCQAQsvFWcW2ebB2Ri8hjFE1XMyS1lo?usp=sharing"
+                  >Colab</a
                 >
                 <a href="https://research.momentslab.com/blog-posts/automatic-chapters">Research note</a>
               </div>
@@ -385,6 +345,7 @@ const footerSecondaryLinks = [
             </span>
             <div class="item-body">
               <span class="tag">Video understanding</span>
+              <span class="role-badge">First author</span>
               <p class="pub-title">Inserting Faces inside Captions: Image Captioning with Attention Guided Merging</p>
               <p class="pub-meta">
                 Yannis Tevissen, Khalil Guetari, Marine Tassel, Erwan Kerleroux, Frédéric Petitpont · arXiv:2405.02305 ·
@@ -397,58 +358,77 @@ const footerSecondaryLinks = [
             </div>
           </li>
           <li class="pub-item has-thumb">
-            <span class="thumb thumb-2" aria-hidden="true"></span>
+            <span class="thumb">
+              <img src="/assets/img/items/pub_privacy_assistant.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
             <div class="item-body">
               <span class="tag">Speech processing</span>
+              <span class="role-badge">Co-author</span>
               <p class="pub-title">
                 Privacy Preserving Personal Assistant with On-Device Diarization and Spoken Dialogue System for Home and
                 Beyond
               </p>
-              <p class="pub-meta">Gérard Chollet et al. · IHIET 2024</p>
+              <p class="pub-meta">
+                Gérard Chollet et al. · IHIET 2024 ·
+                <a href="https://arxiv.org/abs/2401.01146">arXiv</a>
+              </p>
             </div>
           </li>
         </ul>
 
         <h3 class="pub-year">2023</h3>
         <ul class="pub-list">
-          <li class="pub-item has-thumb">
-            <span class="thumb thumb-3" aria-hidden="true"></span>
+          <li class="pub-item has-thumb" id="thesis">
+            <span class="thumb">
+              <img src="/assets/img/items/pub_thesis_diarization.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
             <div class="item-body">
               <span class="tag">Speech processing</span>
+              <span class="role-badge">Sole author</span>
               <p class="pub-title">Diarisation multimodale: vers des modèles robustes et justes en contexte réel</p>
-              <p class="pub-meta">Yannis Tevissen · Institut Polytechnique de Paris</p>
-            </div>
-          </li>
-          <li class="pub-item has-thumb">
-            <span class="thumb thumb-4" aria-hidden="true"></span>
-            <div class="item-body">
-              <span class="tag">Speech processing</span>
-              <p class="pub-title">Détection d'activité vocale Multi-flux pour la Diarisation du locuteur</p>
-              <p class="pub-meta">Yannis Tevissen, Jérôme Boudy, Gérard Chollet, Frédéric Petitpont · GRETSI 2023</p>
-            </div>
-          </li>
-          <li class="pub-item has-thumb">
-            <span class="thumb thumb-5" aria-hidden="true"></span>
-            <div class="item-body">
-              <span class="tag">Speech processing</span>
-              <p class="pub-title">
-                Home monitoring for frailty detection through sound and speaker diarization analysis
+              <p class="pub-meta">
+                Yannis Tevissen · Institut Polytechnique de Paris ·
+                <a href="https://theses.hal.science/tel-04345081">HAL</a>
               </p>
-              <p class="pub-meta">Yannis Tevissen et al. · JETSAN 2023</p>
             </div>
           </li>
           <li class="pub-item has-thumb">
             <span class="thumb">
-              <img
-                src="/assets/img/items/pub_diarization_fairness.jpg"
-                alt=""
-                width="160"
-                height="160"
-                loading="lazy"
-              />
+              <img src="/assets/img/items/pub_vad_multistream.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <span class="tag">Speech processing</span>
+              <span class="role-badge">First author</span>
+              <p class="pub-title">Détection d'activité vocale Multi-flux pour la Diarisation du locuteur</p>
+              <p class="pub-meta">
+                Yannis Tevissen, Jérôme Boudy, Gérard Chollet, Frédéric Petitpont · GRETSI 2023 ·
+                <a href="https://hal.science/hal-04312439">HAL</a>
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb" id="jetsan-frailty">
+            <span class="thumb">
+              <img src="/assets/img/items/pub_frailty_home.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <span class="tag">Speech processing</span>
+              <span class="role-badge">First author</span>
+              <p class="pub-title">
+                Home monitoring for frailty detection through sound and speaker diarization analysis
+              </p>
+              <p class="pub-meta">
+                Yannis Tevissen et al. · JETSAN 2023 ·
+                <a href="https://arxiv.org/abs/2308.08985">arXiv</a>
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/pub_diarization_fairness.jpg" alt="" width="160" height="160" loading="lazy" />
             </span>
             <div class="item-body">
               <span class="tag">Fairness</span>
+              <span class="role-badge">First author</span>
               <p class="pub-title">Towards measuring and scoring speaker diarization fairness</p>
               <p class="pub-meta">
                 Yannis Tevissen, Jérôme Boudy, Gérard Chollet, Frédéric Petitpont · arXiv:2302.09991 ·
@@ -461,24 +441,132 @@ const footerSecondaryLinks = [
         <h3 class="pub-year">2022</h3>
         <ul class="pub-list">
           <li class="pub-item has-thumb">
-            <span class="thumb thumb-1" aria-hidden="true"></span>
+            <span class="thumb">
+              <img src="/assets/img/items/pub_vad_spatial.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
             <div class="item-body">
               <span class="tag">Speech processing</span>
+              <span class="role-badge">First author</span>
               <p class="pub-title">Multi-stream voice activity detection for robust speaker diarization</p>
               <p class="pub-meta">Yannis Tevissen, Jérôme Boudy, Gérard Chollet · GDR ISIS 2022</p>
             </div>
           </li>
           <li class="pub-item has-thumb">
-            <span class="thumb thumb-2" aria-hidden="true"></span>
+            <span class="thumb">
+              <img src="/assets/img/items/pub_voxceleb.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
             <div class="item-body">
               <span class="tag">Speech processing</span>
+              <span class="role-badge">First author</span>
               <p class="pub-title">
                 The Newsbridge-Telecom SudParis VoxCeleb Speaker Recognition Challenge 2022 System Description
               </p>
-              <p class="pub-meta">Yannis Tevissen, Jérôme Boudy, Frédéric Petitpont · VoxCeleb SRC 2022 Task 4</p>
+              <p class="pub-meta">
+                Yannis Tevissen, Jérôme Boudy, Frédéric Petitpont · VoxCeleb SRC 2022 Task 4 ·
+                <a href="https://arxiv.org/abs/2301.07491">arXiv</a>
+              </p>
             </div>
           </li>
         </ul>
+      </section>
+
+      <section id="artifacts" aria-labelledby="artifacts-heading">
+        <h2 id="artifacts-heading">Artifacts</h2>
+        <p class="page-lede" style="margin-top: 0.5rem">
+          Datasets, models, code, and demos you can download and run, grouped by the research line they came from.
+        </p>
+
+        <nav class="artifact-links" aria-label="Artifact groups">
+          {artifactGroups.map((group) => <a href={`#${group.id}`}>{group.heading}</a>)}
+        </nav>
+
+        {
+          artifactGroups.map((group) => (
+            <section id={group.id} aria-labelledby={`${group.id}-heading`}>
+              <h3 id={`${group.id}-heading`} style="margin-top: 2rem">
+                {group.heading}
+              </h3>
+              <p class="page-lede" style="margin-top: 0.5rem">
+                {group.lede}
+              </p>
+              <ul class="pub-list">
+                {group.items.map((item) => (
+                  <li class="pub-item">
+                    <span class="tag">{item.kind}</span>
+                    <p class="pub-title">
+                      <a href={item.href}>{item.name}</a>
+                    </p>
+                    <p class="pub-meta">{item.summary}</p>
+                    {item.meta && <p class="pub-meta">{item.meta}</p>}
+                    {item.links && (
+                      <div class="artifact-links" aria-label={`Artifacts for ${item.name}`}>
+                        {item.links.map((link) => (
+                          <a href={link.href}>{link.label}</a>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+
+        <p class="section-foot">
+          <a href="https://huggingface.co/YannisTevissen">Hugging Face profile</a> ·
+          <a href="https://github.com/YannisTevissen">GitHub</a> ·
+          <a href="#publications">Publications ↑</a>
+        </p>
+      </section>
+
+      <section id="teaching" aria-labelledby="teaching-heading">
+        <h2 id="teaching-heading">Teaching and mentoring</h2>
+
+        <h3 id="courses-heading" style="margin-top: 1.25rem">Teaching</h3>
+        <ul class="pub-list">
+          {
+            teaching.map((course) => (
+              <li class="pub-item">
+                <p class="pub-title">{course.name}</p>
+                <p class="pub-meta">{course.meta}</p>
+                <p>{course.summary}</p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3 id="mentoring-heading" style="margin-top: 2rem">Mentoring</h3>
+        <ul class="student-list">
+          {
+            mentees.map((person) => (
+              <li>
+                {person.linkedin ? <a href={person.linkedin}>{person.name}</a> : <span>{person.name}</span>}
+                <span class="student-role">{person.role}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3 id="working-heading">Working with me</h3>
+        <p>
+          I am interested in supervising work on evidence selection under a budget, evaluation that survives contact with
+          real data, and assistive systems where the signal depends on the person using them. If that overlaps with what
+          you want to work on, <a href="/contact/">get in touch</a>.
+        </p>
+      </section>
+
+      <section id="service" aria-labelledby="service-heading">
+        <h2 id="service-heading">Service</h2>
+        <p>
+          Reviewer for ICASSP 2026, ICPRAI 2026, and ICME 2025, and a member of the scientific committee of JETSAN 2025.
+          Granted US patents on shot-level video indexing and on multimodal enrichment of generated captions are listed
+          under <a href="#publications">Publications</a>.
+        </p>
+        <p class="section-foot">
+          <a href="#publications">Publications ↑</a> ·
+          <a href="#artifacts">Artifacts ↑</a> ·
+          <a href="#teaching">Teaching &amp; mentoring ↑</a>
+        </p>
       </section>
     </div>
   </main>

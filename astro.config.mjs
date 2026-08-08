@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
-const excludedSitemapPaths = ["/cv/", "/publications/", "/selected-work/"];
+const excludedSitemapPaths = ["/cv/", "/publications/", "/selected-work/", "/artifacts/", "/students/", "/talks/"];
 
 // https://astro.build/config
 export default defineConfig({

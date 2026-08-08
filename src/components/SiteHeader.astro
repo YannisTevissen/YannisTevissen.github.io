@@ -6,22 +6,135 @@ interface Props {
 }
 
 const { pathname } = Astro.props;
+const normalized = pathname.endsWith("/") ? pathname : `${pathname}/`;
 ---
 
 <header class="site-header">
   <div class="site-shell--wide">
     <a class="site-title" href="/">{SITE.title}</a>
-    <nav class="site-nav" aria-label="Main">
-      {
-        NAV.map((item) => {
-          const active = isActive(pathname, item);
-          return (
-            <a href={item.href} {...(active ? { "aria-current": "page" } : {})}>
-              {item.label}
-            </a>
-          );
-        })
-      }
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-bars" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      Menu
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        {
+          NAV.map((item) => {
+            const children = item.children ?? [];
+            const sectionActive = isActive(pathname, item);
+            const isExact = normalized === item.href;
+            return (
+              <li class={children.length ? "nav-item nav-item--parent" : "nav-item"}>
+                <a
+                  href={item.href}
+                  class={sectionActive ? "is-section" : undefined}
+                  {...(isExact ? { "aria-current": "page" } : {})}
+                >
+                  {item.label}
+                  {children.length > 0 && (
+                    <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+                      <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                  )}
+                </a>
+                {children.length > 0 && (
+                  <ul class="nav-submenu">
+                    {children.map((child) => (
+                      <li>
+                        <a href={child.href} {...(normalized === child.href ? { "aria-current": "page" } : {})}>
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })
+        }
+      </ul>
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    /* ---------------------------------------------------------- phone toggle */
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.getElementById("site-nav");
+
+    if (toggle && nav) {
+      const setOpen = (open) => {
+        nav.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+      };
+
+      toggle.addEventListener("click", () => {
+        setOpen(nav.classList.contains("is-open") === false);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || !nav.classList.contains("is-open")) return;
+        setOpen(false);
+        toggle.focus();
+      });
+
+      // Leaving the phone layout must not strand the nav in its collapsed state,
+      // because the toggle that would reopen it is display:none above 700px.
+      const wide = window.matchMedia("(min-width: 701px)");
+      wide.addEventListener("change", (event) => {
+        if (event.matches) setOpen(false);
+      });
+    }
+
+    /* ------------------------------------------- pointer-layout dropdown keys */
+    // Submenus already open on hover and on :focus-within with CSS alone, so the
+    // nav works without JS. This adds the keyboard affordances CSS cannot express:
+    // arrow keys to move through a submenu, and Escape to dismiss it without
+    // having to tab past every item inside.
+    //
+    // "is-dismissed" exists because Escape has to beat the CSS :focus-within rule,
+    // which would otherwise reopen the panel while the trigger still holds focus.
+    // Only an explicit reopen clears it: focusin must not, because returning focus
+    // to the trigger after Escape fires focusin and would undo the dismissal.
+    for (const parent of document.querySelectorAll(".nav-item--parent")) {
+      const trigger = parent.querySelector(":scope > a");
+      const items = Array.from(parent.querySelectorAll(".nav-submenu a"));
+      if (!trigger || !items.length) continue;
+
+      const reopen = () => {
+        parent.classList.remove("is-dismissed");
+        parent.classList.add("is-open");
+      };
+
+      parent.addEventListener("focusin", () => parent.classList.add("is-open"));
+      parent.addEventListener("focusout", (event) => {
+        if (parent.contains(event.relatedTarget)) return;
+        parent.classList.remove("is-open");
+        parent.classList.remove("is-dismissed");
+      });
+
+      parent.addEventListener("keydown", (event) => {
+        const index = items.indexOf(document.activeElement);
+
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          reopen();
+          items[Math.min(index + 1, items.length - 1)].focus();
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          reopen();
+          if (index <= 0) trigger.focus();
+          else items[index - 1].focus();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          parent.classList.remove("is-open");
+          parent.classList.add("is-dismissed");
+          trigger.focus();
+        }
+      });
+    }
+  })();
+</script>

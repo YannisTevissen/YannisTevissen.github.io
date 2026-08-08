@@ -6,55 +6,284 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
 
-const title = "Blog - Yannis Tevissen";
+const title = "Blog & Press - Yannis Tevissen";
 const description =
-  "Technical notes, prototypes, and side projects by Yannis Tevissen on multimodal video understanding, retrieval, and home robotics experiments.";
+  "Technical notes, prototypes, press coverage, interviews, and public talks by Yannis Tevissen.";
+const footerSecondaryLinks = [
+  { href: "/research/", label: "Research" },
+  { href: "/advocacy/", label: "Advocacy" },
+];
 ---
 
-<BaseLayout title={title} description={description} showFeedLink>
+<BaseLayout title={title} description={description} showFeedLink footerSecondaryLinks={footerSecondaryLinks}>
   <main id="site-main" class="site-main">
     <div class="site-shell">
-      <h1 class="page-title">Blog</h1>
-      <p class="lede">Technical notes, prototypes, and side projects.</p>
-      <ul class="post-list">
-        {
-          posts.map((post) => {
-            const slug = post.data.customSlug ?? post.id;
-            const permalink = `/blog/${slug}/`;
-            const dateLabel = post.data.pubDate.toLocaleDateString("en-GB", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            });
-            const isoDate = post.data.pubDate.toISOString().slice(0, 10);
-            const blurb = post.data.listingBlurb ?? post.data.description;
-            const linkText = post.data.headline ?? post.data.title;
-            const hasThumb = !!post.data.listingImage;
-            return (
-              <li class={hasThumb ? "has-thumb" : undefined}>
-                {hasThumb && (
-                  <span class="thumb">
-                    <img
-                      src={post.data.listingImage}
-                      alt={post.data.listingImageAlt ?? ""}
-                      width="160"
-                      height="160"
-                      loading="lazy"
-                    />
-                  </span>
-                )}
-                <div class="item-body">
-                  <a href={permalink}>{linkText}</a>
-                  <p class="post-date">
-                    <time datetime={isoDate}>{dateLabel}</time>
-                  </p>
-                  <p>{blurb}</p>
-                </div>
-              </li>
-            );
-          })
-        }
-      </ul>
+      <h1 class="page-title">Blog &amp; Press</h1>
+      <p class="page-lede">
+        Technical notes and prototypes, plus press coverage, interviews, and talks. Disability-focused talks and writing
+        are on the <a href="/advocacy/">advocacy</a> page. The technical record is under
+        <a href="/research/#publications">Publications</a>.
+      </p>
+
+      <section aria-labelledby="notes">
+        <h2 id="notes">Notes</h2>
+        <ul class="post-list">
+          {
+            posts.map((post) => {
+              const slug = post.data.customSlug ?? post.id;
+              const permalink = `/blog/${slug}/`;
+              const dateLabel = post.data.pubDate.toLocaleDateString("en-GB", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+              const isoDate = post.data.pubDate.toISOString().slice(0, 10);
+              const blurb = post.data.listingBlurb ?? post.data.description;
+              const linkText = post.data.headline ?? post.data.title;
+              const hasThumb = !!post.data.listingImage;
+              return (
+                <li class={hasThumb ? "has-thumb" : undefined}>
+                  {hasThumb && (
+                    <span class="thumb">
+                      <img
+                        src={post.data.listingImage}
+                        alt={post.data.listingImageAlt ?? ""}
+                        width="160"
+                        height="160"
+                        loading="lazy"
+                      />
+                    </span>
+                  )}
+                  <div class="item-body">
+                    <a href={permalink}>{linkText}</a>
+                    <p class="post-date">
+                      <time datetime={isoDate}>{dateLabel}</time>
+                    </p>
+                    <p>{blurb}</p>
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="press">
+        <h2 id="press">Press</h2>
+        <ul class="pub-list">
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/nojitter.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">
+                <a href="https://www.nojitter.com/ai-voice/even-as-ai-transcription-leaps-forward-pitfalls-remain"
+                  >Even as AI transcription leaps forward, pitfalls remain</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2025-12-12">12 December 2025</time> · No Jitter · Commentary on speech systems, captions, and
+                production constraints.
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/adworld.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">
+                <a href="https://www.adworldnews.com/news/ai-video-understanding-yannis-tevissen-moments-labs"
+                  >How AI Video Understanding is Rewriting the Rules of Media Production and Discovery</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2025-11-19">19 November 2025</time> · Ad World News · Interview on video retrieval, archives,
+                and media workflows.
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/faireface.jpg" alt="" width="160" height="100" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title" lang="fr">
+                <a href="https://www.faire-face.fr/boutique/dossier/intelligence-artificielle-ia-handicap/"
+                  >L'IA dans tous ses états</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2025-03">March 2025</time> · Faire Face n° 796 · Interviewed for the cover dossier on AI and
+                disability.
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/tvbeurope.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">
+                <a href="https://www.tvbeurope.com/features/how-tf1-is-exploring-an-ai-driven-future-with-moments-lab"
+                  >How TF1 is exploring an AI-driven future with Moments Lab</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2024-06-25">25 June 2024</time> · TVBEurope · Discussion of retrieval and search systems for
+                broadcast archives.
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/iabm.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">
+                <a
+                  href="https://theiabm.org/news/moments-lab-launches-ai-research-program-to-advance-video-understanding/"
+                  >IABM: Moments Lab AI research program</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2024-04">April 2024</time> · IABM · Industry coverage of the research program launch.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="talks">
+        <h2 id="talks">Talks</h2>
+        <ul class="pub-list">
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/pub_frailty_home.svg" alt="" width="160" height="100" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">Older adults ADL detection with speaker diarization</p>
+              <p class="pub-meta">
+                <time datetime="2026-07-15">15 July 2026</time> · Speaker · Masaryk University, Brno ·
+                <a href="https://icchp.org/">ICCHP 2026</a> · Adapted from the
+                <a href="/research/#jetsan-frailty">JETSAN 2023 paper</a> on home monitoring for frailty detection.
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/fost.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">Video Understanding: From Motion Analysis to World Models</p>
+              <p class="pub-meta">
+                <time datetime="2025-12-09">9 December 2025</time> · Speaker · Génération AI, CNIT Forest, Paris La Défense
+                · <a href="https://www.futureofsoftwaretechnologies.com/">Future of Software Technologies (FOST) 2025</a>
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/oecd.png" alt="" width="160" height="100" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">OECD — AI and disability</p>
+              <p class="pub-meta">
+                <time datetime="2024-12">December 2024</time> · Panel · Colloque sur l'innovation dans l'accessibilité,
+                organised by Association APHPP and hosted by the OECD ·
+                <a href="https://www.youtube.com/watch?v=_CYn7HXEWuM&t=7140s">Video</a>
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/tedx.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title">TEDx — <span lang="fr">Handicap, Société et IA, une histoire de biais</span></p>
+              <p class="pub-meta">
+                <time datetime="2024-03">March 2024</time> · TEDxTélécom SudParis ·
+                <a href="https://www.youtube.com/watch?v=9M6xRLEkyV8">Video</a>
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/jcparole.png" alt="" width="160" height="100" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title" lang="fr">Archivage audiovisuel à grande échelle grâce à une diarisation robuste</p>
+              <p class="pub-meta">
+                <time datetime="2023-06-17">17 June 2023</time> · Invited seminar ·
+                <a href="https://www.youtube.com/@jceparole">Jeunes Chercheurs en Parole</a>, Présente Tes Recherches #7 ·
+                <a href="https://www.youtube.com/watch?v=OJbTed99eb0">Video</a> · Overview of the
+                <a href="/research/#thesis">doctoral work</a>, from multi-stream voice activity detection to fairness.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="references">
+        <h2 id="references">Additional references</h2>
+        <p class="page-lede" style="margin-bottom: 0.75rem; margin-top: 0.25rem">
+          Earlier coverage of VocaCoach, the speech training platform I co-founded, listed here because each piece names
+          the founding team.
+        </p>
+        <ul class="pub-list">
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/leparisien.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title" lang="fr">
+                <a
+                  href="https://www.leparisien.fr/vie-de-bureau/vocacoach-une-nouvelle-plate-forme-pour-sentrainer-a-parler-en-public-03-02-2022-7LVIIAH7FJAAPMKKBURFIYCI4I.php"
+                  >VocaCoach, une nouvelle plate-forme pour s'entraîner à parler en public</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2022-02-03">3 February 2022</time> · Le Parisien
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/telecomsudparis.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title" lang="fr">
+                <a
+                  href="https://www.telecom-sudparis.eu/ecole/vocacoach-remporte-le-prix-coup-de-coeur-au-next-startupper-challenge-a-vivatech/"
+                  >VocaCoach, prix coup de cœur au Next Startupper Challenge</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2021-05">May 2021</time> · Télécom SudParis · Awarded at VivaTech.
+              </p>
+            </div>
+          </li>
+          <li class="pub-item has-thumb">
+            <span class="thumb">
+              <img src="/assets/img/items/jaimelesstartups.jpg" alt="" width="160" height="160" loading="lazy" />
+            </span>
+            <div class="item-body">
+              <p class="pub-title" lang="fr">
+                <a href="https://www.jaimelesstartups.fr/vocacoach-plateforme-de-coach-en-expression-orale/"
+                  >VocaCoach, profil startup</a
+                >
+              </p>
+              <p class="pub-meta">
+                <time datetime="2021-06-29">29 June 2021</time> · J'aime les Startups
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <p class="section-foot">
+        Accessibility-related work is collected on <a href="/advocacy/">Advocacy</a>.
+      </p>
     </div>
   </main>
 </BaseLayout>

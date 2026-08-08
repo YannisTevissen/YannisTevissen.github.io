@@ -8,13 +8,13 @@ The site is generated from `src/`, static assets live in `public/`, and GitHub A
 
 | Path                                        | Purpose                                         |
 | ------------------------------------------- | ----------------------------------------------- |
-| `/`                                         | About, research focus, selected work, bio       |
-| `/research/`                                | Research statement, selected work, publications |
-| `/talks/`                                   | Press, interviews, talks, panels                |
-| `/advocacy/`                                | Blog and advocacy landing page                  |
-| `/blog/`, `/blog/<year>/<slug>/`            | Blog archive and MDX posts                      |
-| `/contact/`                                 | Email, profiles, embedded CV                    |
-| `/cv/`, `/publications/`, `/selected-work/` | Noindex redirect pages kept for old links       |
+| `/`                                                   | About, research focus, selected work, bio              |
+| `/research/`                                          | Interests, publications, artifacts, teaching & mentoring |
+| `/blog/`, `/blog/<year>/<slug>/`                      | Notes, press, talks; MDX posts                         |
+| `/advocacy/`                                          | Disability and accessibility advocacy                  |
+| `/contact/`                                           | Email, profiles                                        |
+| `/cv/`                                                | Resume                                                 |
+| `/talks/`, `/publications/`, `/artifacts/`, `/students/`, `/selected-work/` | Noindex redirects kept for old links |
 | `/404.html`                                 | Custom not-found page                           |
 
 ## Structure

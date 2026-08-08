@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" role="img" aria-label="A query searches a large library of video segments; three matching segments are retrieved and grounded into a generated answer that points back to specific moments on a timeline.">
+  <rect width="640" height="400" fill="#fcfbf9"/>
+
+  <!-- query -->
+  <rect x="52" y="62" width="187" height="28" rx="14" fill="#f4f2ee" stroke="#dedbd4" stroke-width="1.5"/>
+  <circle cx="70" cy="76" r="5.5" fill="none" stroke="#1f4f7a" stroke-width="2"/>
+  <line x1="74" y1="80" x2="78" y2="84" stroke="#1f4f7a" stroke-width="2" stroke-linecap="round"/>
+  <rect x="88" y="72" width="86" height="7" rx="3.5" fill="#c4c0b7"/>
+  <rect x="180" y="72" width="38" height="7" rx="3.5" fill="#dedbd4"/>
+
+  <!-- video library: a grid of indexed segments, three of them relevant -->
+  <g stroke="#dedbd4" stroke-width="1.5">
+    <rect x="52"  y="108" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="101" y="108" width="40" height="30" rx="3" fill="#1f4f7a" stroke="#1f4f7a"/>
+    <rect x="150" y="108" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="199" y="108" width="40" height="30" rx="3" fill="#f4f2ee"/>
+
+    <rect x="52"  y="147" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="101" y="147" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="150" y="147" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="199" y="147" width="40" height="30" rx="3" fill="#f4f2ee"/>
+
+    <rect x="52"  y="186" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="101" y="186" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="150" y="186" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="199" y="186" width="40" height="30" rx="3" fill="#1f4f7a" stroke="#1f4f7a"/>
+
+    <rect x="52"  y="225" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="101" y="225" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="150" y="225" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="199" y="225" width="40" height="30" rx="3" fill="#f4f2ee"/>
+
+    <rect x="52"  y="264" width="40" height="30" rx="3" fill="#1f4f7a" stroke="#1f4f7a"/>
+    <rect x="101" y="264" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="150" y="264" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="199" y="264" width="40" height="30" rx="3" fill="#f4f2ee"/>
+
+    <rect x="52"  y="303" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="101" y="303" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="150" y="303" width="40" height="30" rx="3" fill="#f4f2ee"/>
+    <rect x="199" y="303" width="40" height="30" rx="3" fill="#f4f2ee"/>
+  </g>
+
+  <!-- retrieval: the matched segments route to the generator -->
+  <g fill="none" stroke="#1f4f7a" stroke-width="2" stroke-linecap="round">
+    <path d="M141 123 C 226 119 286 148 352 196"/>
+    <path d="M239 201 C 280 201 312 200 352 201"/>
+    <path d="M92 279 C 198 296 292 256 352 207"/>
+  </g>
+  <circle cx="356" cy="201" r="5" fill="#1f4f7a"/>
+
+  <!-- generated answer, grounded in the retrieved evidence -->
+  <rect x="382" y="132" width="206" height="138" rx="4" fill="#fcfbf9" stroke="#c4c0b7" stroke-width="1.5"/>
+  <rect x="402" y="160" width="166" height="8" rx="4" fill="#dedbd4"/>
+  <rect x="402" y="182" width="140" height="8" rx="4" fill="#dedbd4"/>
+  <rect x="402" y="204" width="52"  height="8" rx="4" fill="#1f4f7a"/>
+  <rect x="462" y="204" width="106" height="8" rx="4" fill="#dedbd4"/>
+  <rect x="402" y="226" width="112" height="8" rx="4" fill="#dedbd4"/>
+
+  <!-- the answer cites specific moments -->
+  <g fill="none" stroke="#1f4f7a" stroke-width="1.5" stroke-dasharray="3 4" stroke-linecap="round">
+    <line x1="430" y1="276" x2="430" y2="302"/>
+    <line x1="490" y1="276" x2="490" y2="302"/>
+    <line x1="550" y1="276" x2="550" y2="302"/>
+  </g>
+  <rect x="382" y="306" width="206" height="20" rx="3" fill="#f4f2ee" stroke="#dedbd4" stroke-width="1.5"/>
+  <g stroke="#c4c0b7" stroke-width="1.5" stroke-linecap="round">
+    <line x1="400" y1="312" x2="400" y2="320"/>
+    <line x1="460" y1="312" x2="460" y2="320"/>
+    <line x1="520" y1="312" x2="520" y2="320"/>
+    <line x1="574" y1="312" x2="574" y2="320"/>
+  </g>
+  <g fill="#1f4f7a">
+    <rect x="426" y="308" width="8" height="16" rx="2"/>
+    <rect x="486" y="308" width="8" height="16" rx="2"/>
+    <rect x="546" y="308" width="8" height="16" rx="2"/>
+  </g>
+</svg>
