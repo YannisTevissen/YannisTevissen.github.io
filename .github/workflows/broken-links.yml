@@ -54,6 +54,7 @@ jobs:
             --exclude '^https://yannistevissen\.fr/'
             --exclude '^https://fonts\.googleapis\.com/?$'
             --exclude '^https://fonts\.gstatic\.com/?$'
+            --exclude 'linkedin\.com'
             "dist/**/*.html"
             "DESIGN.md"
             "README.md"
